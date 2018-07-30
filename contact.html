@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="tuc_poc.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>The Ugly Croissant - Contact</title>
+ </head>
+
+  <body id="myBody">
+    <div class="topnav" id="myTopnav">
+      <a href="index.html"><img src="logos/the_ugly_croissant_long_EDIT.jpeg"></a>
+      <a href="about.html">About</a>
+      <a href="recipes.html">Recipes</a>
+      <a href="#gallery">Gallery</a>
+      <a href="contact.html" class="active_topnav">Contact</a>
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()"> <i class="fas fa-bars"></i></a>
+    </div>
+    <div class="contact_container">
+        <h1>Contact Info</h1>
+        <p>
+          <strong>E-mail: </strong><a href="mailto:theuglycroissant@gmail.com">theuglycroissant@gmail.com</a> or use the form below.<br><br>
+          <strong>Social Media: </strong><a href="https://www.instagram.com/theuglycroissant/" style="color:white;text-decoration:none;"><i class="fab fa-instagram" style="font-size:1.5em;position:relative;top:0.125em;"></i> @theuglycroissant</a>
+        </p>
+        <h1>Contact Form</h1>
+        <p>All fields are required.</p>
+        <form method="post" action="action_page.php">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name...">
+
+            <label for="address">E-mail Address</label>
+            <input type="text" id="address" name="address" placeholder="Your e-mail address...">
+
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="address" placeholder="Subject...">
+
+            <label for="msg">Message</label>
+            <textarea id="text" name="msg" placeholder="Write something.." style="height:200px"></textarea>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>      
+    <script>
+	    function myFunction() {
+      	var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+         	x.className += " responsive";
+       	 } else {
+         	x.className = "topnav";
+       	}
+    	}
+    </script>
+
+  </body>
+
+</html>
