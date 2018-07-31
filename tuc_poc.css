@@ -212,6 +212,10 @@ img.portait{
   float:left;
 }
 
+.recipe_card_text p{
+  padding-right: 1%;
+}
+
 
 /* Topnav */
 
@@ -480,8 +484,8 @@ input[type=submit]:hover {
     width:100%;
   }
   .recipe_card_img{
-    padding-left:0;
-    width:24%;
+    padding-left:1%;;
+    width:23%;
   }
 }
 
