@@ -45,6 +45,50 @@ img.portait{
   width: 30%;
 }
 
+/* Footer */
+
+.footer {
+  margin:0;
+  overflow: hidden;
+  background-color: var(--main-color);
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: var(--background-color);
+  width:100%;
+}
+
+.footer a {
+  float: left;
+  display: block;
+  text-align: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  text-decoration: none;
+  font-size: 17px;
+  width: 5%;
+  color:var(--accent-color);
+  text-decoration:none;
+}
+
+.footer a i {
+  font-size:1.5em;
+  position:relative;
+  top:0.125em;
+}
+
+.footer a:first-child{
+  width: 90%;
+  text-align: left;
+  padding:0;
+  height: calc(1em + 35px);
+}
+
+.footer a:first-child img{
+  padding-left: 1%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
 /* About page */
 
 .about_content {
@@ -53,9 +97,6 @@ img.portait{
   background-color: white;
   color:black;
   overflow: hidden;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: var(--background-color);
 }
 
 .about_content h1,h2,h3,p{
@@ -140,10 +181,9 @@ img.portait{
   overflow: auto;
   float:left;
   background-color:white;
-  border-color: var(--main-color);
   border-width: 1.5px;
   /*border-top-style: solid;*/
-  border-bottom-style: solid;
+  border-top-style: solid;
 }
 
 .recipe_card_title_info {
@@ -338,9 +378,13 @@ ol {
 }
 ol li:before {
   margin-right: 5px;
-  content: counter(item);
+  content: counter(item)'.';
   counter-increment: item;
   font-weight:bold;
+}
+
+li::marker{
+    font-weight: bold;
 }
 
 /* Contact page form */
@@ -371,9 +415,6 @@ input[type=submit]:hover {
 
 .contact_container {
   color:white;
-  border-radius: 5px;
-  border-top-left-radius:0;
-  border-top-right-radius:0;
   background-color: var(--main-color);
   padding:2%;
   padding-left:5%;
@@ -432,7 +473,6 @@ input[type=submit]:hover {
   }
   .contact_container {
     padding:2%;
-    border-radius: 0px;
   }
   .about_img {
     width:100%;
