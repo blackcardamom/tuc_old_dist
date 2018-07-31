@@ -54,7 +54,7 @@ img.portait{
   color:black;
   overflow: hidden;
   border-bottom-style: solid;
-  border-bottom-width: 1px;
+  border-bottom-width: 2px;
   border-bottom-color: var(--background-color);
 }
 
@@ -181,7 +181,7 @@ img.portait{
   overflow: hidden;
   background-color: var(--main-color);
   border-bottom-style: solid;
-  border-bottom-width: 1px;
+  border-bottom-width: 2px;
   border-bottom-color: var(--background-color);
 }
 
@@ -258,7 +258,7 @@ a.active_topnav {
   color: var(--text-light);
   overflow: hidden;
   border-bottom-style: solid;
-  border-bottom-width: 1px;
+  border-bottom-width: 2px;
   border-bottom-color: var(--background-color);
 }
 
@@ -297,6 +297,7 @@ a.active_topnav {
 }
 
 .ingredients h2{
+  color: var(--accent-color-strong);
   padding-top:0.5em;
   margin-top: 0;
   border-bottom-style: dashed;
@@ -306,21 +307,26 @@ a.active_topnav {
 
 .method{
   background-color:white;
-  width:calc(68% - 1px);
+  width:calc(68% - 2px);
   float:left;
   padding-left:1%;
   padding-right:1%;
   border-left-style: solid;
-  border-left-width: 1px;
+  border-left-width: 2px;
   border-left-color: var(--background-color);
 }
 
 .method h2{
+  color: var(--accent-color-strong);
   padding-top:0.5em;
   margin-top: 0;
   border-bottom-style: dashed;
   border-bottom-width: 1px;
   border-bottom-color: var(--background-color);
+}
+
+.method p{
+  padding-left: 3%;
 }
 
 ul{
@@ -417,7 +423,7 @@ input[type=submit]:hover {
   .ingredients{
     width:99%;
     border-bottom-style: solid;
-    border-bottom-width: 1px;
+    border-bottom-width: 2px;
     border-bottom-color: var(--background-color);
   }
   .method{
