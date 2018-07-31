@@ -24,7 +24,9 @@
             <img src="card_picture.jpg">
         </div>
         <h1>Chocolate Celebration Cake</h1>
-        <p><i class="fas fa-clock"></i> 2 hours &nbsp;&nbsp; <i class="fas fa-utensils"></i> 4 as a main</p>
+        <p><i class="fas fa-clock"></i> 2 hours &nbsp;&nbsp; <i class="fas fa-utensils"></i> 4 as a main &nbsp;&nbsp;
+          <i class="fab fa-facebook" title="Share to Facebook"></i> &nbsp;&nbsp; <i class="fab fa-twitter" title="Share to Twitter"></i> &nbsp;&nbsp; <i class="fab fa-pinterest" title="Share to Pinterest"></i>
+             &nbsp;&nbsp; <i class="fab fa-reddit" title="Share to Reddit"></i> &nbsp;&nbsp; <i class="fas fa-copy" title="Copy to clipboard" onclick="copyToClip()"></i></p>
         <p>Seeing as this is the first recipe on the website it seems fit for it to be a celebration cake! The most challenging eggless bake I have tackled has to be cake, and I was very happy when this came out just how I wanted. The cake itself is a little like a muffin, but when you put it together with the ganache I think it would rival any chocolate cake out there. So please, enjoy.</p>
     </div>
     <div class="recipe_content_container">
@@ -86,6 +88,16 @@
           x.className = "topnav";
         }
     	}
+
+      function copyToClip() {
+        var dummy = document.createElement('input'),
+        text = window.location.href;
+        document.body.appendChild(dummy);
+        dummy.value = text;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
+      }
     </script>
   </body>
 </html>
