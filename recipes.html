@@ -1,84 +1,97 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="tuc_poc.css">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <title>The Ugly Croissant - Recipes</title>
- </head>
-  <body id="myBody">
-    <div class="topnav" id="myTopnav">
-      <a href="index.html"><img src="logos/the_ugly_croissant_long_EDIT.jpeg"></a>
-      <a href="about.html">About</a>
-      <a href="recipes.html" class="active_topnav">Recipes</a>
-      <a href="#gallery">Gallery</a>
-      <a href="contact.html">Contact</a>
-      <a href="javascript:void(0);" class="icon" onclick="myFunction()"> <i class="fas fa-bars"></i></a>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+  <link rel="stylesheet" href="tuc_poc.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <title>The Ugly Croissant - Recipes</title>
+</head>
+
+<body id="myBody">
+  <div class="topnav" id="myTopnav">
+    <a href="index.html"><img src="logos/the_ugly_croissant_long_EDIT.jpeg"></a>
+    <a href="about.html">About</a>
+    <a href="recipes.html" class="active_topnav">Recipes</a>
+    <a href="#gallery">Gallery</a>
+    <a href="contact.html">Contact</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()"> <i class="fas fa-bars"></i></a>
+  </div>
+  <div class="section_selection">
+    <div class="container">
+      <img src="assets/cake_crop.JPG">
+      <div class="bottom-right">Cakes</div>
+      <a href=#cakes>
+        <div class="container_overlay"></div>
+      </a>
     </div>
-    <div class = "section_selection">
-        <div class = "container">
-            <img src="assets/cake_crop.JPG">
-            <div class="bottom-right">Cakes</div>
-            <a href=#cakes><div class ="container_overlay"></div></a>
-        </div>
-        <div class = "container">
-            <img src="assets/tart_crop.JPG">
-            <div class="bottom-right">Tarts</div>
-            <a href=#tarts><div class ="container_overlay"></div></a>
-        </div>
-        <div class = "container">
-            <img src="assets/cookies_crop.JPG">
-            <div class="bottom-right">Biscuits</div>
-            <a href=#chocolate><div class ="container_overlay"></div></a>
-        </div>
-        <div class = "container">
-            <img src="assets/pizza_crop.JPG">
-            <div class="bottom-right">Other</div>
-            <a href=#other><div class ="container_overlay"></div></a>
-        </div>
+    <div class="container">
+      <img src="assets/tart_crop.JPG">
+      <div class="bottom-right">Tarts</div>
+      <a href=#tarts>
+        <div class="container_overlay"></div>
+      </a>
     </div>
-    <div class="my_content">
-        <h1>Recent Recipes</h1>
+    <div class="container">
+      <img src="assets/cookies_crop.JPG">
+      <div class="bottom-right">Biscuits</div>
+      <a href=#chocolate>
+        <div class="container_overlay"></div>
+      </a>
     </div>
-    <div class="recipe_card">
-        <div class="recipe_card_img"><a href="recipes/lemon_meringue/recipe.html"><img src="recipes/lemon_meringue/picture.jpg"></a></div>
-        <div class="recipe_card_title_info">
-            <a href="recipes/lemon_meringue/recipe.html"><h3>Lemon Meringue Pie</h3></a>
-            <p><i class="fas fa-clock"></i> 2 hours &nbsp;&nbsp; <i class="fas fa-utensils"></i> 4 as a main</p>
-        </div>
-        <div class="recipe_card_text">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sed nulla et libero sodales vestibulum. Etiam ac purus ante. Vestibulum non urna dictum, pharetra nunc vitae, cursus massa. Suspendisse tempus et mi quis dignissim. Aliquam at massa ipsum. Nulla viverra tortor sit amet ullamcorper pharetra. Donec sit amet erat blandit, malesuada lorem vel, tristique purus. Proin semper nec elit ac bibendum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean ac pretium neque, eget ornare justo. In id ex mauris. Etiam facilisis accumsan aliquet.</p>
-        </div>
+    <div class="container">
+      <img src="assets/pizza_crop.JPG">
+      <div class="bottom-right">Other</div>
+      <a href=#other>
+        <div class="container_overlay"></div>
+      </a>
     </div>
-    <!-- Copy this recipe card, change anything that looks like chocolate_cake or is plaintext-->
-    <div class="recipe_card">
-        <div class="recipe_card_img"><a href="recipes/chocolate_cake/recipe.html"><img src="recipes/chocolate_cake/card_picture.jpg"></a></div>
-        <div class="recipe_card_title_info">
-          <a href="recipes/chocolate_cake/recipe.html"><h3>Chocolate Celebration Cake</h3></a>
-          <p><i class="fas fa-clock"></i> 2 hours &nbsp;&nbsp; <i class="fas fa-utensils"></i> 4 as a main</p>
-        </div>
-        <div class="recipe_card_text">
-          <p>Seeing as this is the first recipe on the website it seems fit for it to be a celebration cake! The most challenging eggless bake I have tackled has to be cake, and I was very happy when this came out just how I wanted. The cake itself is a little like a muffin, but when you put it together with the ganache I think it would rival any chocolate cake out there. So please, enjoy.</p>
-        </div>
+  </div>
+  <div class="my_content">
+    <h1>Recent Recipes</h1>
+  </div>
+  <div class="recipe_card">
+    <div class="recipe_card_img"><a href="recipes/lemon_meringue/recipe.html"><img src="recipes/lemon_meringue/picture.jpg"></a></div>
+    <div class="recipe_card_title_info">
+      <a href="recipes/lemon_meringue/recipe.html"><h3>Lemon Meringue Pie</h3></a>
+      <p><i class="fas fa-clock"></i> 2 hours &nbsp;&nbsp; <i class="fas fa-utensils"></i> 4 as a main</p>
     </div>
-    <!-- -->
-    <div class="footer">
-        <a href="index.html"><img src="logos/the_ugly_croissant_long_EDIT.jpeg"></a>
-        <a href="mailto:theuglycroissant@gmail.com"><i class="fas fa-envelope"></i></a>
-        <a href="https://www.instagram.com/theuglycroissant/"><i class="fab fa-instagram"></i></a>
+    <div class="recipe_card_text">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sed nulla et libero sodales vestibulum. Etiam ac purus ante. Vestibulum non urna dictum, pharetra nunc vitae, cursus massa. Suspendisse tempus et mi quis dignissim. Aliquam at massa
+        ipsum. Nulla viverra tortor sit amet ullamcorper pharetra. Donec sit amet erat blandit, malesuada lorem vel, tristique purus. Proin semper nec elit ac bibendum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        Aenean ac pretium neque, eget ornare justo. In id ex mauris. Etiam facilisis accumsan aliquet.</p>
     </div>
-    <script>
-	    function myFunction() {
-      	    var x = document.getElementById("myTopnav");
-            if (x.className === "topnav") {
-         	    x.className += " responsive";
-       	    } else {
-         	    x.className = "topnav";
-       	    }
-    	}
-    </script>
-  </body>
+  </div>
+  <!-- Copy this recipe card, change anything that looks like chocolate_cake or is plaintext-->
+  <div class="recipe_card">
+    <div class="recipe_card_img"><a href="recipes/chocolate_cake/recipe.html"><img src="recipes/chocolate_cake/card_picture.jpg"></a></div>
+    <div class="recipe_card_title_info">
+      <a href="recipes/chocolate_cake/recipe.html"><h3>Chocolate Celebration Cake</h3></a>
+      <p><i class="fas fa-clock"></i> 2 hours &nbsp;&nbsp; <i class="fas fa-utensils"></i> 4 as a main</p>
+    </div>
+    <div class="recipe_card_text">
+      <p>Seeing as this is the first recipe on the website it seems fit for it to be a celebration cake! The most challenging eggless bake I have tackled has to be cake, and I was very happy when this came out just how I wanted. The cake itself is a little
+        like a muffin, but when you put it together with the ganache I think it would rival any chocolate cake out there. So please, enjoy.</p>
+    </div>
+  </div>
+  <!-- -->
+  <div class="footer">
+    <a href="index.html"><img src="logos/the_ugly_croissant_long_EDIT.jpeg"></a>
+    <a href="mailto:theuglycroissant@gmail.com"><i class="fas fa-envelope"></i></a>
+    <a href="https://www.instagram.com/theuglycroissant/"><i class="fab fa-instagram"></i></a>
+  </div>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+  </script>
+</body>
+
 </html>
