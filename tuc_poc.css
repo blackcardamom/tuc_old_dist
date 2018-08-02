@@ -94,6 +94,20 @@ img.portait {
   padding-left   : 16px;
 }
 
+/* Featured content slider */
+
+.scrolling-wrapper-flexbox {
+  display    : flex;
+  overflow-x : hidden;
+  flex-wrap  : nowrap;
+}
+
+.card {
+  width            : 100%;
+  background-color : white;
+  flex             : 0 0 auto;
+}
+
 /* About page */
 
 .about_content {
