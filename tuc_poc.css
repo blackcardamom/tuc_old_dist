@@ -306,6 +306,10 @@ a.active_topnav {
   border-bottom-color: var(--background-color);
 }
 
+.socials:active{
+  color: var(--accent-color);
+}
+
 .recipe_intro h1,h2,h3,p{
   padding-left: 1%
 }
