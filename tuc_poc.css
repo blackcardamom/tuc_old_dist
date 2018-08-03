@@ -91,9 +91,9 @@ img.portait {
 }
 
 .footer a:first-child img {
-  width  : auto;
-  height : 100%;
-  padding: 8px 0 8px 16px;
+  width   : auto;
+  height  : 100%;
+  padding : 8px 0 8px 16px;
 }
 
 /* Featured content slider */
@@ -586,6 +586,14 @@ input[type=submit]:hover {
 
   .recipe_card_img {
     padding-left : 1%;
+  }
+
+  .feature_card_img {
+    width : 100%;
+  }
+
+  .feature_card_text {
+    width : 100%;
   }
 }
 
