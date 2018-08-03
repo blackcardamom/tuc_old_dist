@@ -594,6 +594,7 @@ input[type=submit]:hover {
 
   .feature_card_text {
     width : 100%;
+    text-align: center;
   }
 }
 
