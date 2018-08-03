@@ -288,6 +288,7 @@ p {
 
 .recipe_card_title_info {
   width : 75%;
+  float:left;
 }
 
 .recipe_card_title_info a {
