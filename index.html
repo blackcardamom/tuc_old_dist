@@ -9,30 +9,6 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
-<!--script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"-->
-<!--script>
-    console.log("Hello World");
-    window.addEventListener("hashchange", handler, true);
-
-    function handler(e) {
-        e.preventDefault();
-        console.log("Event!");
-        if (this.hash !== "") {
-            // Prevent default anchor click behavior
-            console.log(window.location.hash);
-            var hash = this.hash;
-            var container = document.getElementById("scrolling_container")
-            // 800 = milliseconds it takes to scroll; - 50 = vertical location
-            container.animate({
-                scrollLeft: hash.offset().left
-            }, 800, function() {
-                // Add hash (#) to URL when done scrolling (default click behavior)
-                window.location.hash = hash;
-            });
-            console.log(window.location.hash);
-        }; // End if
-    }
-</script-->
 
 <body id="myBody">
     <div class="topnav" id="myTopnav">
@@ -137,7 +113,7 @@
             var container = document.getElementById("scrolling_container");
             var newCard = document.getElementById(cardNames[num]);
             var $newCard = $(newCard)
-            scrollTo(container, $newCard.position().left + container.scrollLeft, 800);
+            scrollTo(container, $newCard.position().left + container.scrollLeft, 500);
             // Updates hash
             window.location.hash = "#" + cardNames[num];
         }
