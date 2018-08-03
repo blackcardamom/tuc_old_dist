@@ -25,7 +25,7 @@ body {
 }
 
 #mobile_linebreak {
-    display:none;
+  display : none;
 }
 
 a {
@@ -288,7 +288,7 @@ p {
 
 .recipe_card_title_info {
   width : 75%;
-  float:left;
+  float : left;
 }
 
 .recipe_card_title_info a {
@@ -403,14 +403,7 @@ a.active_topnav {
   border-bottom-style : solid;
   background-color    : var(--main-color);
   font-family         : Arial,
-                        .button:active {
-  color : var(--accent-color);
-}
-
-#mobile_linebreak {
-    display:none;
-}Helvetica,
-                        sans-serif;
+                        .button:active { color:var(--accent-color);
 }
 
 .recipe_intro h1,
@@ -594,7 +587,7 @@ input[type=submit]:hover {
   }
 
   #mobile_linebreak {
-      display:inline;
+    display : inline;
   }
 
   .recipe_intro_img {
