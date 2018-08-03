@@ -494,6 +494,15 @@ li::marker {
   font-weight : bold;
 }
 
+/* Gallery page */
+
+.gallery_frame {
+    border: none;
+    width:80%;
+    height:40vw;
+    float: right;
+}
+
 /* Contact page form */
 
 input[type=text],
