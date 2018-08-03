@@ -81,7 +81,6 @@ img.portait {
 
 .footer a i {
   font-size : 1.5em;
-  /* position:relative; top:0.125em; */
 }
 
 .footer a:first-child {
@@ -94,6 +93,7 @@ img.portait {
 .footer a:first-child img {
   width  : auto;
   height : 100%;
+  padding: 8px 0 8px 16px;
 }
 
 /* Featured content slider */
