@@ -20,6 +20,10 @@ body {
                      sans-serif;
 }
 
+.button:active {
+  color : var(--accent-color);
+}
+
 a {
   color : var(--accent-color);
 }
@@ -95,7 +99,7 @@ img.portait {
 /* Featured content slider */
 
 .feature_parent {
-    position: relative;
+  position : relative;
 }
 
 .scrolling-wrapper-flexbox {
@@ -127,33 +131,32 @@ img.portait {
 }
 
 .feature_left_arrow {
+  z-index          : 10;
   position         : absolute;
-  top              : 50%;
+  top              : calc(50% - 18px - 0.5em);
   left             : 0;
+  padding-top      : 14px;
+  padding-right    : 5px;
+  padding-bottom   : 14px;
+  padding-left     : 5px;
   color            : white;
+  border-radius    : 0px 5px 5px 0px;
   background-color : var(--background-color-translucent);
-  z-index: 10;
-  padding-top:14px;
-  padding-bottom: 14px;
-  padding-left:5px;
-  padding-right:5px;
-  border-radius: 0px 5px 5px 0px;
 }
 
 .feature_right_arrow {
+  z-index          : 11;
   position         : absolute;
-  top              : 50%;
+  top              : calc(50% - 18px - 0.5em);
   right            : 0;
+  padding-top      : 14px;
+  padding-right    : 5px;
+  padding-bottom   : 14px;
+  padding-left     : 5px;
   color            : white;
-  z-index:11;
+  border-radius    : 5px 0px 0px 5px;
   background-color : var(--background-color-translucent);
-  padding-top:14px;
-  padding-bottom: 14px;
-  padding-left:5px;
-  padding-right:5px;
-  border-radius: 5px 0px 0px 5px;
 }
-
 
 /* About page */
 
@@ -379,11 +382,9 @@ a.active_topnav {
                         Helvetica,
                         sans-serif;
 }
-
-.socials:active {
+.button:active {
   color : var(--accent-color);
 }
-
 .recipe_intro h1,
 h2,
 h3,
