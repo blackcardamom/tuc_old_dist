@@ -138,7 +138,6 @@
             var newCard = document.getElementById(cardNames[num]);
             var $newCard = $(newCard)
             scrollTo(container, $newCard.position().left + container.scrollLeft, 800);
-            console.log($newCard.position().left);
             // Updates hash
             window.location.hash = "#" + cardNames[num];
         }
