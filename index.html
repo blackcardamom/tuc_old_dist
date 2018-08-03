@@ -9,24 +9,28 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
-<!--script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js">
+<!--script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"-->
+<!--script>
+    console.log("Hello World");
     window.addEventListener("hashchange", handler, true);
 
     function handler(e) {
         e.preventDefault();
+        console.log("Event!");
         if (this.hash !== "") {
             // Prevent default anchor click behavior
+            console.log(window.location.hash);
             var hash = this.hash;
             var container = document.getElementById("scrolling_container")
             // 800 = milliseconds it takes to scroll; - 50 = vertical location
             container.animate({
-                scrollLeft: $(hash).offset().left - 50
+                scrollLeft: hash.offset().left
             }, 800, function() {
                 // Add hash (#) to URL when done scrolling (default click behavior)
                 window.location.hash = hash;
             });
-        } // End if
-        e.preventDefault();
+            console.log(window.location.hash);
+        }; // End if
     }
 </script-->
 
@@ -78,23 +82,64 @@
         <a href="mailto:theuglycroissant@gmail.com"><i class="fas fa-envelope"></i></a>
         <a href="https://www.instagram.com/theuglycroissant/"><i class="fab fa-instagram"></i></a>
     </div>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script>
         var cardNames = ["card1", "card2", "card3", "card4", "card5", "card6"];
 
+        // Makes modular arithmetic work with negative numbers
+        function mod(n, m) {
+            return ((n % m) + m) % m;
+        }
+
+        // Javascript scroll animation
+        // From https://gist.github.com/andjosh/6764939
+        function scrollTo(element, to, duration) {
+            var start = element.scrollLeft,
+                change = to - start,
+                currentTime = 0,
+                increment = 20;
+
+            var animateScroll = function() {
+                currentTime += increment;
+                var val = Math.easeInOutQuad(currentTime, start, change, duration);
+                element.scrollLeft = val;
+                if (currentTime < duration) {
+                    setTimeout(animateScroll, increment);
+                }
+            };
+            animateScroll();
+        }
+
+        //t = current time
+        //b = start value
+        //c = change in value
+        //d = duration
+        Math.easeInOutQuad = function(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t + b;
+            t--;
+            return -c / 2 * (t * (t - 2) - 1) + b;
+        };
+
         function changeCard(direction) {
+            // Typical direction is 1 or -1 (right or left resp.)
             var currentCard = window.location.hash.substr(1);
+            // No hash means we've just opened the page so must be on the first card
             if (currentCard == "") {
                 currentCard = cardNames[0];
             }
+            // Finds current card number
             var num = cardNames.indexOf(currentCard);
-            num = num + direction;
-            if (num >= cardNames.length) {
-                num = 0;
-            }
-            if (num < 0) {
-                num = cardNames.length - 1;
-            }
-            location.hash = "#" + cardNames[num];
+            // Calculates new card number
+            num = mod((num + direction), cardNames.length);
+            // Smooth scrolling
+            var container = document.getElementById("scrolling_container");
+            var newCard = document.getElementById(cardNames[num]);
+            var $newCard = $(newCard)
+            scrollTo(container, $newCard.position().left + container.scrollLeft, 800);
+            console.log($newCard.position().left);
+            // Updates hash
+            window.location.hash = "#" + cardNames[num];
         }
 
         function myFunction() {
