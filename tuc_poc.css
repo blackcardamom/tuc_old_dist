@@ -173,7 +173,8 @@ img.portait {
 }
 
 .centered_image img {
-    height:25vw;
+    max-width:100%;
+    max-height:25vw;
 }
 
 /* About page */
@@ -539,6 +540,9 @@ input[type=submit]:hover {
     margin-right : 5%;
     margin-left  : 5%;
   }
+  .centered_image img {
+      max-height:30vw;
+  }
 }
 
 @media
@@ -547,6 +551,10 @@ input[type=submit]:hover {
   body {
     margin : 0;
   }
+  .centered_image img {
+      max-height:40vw;
+  }
+
 }
 
 @media
@@ -619,6 +627,10 @@ input[type=submit]:hover {
   .feature_card_text {
     width      : 100%;
     text-align : center;
+  }
+
+  .centered_image img {
+      max-height:50vw;
   }
 }
 
