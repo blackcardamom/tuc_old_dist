@@ -99,8 +99,8 @@
         }
 
         function copyToClip() {
-            var dummy = document.createElement('input'),
-                text = window.location.href;
+            var dummy = document.createElement('input');
+            text = window.location.href;
             document.body.appendChild(dummy);
             dummy.value = text;
             dummy.select();
