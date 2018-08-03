@@ -1,11 +1,12 @@
 :root {
-  --main-color          : #48494B;
-  --main-color-weak     : #BEBFC1;
-  --accent-color        : #4CC8FF;
-  --accent-color-weak   : #CCF0FF;
-  --accent-color-strong : #00B3FF;
-  --background-color    : #CBCFD6;
-  --text-light          : #f2f2f2;
+  --main-color                   : #48494B;
+  --main-color-weak              : #BEBFC1;
+  --accent-color                 : #4CC8FF;
+  --accent-color-weak            : #CCF0FF;
+  --accent-color-strong          : #00B3FF;
+  --background-color             : #CBCFD6;
+  --background-color-translucent : rgba(203, 207, 214,0.35);
+  --text-light                   : #f2f2f2;
 }
 
 body {
@@ -87,14 +88,15 @@ img.portait {
 }
 
 .footer a:first-child img {
-  width          : auto;
-  height         : 100%;
-  padding-top    : 8px;
-  padding-bottom : 8px;
-  padding-left   : 16px;
+  width  : auto;
+  height : 100%;
 }
 
 /* Featured content slider */
+
+.feature_parent {
+    position: relative;
+}
 
 .scrolling-wrapper-flexbox {
   display    : flex;
@@ -102,11 +104,56 @@ img.portait {
   flex-wrap  : nowrap;
 }
 
-.card {
+.feature_card {
   width            : 100%;
-  background-color : white;
+  color            : var(--text-light);
+  background-color : var(--main-color);
   flex             : 0 0 auto;
 }
+
+.feature_card_img {
+  width : 50%;
+  float : left;
+}
+
+.feature_card_img img {
+  display : block;
+  width   : 100%;
+}
+
+.feature_card_text {
+  width : 50%;
+  float : left;
+}
+
+.feature_left_arrow {
+  position         : absolute;
+  top              : 50%;
+  left             : 0;
+  color            : white;
+  background-color : var(--background-color-translucent);
+  z-index: 10;
+  padding-top:14px;
+  padding-bottom: 14px;
+  padding-left:5px;
+  padding-right:5px;
+  border-radius: 0px 5px 5px 0px;
+}
+
+.feature_right_arrow {
+  position         : absolute;
+  top              : 50%;
+  right            : 0;
+  color            : white;
+  z-index:11;
+  background-color : var(--background-color-translucent);
+  padding-top:14px;
+  padding-bottom: 14px;
+  padding-left:5px;
+  padding-right:5px;
+  border-radius: 5px 0px 0px 5px;
+}
+
 
 /* About page */
 
