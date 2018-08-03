@@ -147,7 +147,7 @@ img.portait {
 .feature_right_arrow {
   z-index          : 11;
   position         : absolute;
-  top              : calc(50% - 18px - 0.5em);
+  top              : calc(50% - 18px - 0.S5em);
   right            : 0;
   padding-top      : 14px;
   padding-right    : 5px;
@@ -382,9 +382,11 @@ a.active_topnav {
                         Helvetica,
                         sans-serif;
 }
+
 .button:active {
   color : var(--accent-color);
 }
+
 .recipe_intro h1,
 h2,
 h3,
