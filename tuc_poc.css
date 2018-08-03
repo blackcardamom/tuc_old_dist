@@ -406,6 +406,10 @@ a.active_topnav {
   color : var(--accent-color);
 }
 
+#socials_linebreak {
+    display:none;
+}
+
 .recipe_intro h1,
 h2,
 h3,
@@ -586,6 +590,9 @@ input[type=submit]:hover {
     text-align : center;
   }
 
+  #socials_linebreak {
+      display:inline;
+  }
   .recipe_intro_img {
     width         : 100%;
     padding-top   : 0;
