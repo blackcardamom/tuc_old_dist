@@ -24,6 +24,10 @@ body {
   color : var(--accent-color);
 }
 
+#mobile_linebreak {
+    display:none;
+}
+
 a {
   color : var(--accent-color);
 }
@@ -398,16 +402,14 @@ a.active_topnav {
   border-bottom-style : solid;
   background-color    : var(--main-color);
   font-family         : Arial,
-                        Helvetica,
-                        sans-serif;
-}
-
-.button:active {
+                        .button:active {
   color : var(--accent-color);
 }
 
-#socials_linebreak {
+#mobile_linebreak {
     display:none;
+}Helvetica,
+                        sans-serif;
 }
 
 .recipe_intro h1,
@@ -590,9 +592,10 @@ input[type=submit]:hover {
     text-align : center;
   }
 
-  #socials_linebreak {
+  #mobile_linebreak {
       display:inline;
   }
+
   .recipe_intro_img {
     width         : 100%;
     padding-top   : 0;
