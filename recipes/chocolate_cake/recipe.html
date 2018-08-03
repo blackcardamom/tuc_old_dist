@@ -78,12 +78,86 @@
             <p> This cake is best served the next day, when the ganache has started to seep into the layers.</p>
         </div>
     </div>
+    <div class="feature_parent">
+        <div class="feature_left_arrow button" onclick="changeCard(-1)"><i class="fas fa-arrow-left"></i></div>
+        <div class="feature_right_arrow button" onclick="changeCard(1)"><i class="fas fa-arrow-right"></i></div>
+        <div class="scrolling-wrapper-flexbox" id="scrolling_container">
+            <div class="centered_image" id="card1">
+                <img src="landscape_picture.jpg">
+            </div>
+            <div class="centered_image" id="card2">
+                <img src="intro_picture.jpg">
+            </div>
+            <div class="centered_image" id="card3">
+                <img src="card_picture.jpg">
+            </div>
+        </div>
+    </div>
     <div class="footer">
         <a href="../../index.html"><img src="../../logos/the_ugly_croissant_long_EDIT.jpeg"></a>
         <a href="mailto:theuglycroissant@gmail.com"><i class="fas fa-envelope"></i></a>
         <a href="https://www.instagram.com/theuglycroissant/"><i class="fab fa-instagram"></i></a>
     </div>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script>
+        var cardNames = ["card1", "card2", "card3"];
+
+        // Makes modular arithmetic work with negative numbers
+        function mod(n, m) {
+            return ((n % m) + m) % m;
+        }
+
+        // Javascript scroll animation
+        // From https://gist.github.com/andjosh/6764939
+        function scrollTo(element, to, duration) {
+            var start = element.scrollLeft,
+                change = to - start,
+                currentTime = 0,
+                increment = 20;
+
+            var animateScroll = function() {
+                currentTime += increment;
+                var val = Math.easeInOutQuad(currentTime, start, change, duration);
+                element.scrollLeft = val;
+                if (currentTime < duration) {
+                    setTimeout(animateScroll, increment);
+                }
+            };
+            animateScroll();
+        }
+
+        // From https://gist.github.com/andjosh/6764939
+        //t = current time
+        //b = start value
+        //c = change in value
+        //d = duration
+        Math.easeInOutQuad = function(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t + b;
+            t--;
+            return -c / 2 * (t * (t - 2) - 1) + b;
+        };
+
+        function changeCard(direction) {
+            // Typical direction is 1 or -1 (right or left resp.)
+            var currentCard = window.location.hash.substr(1);
+            // No hash means we've just opened the page so must be on the first card
+            if (currentCard == "") {
+                currentCard = cardNames[0];
+            }
+            // Finds current card number
+            var num = cardNames.indexOf(currentCard);
+            // Calculates new card number
+            num = mod((num + direction), cardNames.length);
+            // Smooth scrolling
+            var container = document.getElementById("scrolling_container");
+            var newCard = document.getElementById(cardNames[num]);
+            var $newCard = $(newCard)
+            scrollTo(container, $newCard.position().left + container.scrollLeft, 500);
+            // Updates hash
+            window.location.hash = "#" + cardNames[num];
+        }
+
         function myFunction() {
             var x = document.getElementById("myTopnav");
             if (x.className === "topnav") {

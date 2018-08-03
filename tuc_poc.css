@@ -99,13 +99,16 @@ img.portait {
 /* Featured content slider */
 
 .feature_parent {
+    float:left;
   position : relative;
+  width:100%;
 }
 
 .scrolling-wrapper-flexbox {
   display    : flex;
   overflow-x : hidden;
   flex-wrap  : nowrap;
+  background-color: var(--main-color);
 }
 
 .feature_card {
@@ -160,6 +163,17 @@ img.portait {
   color            : white;
   border-radius    : 5px 0px 0px 5px;
   background-color : var(--background-color-translucent);
+}
+
+.centered_image {
+    width:100%;
+    flex: 0 0 auto;
+    background-color: rgba(0,0,0,0);
+    text-align:center;
+}
+
+.centered_image img {
+    height:25vw;
 }
 
 /* About page */
