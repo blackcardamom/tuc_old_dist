@@ -170,13 +170,13 @@ img.portait {
 }
 
 .centered_image {
+  display          : flex;
   width            : 100%;
   background-color : rgba(0,0,0,0);
   text-align       : center;
+  align-items      : center;
   flex             : 0 0 auto;
-  display:flex;
-  align-items: center;
-  justify-content: center;
+  justify-content  : center;
 }
 
 .centered_image img {
@@ -499,13 +499,12 @@ li::marker {
 
 /* Gallery page */
 
-.gallery_wrapper{
-    width:100%;
-    background-color: var(--main-color)
-    display:flex;
-    height:90vh;
+.gallery_wrapper {
+  display          : flex;
+  width            : 100%;
+  height           : 90vh;
+  background-color : var(--main-color);
 }
-
 
 /* Contact page form */
 
@@ -554,10 +553,6 @@ input[type=submit]:hover {
     margin-right : 5%;
     margin-left  : 5%;
   }
-/*
-  .centered_image img {
-    max-height : 30vw;
-  }*/
 }
 
 @media
@@ -566,10 +561,6 @@ input[type=submit]:hover {
   body {
     margin : 0;
   }
-/*
-  .centered_image img {
-    max-height : 40vw;
-  }*/
 }
 
 @media
@@ -647,10 +638,6 @@ input[type=submit]:hover {
     width      : 100%;
     text-align : center;
   }
-/*
-  .centered_image img {
-    max-height : 50vw;
-  }*/
 }
 
 @media
