@@ -18,13 +18,26 @@
         <a href="contact.html">Contact</a>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()"> <i class="fas fa-bars"></i></a>
     </div>
-    <div class="gallery_wrapper"></div>
+    <div class="gallery_wrapper">
+        <div class="gallery_selection_window">
+            <img src="gallery/Brownies_DSC05549.jpg" onclick="changeDisplay(this)">
+            <img src="gallery/DSC05254.JPG" onclick="changeDisplay(this)">
+            <img src="gallery/DSC05324.JPG" onclick="changeDisplay(this)">
+            <img src="gallery/DSC05349.JPG" onclick="changeDisplay(this)">
+            <img src="gallery/DSC05413.JPG" onclick="changeDisplay(this)">
+            <img src="gallery/DSC05434.JPG" onclick="changeDisplay(this)">
+            <img src="gallery/DSC05460.JPG" onclick="changeDisplay(this)">
+            <img src="gallery/Mango%20Tart_DSC05490.jpg" onclick="changeDisplay(this)">
+        </div>
+        <div class="gallery_display_port"><img src="gallery/Brownies_DSC05549.jpg" id="displayed_pic"></div>
+    </div>
     <div class="footer">
         <a href="index.html"><img src="logos/the_ugly_croissant_long_EDIT.jpeg"></a>
         <a href="mailto:theuglycroissant@gmail.com"><i class="fas fa-envelope"></i></a>
         <a href="https://www.instagram.com/theuglycroissant/"><i class="fab fa-instagram"></i></a>
     </div>
     <script>
+        // Taken from https://www.w3schools.com/howto/howto_js_topnav_responsive.asp
         function myFunction() {
             var x = document.getElementById("myTopnav");
             if (x.className === "topnav") {
@@ -32,6 +45,10 @@
             } else {
                 x.className = "topnav";
             }
+        }
+
+        function changeDisplay(elem) {
+            document.getElementById("displayed_pic").src = elem.src;
         }
     </script>
 

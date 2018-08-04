@@ -504,6 +504,44 @@ li::marker {
   width            : 100%;
   height           : 90vh;
   background-color : var(--main-color);
+  flex-direction   : row;
+}
+
+.gallery_display_port {
+  display         : flex;
+  width           : 80%;
+  height          : 100%;
+  align-items     : center;
+  justify-content : center;
+  order           : 2;
+}
+
+.gallery_display_port img {
+  max-width  : 100%;
+  max-height : 100%;
+}
+
+.gallery_selection_window {
+  display        : flex;
+  width          : 20%;
+  overflow-x     : hidden;
+  overflow-y     : scroll;
+  flex-direction : column;
+  order          : 1;
+}
+
+.gallery_selection_window img {
+  width       : 100%;
+  padding     : 2px 0px 2px 0px;
+  padding-top : 2px;
+}
+
+.gallery_selection_window img:first-child {
+  padding : 0px 0px 2px 0px;
+}
+
+.gallery_selection_window img:last-child {
+  padding-bottom : 2px 0px 0px 0px;
 }
 
 /* Contact page form */
@@ -637,6 +675,40 @@ input[type=submit]:hover {
   .feature_card_text {
     width      : 100%;
     text-align : center;
+  }
+
+  .gallery_wrapper {
+    flex-direction : column;
+  }
+
+  .gallery_display_port {
+    width  : 100%;
+    height : 80%;
+    order  : 1;
+  }
+
+  .gallery_selection_window {
+    width          : 100%;
+    height         : 20%;
+    overflow-x     : scroll;
+    overflow-y     : hidden;
+    flex-direction : row;
+    flex-wrap      : nowrap;
+    order          : 2;
+  }
+
+  .gallery_selection_window img {
+    width   : auto;
+    height  : 100%;
+    padding : 0px 2px 0px 2px;
+  }
+
+  .gallery_selection_window img:first-child {
+    padding : 0px 2px 0px 0px;
+  }
+
+  .gallery_selection_window img:last-child {
+    padding : 0px 0px 0px 2px;
   }
 }
 
