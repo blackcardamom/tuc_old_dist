@@ -526,9 +526,9 @@ li::marker {
   width          : 20%;
   overflow-x     : hidden;
   overflow-y     : scroll;
+  border-right   : var(--background-color) solid 2px;
   flex-direction : column;
   order          : 1;
-  border-right: var(--background-color) solid 2px;
 }
 
 .gallery_selection_window img {
@@ -693,10 +693,10 @@ input[type=submit]:hover {
     height         : 20%;
     overflow-x     : scroll;
     overflow-y     : hidden;
+    border-top     : var(--background-color) solid 2px;
     flex-direction : row;
     flex-wrap      : nowrap;
     order          : 2;
-    border-top: var(--background-color) solid 2px;
   }
 
   .gallery_selection_window img {
