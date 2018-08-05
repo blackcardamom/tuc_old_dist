@@ -170,14 +170,14 @@ img.portait {
 }
 
 .centered_image {
-    display          : flex;
+  display          : flex;
   width            : 100%;
   background-color : rgba(0,0,0,0);
   text-align       : center;
   align-items      : center;
   flex             : 0 0 auto;
+  flex-direction   : column;
   justify-content  : center;
-  flex-direction: column;
 }
 
 .centered_image img {
@@ -186,7 +186,7 @@ img.portait {
 }
 
 .centered_image p {
-    color: var(--text-light);
+  color : var(--text-light);
 }
 
 /* About page */
