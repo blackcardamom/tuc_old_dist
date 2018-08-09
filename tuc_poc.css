@@ -143,11 +143,11 @@ img.portait {
 }
 
 .feature_card_text p {
-      padding: 0 5% 0 5%;
+  padding : 0 5% 0 5%;
 }
 
 .feature_card_text h2 {
-    padding: 3% 5% 0 5%;
+  padding : 3% 5% 0 5%;
 }
 
 .feature_left_arrow {
@@ -641,6 +641,23 @@ input[type=submit]:hover {
   #mobile_linebreak {
     display : inline;
   }
+
+    .feature_card_text {
+        width:100%;
+        text-align: center;
+    }
+
+    .feature_card_text p {
+        padding: 0 3% 0 3%;
+    }
+
+    .feature_card_text h2 {
+        padding: 3% 3% 0 3%;
+    }
+
+    .feature_card_img {
+        width:100%;
+    }
 
   .recipe_intro_img {
     width         : 100%;
