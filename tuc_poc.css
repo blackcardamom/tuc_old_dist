@@ -12,8 +12,8 @@
 body {
   margin           : 0;
   margin-top       : 0%;
-  margin-right     : 15%;
-  margin-left      : 15%;
+  margin-right     : 20%;
+  margin-left      : 20%;
   background-color : var(--background-color);
   font-family      : Arial,
                      Helvetica,
@@ -255,7 +255,7 @@ p {
   color       : white;
   text-align  : center;
   text-shadow : 1px 1px var(--main-color);
-  font-size   : 3vw;
+  font-size   : 2em;
 }
 
 .container_overlay {
@@ -634,10 +634,14 @@ input[type=submit]:hover {
     margin : 0;
   }
 
+  .bottom-right {
+    font-size : 1em;
+  }
+
   .recipe_intro {
     text-align : center;
   }
-  
+
   #mobile_linebreak {
     display : inline;
   }
