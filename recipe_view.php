@@ -43,7 +43,7 @@
         <a><i class="fas fa-copy button" title="Copy to clipboard" onclick="copyToClip()"></i></a> &nbsp;&nbsp;
         <a href="<?= $print_pdf ?>"><i class="fas fa-print button"  title="Print recipe"></i></a>
     </p>
-    <p><?= $intro_html ?></p>
+    <?= $intro_html ?>
 </div>
 <div class="recipe_content_container">
     <div class="ingredients">
