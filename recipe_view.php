@@ -1,4 +1,7 @@
-<?php include_once 'header.php'; ?>
+<?php
+    include_once 'header.php';
+    include_once 'includes/conn.inc.php'
+?>
 <div class="recipe_intro">
     <div class="recipe_intro_img">
         <img id="recipe_intro_img">
