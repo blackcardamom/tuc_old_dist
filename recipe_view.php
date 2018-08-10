@@ -14,9 +14,9 @@
         $title = $row['title'];
         $recipe_active_time = $row['recipe_active_time'];
         $recipe_serves = $row['recipe_serves'];
-        $intro_html = $row['recipe_html'];
+        $intro_html = $row['intro_html'];
         $ingredients_html = $row['ingredients_html'];
-        $method_html = $row['row_html'];
+        $method_html = $row['method_html'];
         $intro_img = $row['intro_img'];
     }
 ?>
