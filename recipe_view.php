@@ -7,12 +7,12 @@
     <p><i class="fas fa-clock"></i> <span id="recipe_time"></span> &nbsp;&nbsp;
         <i class="fas fa-utensils"></i> <span id="recipe_serves"></span> &nbsp;&nbsp;
         <br id="mobile_linebreak"><br id="mobile_linebreak">
-        <i class="fab fa-facebook button" id="social_fb" title="Share to Facebook"></i> &nbsp;&nbsp;
-        <i class="fab fa-twitter button" id="social_twtr" title="Share to Twitter"></i> &nbsp;&nbsp;
-        <i class="fab fa-pinterest button" id="social_pnt" title="Share to Pinterest"></i> &nbsp;&nbsp;
-        <i class="fab fa-reddit button" id="social_snoo" title="Share to Reddit"></i> &nbsp;&nbsp;
-        <i class="fas fa-copy button" title="Copy to clipboard" onclick="copyToClip()"></i> &nbsp;&nbsp;
-        <i class="fas fa-print button" id="print_pdf" title="Print recipe"></i>
+        <a id="social_fb"><i class="fab fa-facebook button"title="Share to Facebook"></i></a> &nbsp;&nbsp;
+        <a id="social_twtr"><i class="fab fa-twitter button" title="Share to Twitter"></i></a> &nbsp;&nbsp;
+        <a id="social_pnt"><i class="fab fa-pinterest button" title="Share to Pinterest"></i></a> &nbsp;&nbsp;
+        <a id="social_snoo"><i class="fab fa-reddit button" title="Share to Reddit"></i></a> &nbsp;&nbsp;
+        <a><i class="fas fa-copy button" title="Copy to clipboard" onclick="copyToClip()"></i></a> &nbsp;&nbsp;
+        <a id="print_pdf"><i class="fas fa-print button"  title="Print recipe"></i></a>
     </p>
     <p id="recipe_intro"></p>
 </div>

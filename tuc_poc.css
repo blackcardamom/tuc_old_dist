@@ -33,6 +33,10 @@ a {
   color : var(--accent-color);
 }
 
+a i.button {
+    color: white;
+}
+
 .my_content {
   height           : 100%;
   margin           : 0;
