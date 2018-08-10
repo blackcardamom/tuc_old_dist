@@ -16,7 +16,7 @@
         $recipe_wait_time = $row['recipe_wait_time'];
         $recipe_serves = $row['recipe_serves'];
         $social_fb = $row['social_fb'];
-        $social_twtr = $row['$social_twtr'];
+        $social_twtr = $row['social_twtr'];
         $social_pnt = $row['social_pnt'];
         $social_snoo = $row['social_snoo'];
         $print_pdf = $row['print_pdf'];
