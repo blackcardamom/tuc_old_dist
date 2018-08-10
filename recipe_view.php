@@ -4,8 +4,8 @@
         <img id="recipe_intro_img">
     </div>
     <h1 id="recipe_title"></h1>
-    <p><i class="fas fa-clock"></i> <span id="recipe_time"></span> &nbsp;&nbsp;
-        <i class="fas fa-utensils"></i> <span id="recipe_serves"></span> &nbsp;&nbsp;
+    <p><i class="fas fa-clock" title="Cooking time"></i> <span id="recipe_time"></span> &nbsp;&nbsp;
+        <i class="fas fa-utensils" title="Serving size"></i> <span id="recipe_serves"></span> &nbsp;&nbsp;
         <br id="mobile_linebreak"><br id="mobile_linebreak">
         <a id="social_fb"><i class="fab fa-facebook button"title="Share to Facebook"></i></a> &nbsp;&nbsp;
         <a id="social_twtr"><i class="fab fa-twitter button" title="Share to Twitter"></i></a> &nbsp;&nbsp;
