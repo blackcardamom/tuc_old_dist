@@ -19,7 +19,7 @@
         $social_twtr = $row['$social_twtr'];
         $social_pnt = $row['social_pnt'];
         $social_snoo = $row['social_snoo'];
-        $print_pdf = $row['print_pdf']
+        $print_pdf = $row['print_pdf'];
         $intro_html = $row['intro_html'];
         $ingredients_html = $row['ingredients_html'];
         $method_html = $row['method_html'];
