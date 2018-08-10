@@ -29,7 +29,7 @@ body {
   display : none;
 }
 
-a {
+a.blue {
   color : var(--accent-color);
 }
 
