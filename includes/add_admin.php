@@ -1,10 +1,16 @@
 <?php
     include_once 'conn.inc.php';
 
-    $uid = 'beansprout';
-    $pwd = 'buttons_tucadmin#18';
-    $first_name = 'Nikki';
-    $last_name = 'Easton';
+    /*
+
+    //
+    // Remove block quotes, fill out variables and navigate this page in order to add an admin account
+    //
+
+    $uid = '';
+    $pwd = '';
+    $first_name = '';
+    $last_name = '';
 
     $pwd_hash = password_hash($pwd, PASSWORD_DEFAULT);
     $sql = "INSERT INTO users (uid, pwd, first_name, last_name) VALUES ('$uid', '$pwd_hash', '$first_name', '$last_name')";
@@ -20,3 +26,5 @@
     } else {
         echo "Couldn't verify password";
     }
+    
+    */
