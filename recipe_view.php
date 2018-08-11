@@ -33,7 +33,7 @@
     </div>
     <h1><?= $title ?></h1>
     <p><i class="fas fa-clock" title="Acitve time"></i> <?= $recipe_active_time ?> &nbsp;&nbsp;
-        <i class="fas fa-clock" title="Waiting time"></i> <?= $recipe_wait_time ?> &nbsp;&nbsp;
+        <i class="fas fa-bed" title="Waiting time"></i> <?= $recipe_wait_time ?> &nbsp;&nbsp;
         <i class="fas fa-utensils" title="Serving size"></i> <?= $recipe_serves ?> &nbsp;&nbsp;
         <br id="mobile_linebreak"><br id="mobile_linebreak">
         <a href="<?= $social_fb ?>"><i class="fab fa-facebook button"title="Share to Facebook"></i></a> &nbsp;&nbsp;
