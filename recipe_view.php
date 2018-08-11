@@ -2,28 +2,32 @@
     include_once 'header.php';
     include_once 'includes/conn.inc.php';
 
-    $id = $_GET["id"];
-    $sql = "SELECT * FROM recipes WHERE id=".$id;
-    $result = mysqli_query($conn, $sql);
-    $resultCheck = mysqli_num_rows($result);
-
-    if (!$resultCheck == 1) {
-        echo "Something went terribly wrong";
+    if (!isset($_GET['id'])) {
+        header("Location: pagenotfound.php");
     } else {
-        $row = mysqli_fetch_assoc($result);
-        $title = $row['title'];
-        $recipe_active_time = $row['recipe_active_time'];
-        $recipe_wait_time = $row['recipe_wait_time'];
-        $recipe_serves = $row['recipe_serves'];
-        $social_fb = $row['social_fb'];
-        $social_twtr = $row['social_twtr'];
-        $social_pnt = $row['social_pnt'];
-        $social_snoo = $row['social_snoo'];
-        $print_pdf = $row['print_pdf'];
-        $intro_html = $row['intro_html'];
-        $ingredients_html = $row['ingredients_html'];
-        $method_html = $row['method_html'];
-        $intro_img = $row['intro_img'];
+        $id = $_GET["id"];
+        $sql = "SELECT * FROM recipes WHERE id=".$id;
+        $result = mysqli_query($conn, $sql);
+        $resultCheck = mysqli_num_rows($result);
+
+        if (!$resultCheck == 1) {
+            header("Location: pagenotfound.php");
+        } else {
+            $row = mysqli_fetch_assoc($result);
+            $title = $row['title'];
+            $recipe_active_time = $row['recipe_active_time'];
+            $recipe_wait_time = $row['recipe_wait_time'];
+            $recipe_serves = $row['recipe_serves'];
+            $social_fb = $row['social_fb'];
+            $social_twtr = $row['social_twtr'];
+            $social_pnt = $row['social_pnt'];
+            $social_snoo = $row['social_snoo'];
+            $print_pdf = $row['print_pdf'];
+            $intro_html = $row['intro_html'];
+            $ingredients_html = $row['ingredients_html'];
+            $method_html = $row['method_html'];
+            $intro_img = $row['intro_img'];
+        }
     }
 ?>
 
@@ -55,6 +59,4 @@
         <?= $method_html ?>
     </div>
 </div>
-
-
 <?php include_once 'footer.php'; ?>
