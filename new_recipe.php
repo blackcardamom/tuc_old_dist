@@ -17,7 +17,7 @@
 
 <div class="admin_container">
     <h1>Create new recipe (with ID <?= $nextID ?>), username <?= $_POST['uid'] ?></h1><br>
-    <form action="new_recipe.php" method="post">
+    <form action="includes/db_addRecipe.php" method="post">
         <input type="hidden" name="uid" value="<?= $_POST['uid'] ?>">
         <strong>Recipe Title</strong><br>
         <input type="text" name="title" placeholder="Lemon Meringue Pie"><br>
