@@ -38,7 +38,7 @@
 </div>
 <div class="my_content">
     <h2 style="margin:0">Welcome to The Ugly Crossiant</h2>
-    <p>This is the home page, what should we put here? <a href="recipe_view.php?id=1">Click here</a> to visit the PHP-enabled recipe page.</p>
+    <p>This is the home page, what should we put here?</p>
 </div>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
