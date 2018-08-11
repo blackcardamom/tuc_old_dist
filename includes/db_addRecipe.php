@@ -1,6 +1,6 @@
 <?php
     include_once 'conn.inc.php';
-    //include_once 'admin_validate.inc.php';
+    include_once 'admin_validate.inc.php';
     include_once 'parsedown/Parsedown.php';
 
     function makeValuesReferenced(&$arr){
@@ -10,14 +10,12 @@
         return $refs;
     }
 
-    $passwordCorrect = 1;
-
     // Extract username and password for verification
 
     $uid = $_POST['uid'];
     $pwd = $_POST['pwd'];
 
-    if(!$passwordCorrect) {
+    if(!checkCredentials($uid,$pwd)) {
         exit('Password incorrect please try again');
     }
 
