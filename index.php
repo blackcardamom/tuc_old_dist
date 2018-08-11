@@ -1,4 +1,4 @@
-<?php include_once 'header.php'; ?>
+<?php $selected="home"; include_once 'header.php'; ?>
 
 <div class="feature_parent">
     <div class="feature_left_arrow button" onclick="changeCard(-1)"><i class="fas fa-arrow-left"></i></div>

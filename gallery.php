@@ -1,4 +1,4 @@
-<?php include_once 'header.php'; ?>
+<?php $selected="gallery"; include_once 'header.php'; ?>
 
 <div class="gallery_wrapper">
     <div class="gallery_selection_window">

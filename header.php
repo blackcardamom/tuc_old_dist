@@ -11,9 +11,9 @@
     <body id="myBody">
         <div class="topnav" id="myTopnav">
             <a href="index.php"><img src="logos/the_ugly_croissant_long_EDIT.jpeg"></a>
-            <a href="about.php">About</a>
-            <a href="recipes.php">Recipes</a>
-            <a href="gallery.php">Gallery</a>
-            <a href="contact.php">Contact</a>
+            <a href="about.php" <?php if ($selected == "about") echo 'class="active_topnav"'; ?>>About</a>
+            <a href="recipes.php" <?php if ($selected == "recipes") echo 'class="active_topnav"'; ?>>Recipes</a>
+            <a href="gallery.php" <?php if ($selected == "gallery") echo 'class="active_topnav"'; ?>>Gallery</a>
+            <a href="contact.php" <?php if ($selected == "contact") echo 'class="active_topnav"'; ?>>Contact</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()"> <i class="fas fa-bars"></i></a>
         </div>

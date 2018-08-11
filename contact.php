@@ -1,4 +1,4 @@
-<?php include_once 'header.php'; ?>
+<?php $selected="contact"; include_once 'header.php'; ?>
 
 <div class="contact_container">
     <h1>Contact Info</h1>
