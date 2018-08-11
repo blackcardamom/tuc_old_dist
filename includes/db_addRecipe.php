@@ -64,7 +64,10 @@
         }
     }
 
-    // At this point we know all the columns are safe so we can prepare an SQL statement to input the recipe into the database
+    // At this point we know all the columns are safe
+    // Probably worth doing some data validation here
+
+    //Now we can prepare an SQL statement to input the recipe into the database
 
     $format = "";
     $sql = "INSERT into recipes (";
