@@ -1,5 +1,5 @@
 <?php
-    $selected="home"; 
+    $selected="home";
     include_once 'header.php';
     include_once 'includes/conn.inc.php';
 
@@ -35,15 +35,15 @@
         <textarea id="method_mde"></textarea>
         <input type="hidden" name="method_md" id="method_md_input">
         <strong>Path to intro image</strong><br>
-        <input type="text" name="intro_img" placeholder="recipes/id/intro_img.jpg"><br>
+        <input type="text" name="intro_img" value="recipes/<?= $nextID ?>/"><br>
         <strong>Path to card image</strong><br>
-        <input type="text" name="card_img" placeholder="recipes/id/card_img.jpg"><br>
+        <input type="text" name="card_img" value="recipes/<?= $nextID ?>/"<br>
         <strong>Path to printable pdf</strong><br>
-        <input type="text" name="print_pdf" placeholder="recipes/id/lemon_meringue.pdf"><br>
+        <input type="text" name="print_pdf" value="recipes/<?= $nextID ?>/"><br>
         <strong>Username</strong> &nbsp;&nbsp;
-        <input type="password" name="uid"> &nbsp;&nbsp;
+        <input type="password" name="uid"> &nbsp;&nbsp; <br id="mobile_linebreak"> <br id="mobile_linebreak">
         <strong>Password</strong> &nbsp;&nbsp;
-        <input type="password" name="pwd"> &nbsp;&nbsp;
+        <input type="password" name="pwd"> &nbsp;&nbsp; <br id="mobile_linebreak"> <br id="mobile_linebreak">
         <input type="submit" onclick="onNewRecipeSubmit()">
     </form>
 </div>
