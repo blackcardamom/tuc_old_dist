@@ -4,7 +4,7 @@
 
     $sql = "SELECT `AUTO_INCREMENT`
             FROM  INFORMATION_SCHEMA.TABLES
-            WHERE TABLE_SCHEMA = 'tuc_develop'
+            WHERE TABLE_SCHEMA = '$dbName'
             AND   TABLE_NAME   = 'recipes';";
 
     $result = mysqli_query($conn, $sql);
@@ -16,9 +16,8 @@
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
 <div class="admin_container">
-    <h1>Create new recipe (with ID <?= $nextID ?>), username <?= $_POST['uid'] ?></h1><br>
+    <h1>Create new recipe (with ID <?= $nextID ?>)</h1><br>
     <form action="includes/db_addRecipe.php" method="post">
-        <input type="hidden" name="uid" value="<?= $_POST['uid'] ?>">
         <strong>Recipe Title</strong><br>
         <input type="text" name="title" placeholder="Lemon Meringue Pie"><br>
         <strong>Time spent cooking</strong><br>
@@ -40,7 +39,9 @@
         <input type="text" name="card_img" placeholder="recipes/id/card_img.jpg"><br>
         <strong>Path to printable pdf</strong><br>
         <input type="text" name="print_pdf" placeholder="recipes/id/lemon_meringue.pdf"><br>
-        <strong>Admin password</strong> &nbsp;&nbsp;
+        <strong>Username</strong> &nbsp;&nbsp;
+        <input type="password" name="uid"> &nbsp;&nbsp;
+        <strong>Password</strong> &nbsp;&nbsp;
         <input type="password" name="pwd"> &nbsp;&nbsp;
         <input type="submit" onclick="onNewRecipeSubmit()">
     </form>
