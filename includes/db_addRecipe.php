@@ -12,11 +12,15 @@
 
     // Extract username and password for verification
 
+    if(empty($_POST['uid']) || empty($_POST['pwd'])) {
+        exit('Please provide all login credentials');
+    }
+
     $uid = $_POST['uid'];
     $pwd = $_POST['pwd'];
 
     if(!checkCredentials($uid,$pwd)) {
-        exit('Password incorrect please try again');
+        exit('Credentials incorrect please try again');
     }
 
     // Creating array of data we wish to enter into the new entry
