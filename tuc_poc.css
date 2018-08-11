@@ -599,6 +599,25 @@ input[type=submit]:hover {
   background-color : var(--main-color);
 }
 
+/* Admin Page */
+
+.admin_container {
+  width            : 96%;
+  margin           : 0;
+  padding          : 1em 2% 1em 2%;
+  color            : black);
+  background-color : white;
+}
+
+.admin_container h1,h2 {
+    color:var(--main-color);
+}
+
+.admin_container {
+    float:left;
+    width:96%;
+}
+
 /* Responsive design */
 
 @media
