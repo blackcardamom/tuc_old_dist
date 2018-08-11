@@ -12,7 +12,7 @@
         <div class="topnav" id="myTopnav">
             <a href="index.html"><img src="logos/the_ugly_croissant_long_EDIT.jpeg"></a>
             <a href="about.html">About</a>
-            <a href="recipes.html" class="active_topnav">Recipes</a>
+            <a href="recipes.php" class="active_topnav">Recipes</a>
             <a href="gallery.html">Gallery</a>
             <a href="contact.html">Contact</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()"> <i class="fas fa-bars"></i></a>
