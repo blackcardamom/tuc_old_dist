@@ -1,4 +1,5 @@
 <?php include_once 'header.php'; ?>
+
 <div class="about_content">
     <div class="about_img"><img src="assets/portrait2.jpg"></div>
     <h2 style="margin:0;padding-top:0.5em">Welcome to The Ugly Crossiant</h2>
@@ -15,4 +16,5 @@
     <p><strong>Why the name?</strong></p>
     <p>My dad called my croissants ugly, it caught on.</p>
 </div>
+
 <?php include_once 'footer.php'; ?>

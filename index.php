@@ -1,5 +1,5 @@
 <?php include_once 'header.php'; ?>
-<!-- img src="assets/donut_banner.JPG" , class="banner"-->
+
 <div class="feature_parent">
     <div class="feature_left_arrow button" onclick="changeCard(-1)"><i class="fas fa-arrow-left"></i></div>
     <div class="feature_right_arrow button" onclick="changeCard(1)"><i class="fas fa-arrow-right"></i></div>
