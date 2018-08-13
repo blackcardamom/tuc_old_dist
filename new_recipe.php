@@ -1,5 +1,5 @@
 <?php
-    $titleSuffix=" - New recipe"; 
+    $titleSuffix=" - New recipe";
     include_once 'header.php';
     include_once 'includes/conn.inc.php';
 
