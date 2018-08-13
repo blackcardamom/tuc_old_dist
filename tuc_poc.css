@@ -7,6 +7,8 @@
   --background-color             : #CBCFD6;
   --background-color-translucent : rgba(203, 207, 214,0.35);
   --text-light                   : #f2f2f2;
+  --badResponse-red              : rgb(255,90,90);
+  --goodResponse-green           : rgb(90,255,90);
 }
 
 body {
@@ -15,9 +17,10 @@ body {
   margin-bottom    : 1%;
   margin-left      : 20%;
   background-color : var(--background-color);
-  font-family      : Arial,
+  font-family: Georgia, serif;
+  /*font-family      : Arial,
                      Helvetica,
-                     sans-serif;
+                     sans-serif;*/
 }
 
 .button:active {
@@ -40,9 +43,6 @@ a i.button {
   height           : 100%;
   margin           : 0;
   background-color : white;
-  font-family      : Arial,
-                     Helvetica,
-                     sans-serif;
 }
 
 .my_content h1 {
@@ -203,9 +203,6 @@ img.portait {
   color            : black;
   overflow         : hidden;
   background-color : white;
-  font-family      : Arial,
-                     Helvetica,
-                     sans-serif;
 }
 
 .about_content h1,
@@ -417,9 +414,6 @@ a.active_topnav {
   border-bottom-width : 2px;
   border-bottom-style : solid;
   background-color    : var(--main-color);
-  font-family         : Arial,
-                        Helvetica,
-                        sans-serif;
 }
 
 .recipe_intro h1,
@@ -597,6 +591,22 @@ input[type=submit]:hover {
   padding-left     : 5%;
   color            : white;
   background-color : var(--main-color);
+}
+
+input.goodResponse {
+    border: 1px solid var(--goodResponse-green);
+}
+
+input.badResponse {
+    border: 1px solid var(--badResponse-red);
+}
+
+textarea.goodResponse {
+    border: 1px solid var(--goodResponse-green);
+}
+
+textarea.badResponse {
+    border: 1px solid var(--badResponse-red);
 }
 
 /* Admin Page */
