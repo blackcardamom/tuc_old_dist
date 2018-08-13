@@ -10,17 +10,26 @@
         return $refs;
     }
 
+    // Check user has actually clicked submit
+
+    if(!isset($_POST['submit'])) {
+        header("Location: ../new_recipe.php?err=no_submit");
+        exit;
+    }
+
     // Extract username and password for verification
 
     if(empty($_POST['uid']) || empty($_POST['pwd'])) {
-        exit('Please provide all login credentials');
+        header("Location: ../new_recipe.php?err=no_creds");
+        exit;
     }
 
     $uid = $_POST['uid'];
     $pwd = $_POST['pwd'];
 
     if(!checkCredentials($uid,$pwd)) {
-        exit('Credentials incorrect please try again');
+        header("Location: ../new_recipe.php?err=bad_creds");
+        exit;
     }
 
     // Creating array of data we wish to enter into the new entry
@@ -60,7 +69,9 @@
 
     foreach ($keys as $key) {
         if(!in_array($key, $acceptableKeys)) {
-            exit('Key "'.$key.'" was not a recognised column. Potential SQL injection attack.');
+            header("Location: ../index.html");
+            exit;
+            //exit('Key "'.$key.'" was not a recognised column. Potential SQL injection attack.');
         }
     }
 
@@ -84,7 +95,8 @@
     $stmt = mysqli_stmt_init($conn);
     array_unshift($data, $stmt, $format);
     if (!mysqli_stmt_prepare($stmt,$sql)) {
-        echo "SQL statement failed to prepare";
+        header("Location: ../new_recipe.php?err=sql_fail");
+        exit;
     } else {
         call_user_func_array("mysqli_stmt_bind_param",makeValuesReferenced($data));
         mysqli_stmt_execute($stmt);
@@ -92,5 +104,5 @@
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
         $id = $row['LAST_INSERT_ID()'];
-        header("Location: ../recipe_view.php?id=".$id);
+        header("Location: ../new_recipe.php?id=".$id);
     }
