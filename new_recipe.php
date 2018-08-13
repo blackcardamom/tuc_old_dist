@@ -46,7 +46,7 @@
         <input type="password" name="uid"> &nbsp;&nbsp; <br id="mobile_linebreak"> <br id="mobile_linebreak">
         <strong>Password</strong> &nbsp;&nbsp;
         <input type="password" name="pwd"> &nbsp;&nbsp; <br id="mobile_linebreak"> <br id="mobile_linebreak">
-        <input type="submit" onclick="onNewRecipeSubmit()">
+        <input type="submit" name="submit" onclick="onNewRecipeSubmit()">
     </form>
 </div>
 

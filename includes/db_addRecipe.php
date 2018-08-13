@@ -37,6 +37,7 @@
     $data = $_POST;
     unset($data['uid']);
     unset($data['pwd']);
+    unset($data['submit']);
 
     // Parseing Markdown into HTML and adding current datetime
 
@@ -69,7 +70,7 @@
 
     foreach ($keys as $key) {
         if(!in_array($key, $acceptableKeys)) {
-            header("Location: ../index.html");
+            header("Location: ../new_recipe.php?err=bad_key&key=$key");
             exit;
             //exit('Key "'.$key.'" was not a recognised column. Potential SQL injection attack.');
         }
