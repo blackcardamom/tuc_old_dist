@@ -1,6 +1,6 @@
 <?php
     $selected = "recipes";
-    $titleSuffix=" - Recipes"; 
+    $titleSuffix=" - Recipes";
     include_once 'header.php';
     include_once 'includes/conn.inc.php';
 
@@ -70,5 +70,8 @@
             echo $recipe_card;
         }
     }
-    include_once 'footer.php'
 ?>
+
+<!-- Include link to recipe search with no restrictions -->
+
+<?php include_once 'footer.php' ?>

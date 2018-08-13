@@ -593,19 +593,19 @@ input[type=submit]:hover {
 }
 
 input.goodResponse {
-    border: 1px solid var(--goodResponse-green);
+  border : 1px solid var(--goodResponse-green);
 }
 
 input.badResponse {
-    border: 1px solid var(--badResponse-red);
+  border : 1px solid var(--badResponse-red);
 }
 
 textarea.goodResponse {
-    border: 1px solid var(--goodResponse-green);
+  border : 1px solid var(--goodResponse-green);
 }
 
 textarea.badResponse {
-    border: 1px solid var(--badResponse-red);
+  border : 1px solid var(--badResponse-red);
 }
 
 /* Admin Page */
@@ -618,13 +618,14 @@ textarea.badResponse {
   background-color : white;
 }
 
-.admin_container h1,h2 {
-    color:var(--main-color);
+.admin_container h1,
+h2 {
+  color : var(--main-color);
 }
 
 .admin_container {
-    float:left;
-    width:96%;
+  width : 96%;
+  float : left;
 }
 
 /* Responsive design */
@@ -633,9 +634,9 @@ textarea.badResponse {
   screen
   and (max-width : 1500px) {
   body {
-      /* Normally 5% */
-    margin-left: 5%;
-    margin-right: 5%;
+    /* Normally 5% */
+    margin-right : 5%;
+    margin-left  : 5%;
   }
 }
 
