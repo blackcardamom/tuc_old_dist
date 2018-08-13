@@ -93,16 +93,21 @@
     $sql = substr($sql,0,-2).")";
 
     $stmt = mysqli_stmt_init($conn);
+    // Add the statement and the format to the array of arguments for mysqli_stmt_bind_param
     array_unshift($data, $stmt, $format);
     if (!mysqli_stmt_prepare($stmt,$sql)) {
         header("Location: ../new_recipe.php?err=sql_fail");
         exit;
     } else {
+        // Bind Paramaters
         call_user_func_array("mysqli_stmt_bind_param",makeValuesReferenced($data));
+        // Submit new recipe
         mysqli_stmt_execute($stmt);
+        // Determine id of new recipe
         $sql = "SELECT LAST_INSERT_ID();";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
         $id = $row['LAST_INSERT_ID()'];
+        // Return to original page for success message and link to new recipe
         header("Location: ../new_recipe.php?id=".$id);
     }
