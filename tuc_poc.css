@@ -17,10 +17,9 @@ body {
   margin-bottom    : 1%;
   margin-left      : 20%;
   background-color : var(--background-color);
-  font-family: Georgia, serif;
-  /*font-family      : Arial,
+  font-family      : Arial,
                      Helvetica,
-                     sans-serif;*/
+                     sans-serif;
 }
 
 .button:active {

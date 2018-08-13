@@ -14,18 +14,22 @@
     $subject = "";
     $msg = "";
 
+    // If the user hasn't clicked submit we don't want to run any code
     if(isset($_POST['submit'])) {
+        // Assume inputs are good
         $fieldTypes = Array(
             "name" => " goodResponse",
             "address" => " goodResponse",
             "subject" => " goodResponse",
             "msg" => " goodResponse");
 
-        $name = $_POST['name'];
-        $address = $_POST['address'];
-        $subject = $_POST['subject'];
-        $msg = $_POST['msg'];
+        // Sanitize inputs
+        $name = htmlspecialchars($_POST['name']);
+        $address = filter_var($_POST['address'], FILTER_SANITIZE_EMAIL);
+        $subject = htmlspecialchars($_POST['subject']);
+        $msg = htmlspecialchars($_POST['msg']);
 
+        // Check for missing fields
         if (empty($_POST['name'])) {
             array_push($resp, "missing_field");
             $fieldTypes['name'] = 'badResponse';
@@ -42,17 +46,20 @@
             array_push($resp, "missing_field");
             $fieldTypes['msg'] = 'badResponse';
         }
+
+        // Validate email adress
         if (!filter_var($address, FILTER_VALIDATE_EMAIL)) {
             array_push($resp, "invalid_email");
             $fieldTypes['address'] = 'badResponse';
         }
+
+        // If there isn't an error so far send the email
         if (empty($resp)) {
             $mailTo = "theuglycroissant@gmail.com";
             $headers = "From: $address";
             $text = "$name submitted the following message through the online contact form:\n\n$msg";
             mail($mailTo, "Contact Form: ".$subject, $text, $headers);
             array_push($resp,"success");
-            $_POST['msg_sent'] = 1;
         }
     }
 ?>
@@ -65,6 +72,7 @@
     </p>
     <h1>Contact Form</h1>
     <?php
+        // Either display opening message or success message
         if(in_array("success",$resp)) {
             echo "<p>Message successfuly sent, we'll be in touch soon.</p>";
         } else {
@@ -73,6 +81,7 @@
     ?>
     <p style="color: var(--badResponse-red);">
     <?php
+        // Display any errors in data
         if(in_array("missing_field",$resp)) {
             echo "Some fields were missing, please try again. ";
         }
@@ -81,6 +90,8 @@
         }
     ?> </p>
 
+    <!-- To avoid losing previous input we put back old input
+         We also change the input class depending on whether the input was deemed acceptable -->
     <form method="post" action="contact.php">
         <label for="name">Name</label>
         <input type="text" name="name" placeholder="Your name..." value="<?= $name ?>" class = "<?= $fieldTypes['name'] ?>">
