@@ -1,5 +1,6 @@
 <?php
     $selected = "recipes";
+    $titleSuffix=" - Recipes"; 
     include_once 'header.php';
     include_once 'includes/conn.inc.php';
 

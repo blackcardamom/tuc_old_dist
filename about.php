@@ -1,4 +1,4 @@
-<?php $selected="about"; include_once 'header.php'; ?>
+<?php $selected="about"; $titleSuffix=" - About"; include_once 'header.php'; ?>
 
 <div class="about_content">
     <div class="about_img"><img src="assets/portrait2.jpg"></div>
