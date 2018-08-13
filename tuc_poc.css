@@ -625,8 +625,8 @@ input[type=submit]:hover {
   and (max-width : 1500px) {
   body {
       /* Normally 5% */
-    margin-left: 30%;
-    margin-right: 30%;
+    margin-left: 5%;
+    margin-right: 5%;
   }
 }
 

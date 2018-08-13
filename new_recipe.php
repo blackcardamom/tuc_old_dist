@@ -25,6 +25,8 @@
         <input type="text" name="recipe_active_time" placeholder="2 hours 30 minutes"><br>
         <strong>Time spent waiting</strong><br>
         <input type="text" name="recipe_wait_time" placeholder="3 hours + overnight"><br>
+        <strong>Recipe servings</strong><br>
+        <input type="text" name="recipe_serves" placeholder="A hungry Tom"><br>
         <strong>Intro Markdown Editor</strong><br>
         <textarea id="intro_mde"></textarea>
         <input type="hidden" name="intro_md" id="intro_md_input">
