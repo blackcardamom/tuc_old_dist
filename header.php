@@ -1,3 +1,12 @@
+<?php
+    if(!isset($selected)) {
+        $selected = "";
+    }
+    if(!isset($titleSuffix)) {
+        $titleSuffix = "";
+    }
+ ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -5,7 +14,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
         <link rel="stylesheet" href="tuc_poc.css">
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-        <title>The Ugly Croissant</title>
+        <title>The Ugly Croissant<?= $titleSuffix ?></title>
     </head>
 
     <body id="myBody">

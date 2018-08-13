@@ -1,6 +1,5 @@
 <?php
-    $selected="recipes"; 
-    include_once 'header.php';
+    $selected="recipes";
     include_once 'includes/conn.inc.php';
 
     if (!isset($_GET['id'])) {
@@ -30,6 +29,8 @@
             $intro_img = $row['intro_img'];
         }
     }
+    $titleSuffix=" - $title";
+    include_once 'header.php';
 ?>
 
 <div class="recipe_intro">

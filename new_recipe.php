@@ -1,5 +1,4 @@
 <?php
-    $selected="home";
     include_once 'header.php';
     include_once 'includes/conn.inc.php';
 
