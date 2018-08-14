@@ -5,15 +5,15 @@
     if (empty($_GET['id'])) {
         header("Location: pagenotfound.php");
     } else {
-        $id = $_GET["id"];
-        $sql = "SELECT * FROM recipes WHERE id=".$id;
-        $result = mysqli_query($conn, $sql);
-        $resultCheck = mysqli_num_rows($result);
+        // Use PDO here
+        $sql = "SELECT * FROM recipes WHERE id = :id";
+        $stmt = $pdo_conn->prepare($sql);
+        $stmt->bindValue('id',$_GET['id']);
+        $stmt->execute();
 
-        if (!$resultCheck == 1) {
+        if (!($row = $stmt->fetch(PDO::FETCH_ASSOC))) {
             header("Location: pagenotfound.php");
         } else {
-            $row = mysqli_fetch_assoc($result);
             $title = $row['title'];
             $recipe_active_time = $row['recipe_active_time'];
             $recipe_wait_time = $row['recipe_wait_time'];
