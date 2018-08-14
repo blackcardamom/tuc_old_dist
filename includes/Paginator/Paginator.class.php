@@ -103,21 +103,25 @@ class Paginator {
     }
 
     public function getPrevPageQuery() {
+        // Take one from the page unless we're already at the start
         $_GET['page'] -= ($_GET['page'] == 1) ? 0 : 1;
         return http_build_query($_GET);
     }
 
     public function getNextPageQuery() {
+        // Add one to the page unless we're already at the end
         $_GET['page'] += ($_GET['page'] == ceil($this->total_items / $this->limit)) ? 0 : 1;
         return http_build_query($_GET);
     }
 
     public function getFirstPageQuery() {
-
+        $_GET['page'] = 1;
+        return http_build_query($_GET);
     }
 
     public function getLastPageQuery() {
-
+        $_GET['page'] = ceil($this->total_items / $this->limit));
+        return http_build_query($_GET);
     }
 
 }
