@@ -2,7 +2,7 @@
     $selected="recipes";
     include_once 'includes/conn.inc.php';
 
-    if (!isset($_GET['id'])) {
+    if (empty($_GET['id'])) {
         header("Location: pagenotfound.php");
     } else {
         $id = $_GET["id"];
