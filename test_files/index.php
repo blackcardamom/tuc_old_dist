@@ -2,9 +2,6 @@
     include_once '../includes/pdo.inc.php';
     include_once '../includes/Paginator/Paginator.class.php';
 
-    function bindValues($stmt) {
-    }
-
     $base_query = "SELECT * FROM test_table";
 
     $page = (empty($_GET['page'])) ? 1 : $_GET['page'];

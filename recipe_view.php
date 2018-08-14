@@ -1,6 +1,6 @@
 <?php
     $selected="recipes";
-    include_once 'includes/conn.inc.php';
+    include_once 'includes/pdo.inc.php';
 
     if (empty($_GET['id'])) {
         header("Location: pagenotfound.php");

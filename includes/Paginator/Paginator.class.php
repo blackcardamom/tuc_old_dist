@@ -120,7 +120,7 @@ class Paginator {
     }
 
     public function getLastPageQuery() {
-        $_GET['page'] = ceil($this->total_items / $this->limit));
+        $_GET['page'] = ceil($this->total_items / $this->limit);
         return http_build_query($_GET);
     }
 
