@@ -25,8 +25,9 @@ class Paginator {
     }
 
     // Use prepared statement to get data for this page
+    // Defaults to page 1 and no limit
     // Return 1 on success, 0 on failure
-    public function updatePage($page = 1, $limit = 5) {
+    public function updatePage($page = 1, $limit = $total_items) {
         // Store variables
         $this->page = (int)$page;
         $this->limit = (int)$limit;
