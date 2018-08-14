@@ -1,7 +1,7 @@
 <?php $selected="about"; $titleSuffix=" - About"; include_once 'header.php'; ?>
 
 <div class="about_content">
-    <div class="about_img"><img src="assets/portrait2.jpg"></div>
+    <div class="about_img"><img src="assets/portrait2.jpg" alt="Portrait of The Ugly Croissant baker"></div>
     <h2 style="margin:0;padding-top:0.5em">Welcome to The Ugly Crossiant</h2>
     <p>This website it primarily for all the tastiest recipes I have come up with so far, oh and by the way they have absolutely no eggs! All recipes are vegetarian, and some even vegan. These won't just be substitutes for any recipes you have with eggs,
         but just delicious recipes that anyone would enjoy.?</p>

@@ -40,7 +40,7 @@
 
                     $feature_card = "
                         <div class='feature_card' id='feature$id'>
-                            <div class='feature_card_img'><a href='recipe_view.php?id=$id'><img src='$feature_img'></a></div>
+                            <div class='feature_card_img'><a href='recipe_view.php?id=$id'><img src='$feature_img' alt='$title'></a></div>
                             <div class='feature_card_text'>
                                 <h2><a href='recipe_view.php?id=$id'>$title</a></h2>
                                 <p><i class='fas fa-clock'></i> $recipe_active_time &nbsp;&nbsp;

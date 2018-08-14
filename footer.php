@@ -1,5 +1,5 @@
         <div class="footer">
-            <a href="index.html"><img src="assets/logos/the_ugly_croissant_long_EDIT.jpeg"></a>
+            <a href="index.html"><img src="assets/logos/the_ugly_croissant_long_EDIT.jpeg" alt="The Ugly Croissant logo"></a>
             <a href="mailto:theuglycroissant@gmail.com"><i class="fas fa-envelope"></i></a>
             <a href="https://www.instagram.com/theuglycroissant/"><i class="fab fa-instagram"></i></a>
         </div>

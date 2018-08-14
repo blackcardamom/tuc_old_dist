@@ -19,7 +19,7 @@
 
     <body id="myBody">
         <div class="topnav" id="myTopnav">
-            <a href="index.php"><img src="assets/logos/the_ugly_croissant_long_EDIT.jpeg"></a>
+            <a href="index.php"><img src="assets/logos/the_ugly_croissant_long_EDIT.jpeg" alt="The Ugly Croissant logo"></a>
             <a href="about.php" <?php if ($selected == "about") echo 'class="active_topnav"'; ?>>About</a>
             <a href="recipes_main.php" <?php if ($selected == "recipes") echo 'class="active_topnav"'; ?>>Recipes</a>
             <a href="gallery.php" <?php if ($selected == "gallery") echo 'class="active_topnav"'; ?>>Gallery</a>

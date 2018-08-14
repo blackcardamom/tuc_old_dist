@@ -5,7 +5,7 @@
     if (empty($_GET['id'])) {
         header("Location: pagenotfound.php");
     } else {
-        // Use PDO here
+
         $sql = "SELECT * FROM recipes WHERE id = :id";
         $stmt = $pdo_conn->prepare($sql);
         $stmt->bindValue('id',$_GET['id']);
@@ -35,7 +35,7 @@
 
 <div class="recipe_intro">
     <div class="recipe_intro_img">
-        <img src="<?= $intro_img ?>">
+        <img src="<?= $intro_img ?>" alt="<?=$title?>">
     </div>
     <h1><?= $title ?></h1>
     <p><i class="fas fa-clock" title="Acitve time"></i> <?= $recipe_active_time ?> &nbsp;&nbsp;

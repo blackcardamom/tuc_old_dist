@@ -57,7 +57,7 @@
 
             $recipe_card =
             '<div class="recipe_card">
-                <div class="recipe_card_img"><a href="recipe_view.php?id='.$id.'"><img src="'.$card_img.'"></a></div>
+                <div class="recipe_card_img"><a href="recipe_view.php?id='.$id.'"><img src="'.$card_img.'" alt="'.$title.'"></a></div>
                 <div class="recipe_card_title_info">
                     <a href="recipe_view.php?id='.$id.'"><h3>'.$title.'</h3></a>
                     <p><i class="fas fa-clock"></i> '.$recipe_active_time.' &nbsp;&nbsp;
