@@ -5,7 +5,7 @@
     $dbName       = "tuc_develop";
 
     // Set DSN
-    $dsn = "mysql:host=$dbHost;dbname=$dbName";
+    $dsn = "mysql:host=".$dbHost.";dbname=".$dbName;
 
     // Create PDO instance
-    $conn_pdo = new PDO($dsn,$dbUsername,$dbPassword);
+    $pdo_conn = new PDO($dsn,$dbUsername,$dbPassword);

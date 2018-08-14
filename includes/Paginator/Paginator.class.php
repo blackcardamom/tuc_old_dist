@@ -18,7 +18,7 @@ class Paginator {
     public function __construct($pdo, $query, $value_bind_func, $total_items) {
         $this->pdo = $pdo;
         $this->query  = $query;
-        $this->$parameter_bind_func = $value_bind_func;
+        $this->value_bind_func = $value_bind_func;
 
         // It would be nice if this was automated
 
@@ -32,30 +32,22 @@ class Paginator {
         $this->page = $page;
         $this->limit = $limit;
         // Calculate offset
-        $offset = ($page - 1) * $limit
-        // Prepared statemnt
-        $limit_query = $this->$query . " LIMIT :paginator_limit OFFSET :paginator_offset "
-
-        /*
-        $stmt = mysqli_stmt_init($db_conn);
-        if (!mysqli_stmt_prepare($stmt,$limit_query)) {
-            return 0;
-        } else {
-            mysqli_stmt_bind_param($stmt,'ii',$limit,$offset);
-            mysqli_stmt_execute($stmt);
-            $this->data = mysqli_stmt_get_result($stmt);
-            return 1;
-        }*/
-
+        $offset = ($page - 1) * $limit;
+        // Add limits to query
+        $limit_query = $this->query . " LIMIT :paginator_limit OFFSET :paginator_offset";
+        // Create prepared statement
         $this->stmt = $this->pdo->prepare($limit_query);
-        call_user_func($value_bind_func,$this->stmt);
+        // Call user function to bind other parameters
+        call_user_func($this->value_bind_func,$this->stmt);
+        // Bind paginator parameters
         $this->stmt->bindValue(':paginator_limit',$this->limit, PDO::PARAM_INT);
         $this->stmt->bindValue(':paginator_offset',$offset, PDO::PARAM_INT);
+        // Execute query
         return $this->stmt->execute();
     }
 
     // Get next row from the data obtained by updatePage()
-    public function getNextRow($fetch_style) {
+    public function fetchNextRow($fetch_style = PDO::FETCH_ASSOC) {
         return $this->stmt->fetch($fetch_style);
     }
 
