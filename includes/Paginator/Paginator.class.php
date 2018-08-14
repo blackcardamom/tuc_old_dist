@@ -2,19 +2,27 @@
 
 class Paginator {
 
-    private $db_conn;
+    private $pdo;
     private $query;
-    private $total_items
+    private $value_bind_func;
+    private $total_items;
 
     private $page;
     private $limit;
-    private $data;
+    private $stmt;
 
-    public function __construct($db_conn, $query) {
-        $this->db_conn = $db_conn;
+
+    // Provide the PDO object with connection to the database
+    // Provide the query with placeholders
+    // Provide the callback function which accepts a PDOStatement and binds values to it
+    public function __construct($pdo, $query, $value_bind_func, $total_items) {
+        $this->pdo = $pdo;
         $this->query  = $query;
+        $this->$parameter_bind_func = $value_bind_func;
 
-        $this->total_items = mysqli_num_rows(mysqli_query($db_conn,$query));
+        // It would be nice if this was automated
+
+        $this->total_items = $total_items;
     }
 
     // Use prepared statement to get data for this page
@@ -26,7 +34,9 @@ class Paginator {
         // Calculate offset
         $offset = ($page - 1) * $limit
         // Prepared statemnt
-        $limit_query = $this->$query . " LIMIT ? OFFSET ? "
+        $limit_query = $this->$query . " LIMIT :paginator_limit OFFSET :paginator_offset "
+
+        /*
         $stmt = mysqli_stmt_init($db_conn);
         if (!mysqli_stmt_prepare($stmt,$limit_query)) {
             return 0;
@@ -35,12 +45,18 @@ class Paginator {
             mysqli_stmt_execute($stmt);
             $this->data = mysqli_stmt_get_result($stmt);
             return 1;
-        }
+        }*/
+
+        $this->stmt = $this->pdo->prepare($limit_query);
+        call_user_func($value_bind_func,$this->stmt);
+        $this->stmt->bindValue(':paginator_limit',$this->limit, PDO::PARAM_INT);
+        $this->stmt->bindValue(':paginator_offset',$offset, PDO::PARAM_INT);
+        return $this->stmt->execute();
     }
 
     // Get next row from the data obtained by updatePage()
-    public function getNextRow() {
-        return mysqli_fetch_assoc($data);
+    public function getNextRow($fetch_style) {
+        return $this->stmt->fetch($fetch_style);
     }
 
     // Returns $num_links pagination links as squential 'li' elements
