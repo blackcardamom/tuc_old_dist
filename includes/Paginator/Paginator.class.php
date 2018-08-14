@@ -102,4 +102,22 @@ class Paginator {
         return http_build_query($_GET);
     }
 
+    public function getPrevPageQuery() {
+        $_GET['page'] -= ($_GET['page'] == 1) ? 0 : 1;
+        return http_build_query($_GET);
+    }
+
+    public function getNextPageQuery() {
+        $_GET['page'] += ($_GET['page'] == ceil($this->total_items / $this->limit)) ? 0 : 1;
+        return http_build_query($_GET);
+    }
+
+    public function getFirstPageQuery() {
+
+    }
+
+    public function getLastPageQuery() {
+
+    }
+
 }
