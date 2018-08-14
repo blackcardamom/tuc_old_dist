@@ -11,34 +11,35 @@ class Paginator {
     private $limit;
     private $stmt;
 
-
     // Provide the PDO object with connection to the database
     // Provide the query with placeholders
     // Provide the callback function which accepts a PDOStatement and binds values to it
-    public function __construct($pdo, $query, $value_bind_func, $total_items) {
+    public function __construct($pdo, $query, $total_items, $value_bind_func = null) {
         $this->pdo = $pdo;
         $this->query  = $query;
         $this->value_bind_func = $value_bind_func;
 
         // It would be nice if this was automated
 
-        $this->total_items = $total_items;
+        $this->total_items = (int)$total_items;
     }
 
     // Use prepared statement to get data for this page
     // Return 1 on success, 0 on failure
-    public function updatePage($page, $limit) {
+    public function updatePage($page = 1, $limit = 5) {
         // Store variables
-        $this->page = $page;
-        $this->limit = $limit;
+        $this->page = (int)$page;
+        $this->limit = (int)$limit;
         // Calculate offset
         $offset = ($page - 1) * $limit;
         // Add limits to query
-        $limit_query = $this->query . " LIMIT :paginator_limit OFFSET :paginator_offset";
+        $page_query = $this->query . " LIMIT :paginator_limit OFFSET :paginator_offset";
         // Create prepared statement
-        $this->stmt = $this->pdo->prepare($limit_query);
-        // Call user function to bind other parameters
-        call_user_func($this->value_bind_func,$this->stmt);
+        $this->stmt = $this->pdo->prepare($page_query);
+        // Call user function to bind other parameters if it exists
+        if(isset($this->value_bind_func)) {
+            all_user_func($this->value_bind_func,$this->stmt);
+        }
         // Bind paginator parameters
         $this->stmt->bindValue(':paginator_limit',$this->limit, PDO::PARAM_INT);
         $this->stmt->bindValue(':paginator_offset',$offset, PDO::PARAM_INT);
@@ -55,17 +56,50 @@ class Paginator {
     // Each element's content is the page number to which it $num_links
     // Each element's class is "$li_class"
     // The current page recieves the class "$li_class $current_page_class"
-    public function getPagination($num_links, $li_class, $current_page_class) {
+    public function getPagination($num_links = 5, $li_class = "", $current_page_class = "") {
+        $num_links = (int) $num_links;
+        // Calculate how many links should go before and how many after the current page
+        // If using an even number, more links will go after than before
+        $links_before = floor(($num_links - 1)/2);
+        $links_after  = floor($num_links / 2);
+        $total_pages = ceil($this->total_items / $this->limit);
+        // Try and go down by links before, else go to link 1 and add to links $links_after
+        if ($this->page - $links_before < 1) {
+            $links_before = $this->page - 1;
+            $links_after = $num_links - $this->page;
+        }
+        // Try and go up by links after, else go to link (total_items) and add to links after
+        if ($this->page + $links_after > $total_pages) {
+            $links_after = $total_pages - $this->page;
+            $links_before = $num_links - $links_after - 1;
+        }
+        // Note if the total_pages is small we may have too many links before
+        // Calculate first and last link, making sure they are within range
+        $first_link = ($this->page > $links_before) ? ($this->page - $links_before) : (1);
+        $last_link = ($this->page + $links_after <= $total_pages) ? ($this->page + $links_after) : ($total_pages);
+        $output_str = "";
 
+        for ($i = $first_link; $i <= $last_link; $i++) {
+            $_GET['page'] = $i;
+            $_GET['limit'] = $this->limit;
+            $output_str .= "<a href=?" . http_build_query($_GET) . ">";
+            $output_str .= "<li class='$li_class";
+            if ($i == $this->page) {
+                $output_str.=" $current_page_class";
+            }
+            $output_str .= "'>$i</li></a>";
+        }
+        return $output_str;
     }
 
     // Figures out which item is at the top of current page
-    // Return page number which displays this item under new limit
-    public function getNewLimitPage($newLimit) {
-        // Figure out which item is at the top of current page
-        // Return page number which displays this item under new limit
+    // Return query for page which displays this item under the new limit
+    public function getNewLimitQuery($newLimit) {
         $topItem = $this->limit * ($this->page -1) + 1;
-        return (int) ceil($topItem / $newLimit);
+        $newPage = ceil($topItem / $newLimit);
+        $_GET['page'] = $newPage;
+        $_GET['limit'] = $newLimit;
+        return http_build_query($_GET);
     }
 
 }
