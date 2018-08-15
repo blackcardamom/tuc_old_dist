@@ -40,7 +40,7 @@ class Paginator {
         $this->stmt = $this->pdo->prepare($page_query);
         // Call user function to bind other parameters if it exists
         if(isset($this->value_bind_func)) {
-            all_user_func($this->value_bind_func,$this->stmt);
+            call_user_func($this->value_bind_func,$this->stmt);
         }
         // Bind paginator parameters
         $this->stmt->bindValue(':paginator_limit',$this->limit, PDO::PARAM_INT);

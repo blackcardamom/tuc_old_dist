@@ -5,19 +5,54 @@
     include_once 'includes/Paginator/Paginator.class.php';
     include_once 'includes/pdo.inc.php';
 
+    // Setup default values for unspecified paramaters
+
+    $page = (empty($_GET['page'])) ? 1 : $_GET['page'];
+    $limit = (empty($_GET['limit'])) ? 5 : $_GET['limit'];
+    $order = (empty($_GET['order'])) ? 0 : $_GET['order'];
+
     // SWITCH TO PDO IF ADDING SEARCH PARAMTERS
 
-    $query = "SELECT * FROM recipes";
+    $query = "SELECT * FROM recipes ORDER BY :order_column :dir";
     $count_query = "SELECT COUNT(*) FROM recipes";
     $total_posts = (int) $pdo_conn->query($count_query)->execute();
+
+    function applyOrder($stmt) {
+        // Fetch desired order from global scope
+        global $order;
+        $order_column = null;
+        $dir = null;
+        switch ($order) {
+            case 0:
+                $order_column = 'date_published';
+                $dir = 'DESC';
+                break;
+            case 1:
+                $order_column = 'date_published';
+                $dir = 'ASC';
+                break;
+            case 2:
+                $order_column = 'title';
+                $dir = 'DESC';
+                break;
+            case 3:
+                $order_column = 'title';
+                $dir = 'ASC';
+                break;
+            default:
+                echo "<h1 style='text-align:center; background-color:white; margin:0; padding:30px;'>Sorry we are currently experiencing technical issues.</h1>";
+                exit;
+        }
+        $stmt->bindValue(':order_column',$order_column);
+        $stmt->bindValue(':dir',$dir);
+    }
+
 
     if(!isset($total_posts)) {
         echo "<h1 style='text-align:center; background-color:white; margin:0; padding:30px;'>Sorry we are currently experiencing technical issues.</h1>";
         exit;
     } else {
-        $page = (empty($_GET['page'])) ? 1 : $_GET['page'];
-        $limit = (empty($_GET['limit'])) ? 5 : $_GET['limit'];
-        $paginator = new Paginator($pdo_conn,$query,$total_posts);
+        $paginator = new Paginator($pdo_conn,$query,$total_posts,'applyOrder');
         $paginator->updatePage($page,$limit);
     }
 ?>
@@ -29,7 +64,7 @@
     <div class="search_results_options">
         <div class="limit_select">
             <ul class="horizontal_list options_list">
-                <li>Results per page: </li>
+                <li>Results per page: &nbsp;&nbsp;</li>
                 <li class="limit_link"><a href="?<?= $paginator->getNewLimitQuery(5);?>">5</a></li>
                 <li class="limit_link"><a href="?<?= $paginator->getNewLimitQuery(10);?>">10</a></li>
                 <li class="limit_link"><a href="?<?= $paginator->getNewLimitQuery(15);?>">15</a></li>
@@ -37,10 +72,13 @@
         </div>
         <div class="order_select">
             <ul class="horizontal_list options_list">
-                <li>Order by: </li>
+                <li>Order by: &nbsp;&nbsp;</li>
                 <li>
                     <select name="order" class="order_dropdown">
-                        <option value="new2old">New -> Old</option>
+                        <option value="0" selected="selected">New -> Old</option>
+                        <option value="1">Old -> New</option>
+                        <option value="2">Title a -> z</option>
+                        <option value="3">Title z -> a</option>
                     </select>
                 </li>
             </ul>
@@ -62,7 +100,7 @@
                 <div class="recipe_card_img"><a href="recipe_view.php?id='.$id.'"><img src="'.$card_img.'" alt="'.$title.'"></a></div>
                 <div class="recipe_card_title_info">
                     <a href="recipe_view.php?id='.$id.'"><h3>'.$title.'</h3></a>
-                    <p><i class="fas fa-clock"></i> '.$recipe_active_time.' &nbsp;&nbsp;
+                    <p><i class="fas fa-clock"></i> '.$recipe_active_time.' &nbsp;&nbsp; <br id="mobile_linebreak">
                     <i class="fas fa-bed"></i> '.$recipe_wait_time.' &nbsp;&nbsp; <br id="mobile_linebreak">
                     <i class="fas fa-utensils"></i> '.$recipe_serves.'</p>
                 </div>
