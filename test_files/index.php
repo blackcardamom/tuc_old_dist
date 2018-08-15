@@ -24,9 +24,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="../tuc_poc.css">
 </head>
 
-<style>
+<!--style>
 a {
     color: inherit;
     text-decoration: none;
@@ -63,13 +64,20 @@ a {
     text-decoration: underline;
 }
 
-</style>
+</style-->
 
 <body>
-    <ul class = "horizontal_list"><?= $paginator->getPagination(5, 'pagination', 'current_page'); ?></ul>
+    <div class="my_content" style="text-align:center;">
+    <ul class = "horizontal_list">
+        <li class="pagination_ellipses">...</li>
+        <?= $paginator->getPagination(5, 'pagination_link', 'current_page'); ?>
+        <li class="pagination_ellipses">...</li>
+    </ul>
+    <br><br>
+    <p>
     <a class="limit_link" href="?<?= $paginator->getNewLimitQuery(1)?>"> 1 per page </a><br>
     <a class="limit_link" href="?<?= $paginator->getNewLimitQuery(2)?>"> 2 per page </a><br>
     <a class="limit_link" href="?<?= $paginator->getNewLimitQuery(3)?>"> 3 per page </a><br>
-    <a class="limit_link" href="?<?= $paginator->getNewLimitQuery(5)?>"> 5 per page </a><br>
+    <a class="limit_link" href="?<?= $paginator->getNewLimitQuery(5)?>"> 5 per page </a><br></p></div>
 </body>
 </html>

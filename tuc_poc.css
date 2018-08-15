@@ -628,6 +628,76 @@ h2 {
   float : left;
 }
 
+/* Search results page */
+
+.search_results_grid-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 40px 1fr 40px;
+  grid-gap: 2px 2px;
+  grid-template-areas: "search_results_sidebar search_results_options" "search_results_sidebar search_results_output" "search_results_sidebar search_results_pagination";
+}
+
+.search_results_sidebar { grid-area: search_results_sidebar; }
+
+.search_results_options { grid-area: search_results_options; }
+
+.search_results_output { grid-area: search_results_output; }
+
+.search_results_pagination { grid-area: search_results_pagination; }
+
+ul.horizontal_list {
+  margin          : 0;
+  padding         : 0;
+  list-style-type : none;
+  width:100%;
+  height:40px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+li.pagination_ellipses {
+    display          : flex;
+    width            : 30px;
+    height           : 30px;
+    color            : black;
+    align-items      : center;
+    justify-content  : center;
+
+}
+
+li.pagination_link {
+  display          : flex;
+  width            : 30px;
+  height           : 30px;
+  color            : black;
+  align-items      : center;
+  justify-content  : center;
+  border-radius: 15px;
+}
+
+li.pagination_link.current_page {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+li.pagination_link:hover {
+  background-color : var(--background-color);
+}
+
+li.pagination_link a {
+  display         : block;
+  color           : inherit;
+  text-align      : center;
+  text-decoration : none;
+  line-height     : 30px;
+  width:100%;
+}
+
+
+
 /* Responsive design */
 
 @media
@@ -655,6 +725,13 @@ h2 {
 @media
   screen
   and (max-width : 700px) {
+      /* Fixed topnav
+    .topnav {
+        position: fixed;
+        top:0;
+        width:100%;
+    } */
+
   .topnav a:not(:first-child) {
     display : none;
     width   : 100%;
@@ -774,6 +851,15 @@ h2 {
   .gallery_selection_window img:last-child {
     padding : 0px 0px 0px 2px;
   }
+
+  .search_results_grid-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: 40px 40px 1fr 40px;
+  grid-gap: 1px 1px;
+  grid-template-areas: "seach_results_sidebar" "search_results_options" "search_results_output" "search_results_pagination";
+}
 }
 
 @media
