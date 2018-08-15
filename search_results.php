@@ -7,9 +7,9 @@
 
     // Setup default values for unspecified paramaters
 
-    $page = (empty($_GET['page'])) ? 1 : $_GET['page'];
-    $limit = (empty($_GET['limit'])) ? 5 : $_GET['limit'];
-    $order = (empty($_GET['order'])) ? 0 : $_GET['order'];
+    $_GET['page'] = (empty($_GET['page'])) ? 1 : $_GET['page'];
+    $_GET['limit'] = (empty($_GET['limit'])) ? 5 : $_GET['limit'];
+    $_GET['order'] = (empty($_GET['order'])) ? 0 : $_GET['order'];
 
     // SWITCH TO PDO IF ADDING SEARCH PARAMTERS
 
@@ -53,7 +53,7 @@
         exit;
     } else {
         $paginator = new Paginator($pdo_conn,$query,$total_posts,'applyOrder');
-        $paginator->updatePage($page,$limit);
+        $paginator->updatePage($GET_['page'],$GET_['limit']);
     }
 ?>
 
