@@ -39,6 +39,9 @@
     if(!isset($total_posts)) {
         echo "<h1 style='text-align:center; background-color:white; margin:0; padding:30px;'>Sorry we are currently experiencing technical issues.</h1>";
         exit;
+    } elseif ($total_posts  == 0) {
+        echo "<h1 style='text-align:center; background-color:white; margin:0; padding:30px;'>Sorry we don't have any posts to show you.</h1>";
+        exit;
     } else {
         $paginator = new Paginator($pdo_conn,$query,$total_posts);
         $paginator->updatePage($_GET['page'],$_GET['limit']);
