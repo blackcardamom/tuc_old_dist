@@ -83,7 +83,7 @@ class Paginator {
 
         $getCopy = $_GET;
         for ($i = $first_link; $i <= $last_link; $i++) {
-            $getCopy = $i;
+            $getCopy['page'] = $i;
             $getCopy['limit'] = $this->limit;
             $output_str .= "<li class='$li_class";
             if ($i == $this->page) {
