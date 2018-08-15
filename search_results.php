@@ -11,49 +11,37 @@
     $_GET['limit'] = (empty($_GET['limit'])) ? 5 : $_GET['limit'];
     $_GET['order'] = (empty($_GET['order'])) ? 0 : $_GET['order'];
 
-    // SWITCH TO PDO IF ADDING SEARCH PARAMTERS
-
-    $query = "SELECT * FROM recipes ORDER BY :order_column :dir";
-    $count_query = "SELECT COUNT(*) FROM recipes";
-    $total_posts = (int) $pdo_conn->query($count_query)->execute();
-
-    function applyOrder($stmt) {
-        // Fetch desired order from global scope
-        global $order;
-        $order_column = null;
-        $dir = null;
-        switch ($order) {
-            case 0:
-                $order_column = 'date_published';
-                $dir = 'DESC';
-                break;
-            case 1:
-                $order_column = 'date_published';
-                $dir = 'ASC';
-                break;
-            case 2:
-                $order_column = 'title';
-                $dir = 'DESC';
-                break;
-            case 3:
-                $order_column = 'title';
-                $dir = 'ASC';
-                break;
-            default:
-                echo "<h1 style='text-align:center; background-color:white; margin:0; padding:30px;'>Sorry we are currently experiencing technical issues.</h1>";
-                exit;
-        }
-        $stmt->bindValue(':order_column',$order_column);
-        $stmt->bindValue(':dir',$dir);
+    switch ($_GET['order']) {
+        case 0:
+            $query = "SELECT * FROM MOCK_TABLE ORDER BY date_published DESC";
+            break;
+        case 1:
+            $query = "SELECT * FROM MOCK_TABLE ORDER BY date_published ASC";
+            break;
+        case 2:
+            $query = "SELECT * FROM MOCK_TABLE ORDER BY title ASC";
+            break;
+        case 3:
+            $query = "SELECT * FROM MOCK_TABLE ORDER BY title DESC";
+            break;
+        default:
+            echo "<h1 style='text-align:center; background-color:white; margin:0; padding:30px;'>Sorry we are currently experiencing technical issues.</h1>";
+            exit;
     }
 
+    // SWITCH TO PDO IF ADDING SEARCH PARAMTERS
+
+    $count_query = "SELECT COUNT(*) FROM MOCK_TABLE";
+    $stmt = $pdo_conn->query($count_query);
+    $result = $stmt->execute();
+    $total_posts = $stmt->fetch()['COUNT(*)'];
 
     if(!isset($total_posts)) {
         echo "<h1 style='text-align:center; background-color:white; margin:0; padding:30px;'>Sorry we are currently experiencing technical issues.</h1>";
         exit;
     } else {
-        $paginator = new Paginator($pdo_conn,$query,$total_posts,'applyOrder');
-        $paginator->updatePage($GET_['page'],$GET_['limit']);
+        $paginator = new Paginator($pdo_conn,$query,$total_posts);
+        $paginator->updatePage($_GET['page'],$_GET['limit']);
     }
 ?>
 
@@ -74,11 +62,11 @@
             <ul class="horizontal_list options_list">
                 <li>Order by: &nbsp;&nbsp;</li>
                 <li>
-                    <select name="order" class="order_dropdown">
-                        <option value="0" selected="selected">New -> Old</option>
-                        <option value="1">Old -> New</option>
-                        <option value="2">Title a -> z</option>
-                        <option value="3">Title z -> a</option>
+                    <select name="order" class="order_dropdown" onchange="updateOrder()" id="order_dropdown">
+                        <option value="0" <?= ($_GET['order']==0) ? "selected" : null ?>>New -> Old</option>
+                        <option value="1" <?= ($_GET['order']==1) ? "selected" : null ?>>Old -> New</option>
+                        <option value="2" <?= ($_GET['order']==2) ? "selected" : null ?>>Title a -> z</option>
+                        <option value="3" <?= ($_GET['order']==3) ? "selected" : null ?>>Title z -> a</option>
                     </select>
                 </li>
             </ul>
@@ -123,5 +111,24 @@
         </ul>
     </div>
 </div>
+
+<script>
+
+// From https://stackoverflow.com/a/5158301
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function updateOrder() {
+    var dropdown = document.getElementById("order_dropdown");
+    var newOrder = dropdown.options[dropdown.selectedIndex].value;
+    var page = getParameterByName('page');
+    var limit = getParameterByName('limit');
+    var query = "?page=" + page + "&limit=" + limit + "&order=" + newOrder;
+    document.location.search = query;
+}
+
+</script>
 
 <?php include_once 'footer.php'; ?>

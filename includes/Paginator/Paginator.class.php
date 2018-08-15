@@ -98,31 +98,36 @@ class Paginator {
     public function getNewLimitQuery($newLimit) {
         $topItem = $this->limit * ($this->page -1) + 1;
         $newPage = ceil($topItem / $newLimit);
-        $_GET['page'] = $newPage;
-        $_GET['limit'] = $newLimit;
-        return http_build_query($_GET);
+        $getCopy = $_GET;
+        $getCopy['page'] = $newPage;
+        $getCopy['limit'] = $newLimit;
+        return http_build_query($getCopy);
     }
 
     public function getPrevPageQuery() {
         // Take one from the page unless we're already at the start
-        $_GET['page'] -= ($_GET['page'] == 1) ? 0 : 1;
-        return http_build_query($_GET);
+        $getCopy = $_GET;
+        $getCopy['page'] -= ( ($getCopy['page'] == 1) ? 0 : 1 );
+        return http_build_query($getCopy);
     }
 
     public function getNextPageQuery() {
         // Add one to the page unless we're already at the end
-        $_GET['page'] += ($_GET['page'] == ceil($this->total_items / $this->limit)) ? 0 : 1;
-        return http_build_query($_GET);
+        $getCopy = $_GET;
+        $getCopy['page'] += ($getCopy['page'] == ceil($this->total_items / $this->limit)) ? 0 : 1;
+        return http_build_query($getCopy);
     }
 
     public function getFirstPageQuery() {
-        $_GET['page'] = 1;
-        return http_build_query($_GET);
+        $getCopy = $_GET;
+        $getCopy['page'] = 1;
+        return http_build_query($getCopy);
     }
 
     public function getLastPageQuery() {
-        $_GET['page'] = ceil($this->total_items / $this->limit);
-        return http_build_query($_GET);
+        $getCopy = $_GET;
+        $getCopy['page'] = ceil($this->total_items / $this->limit);
+        return http_build_query($getCopy);
     }
 
 }
