@@ -45,8 +45,6 @@
     $data['intro_html']=$Parsedown->text($_POST['intro_md']);
     $data['ingredients_html']=$Parsedown->text($_POST['ingredients_md']);
     $data['method_html']=$Parsedown->text($_POST['method_md']);
-    date_default_timezone_set('Greenwich');
-    $data['date_published'] = date('Y-m-d H:i:s', time());
 
     // Getting list of keys for which we have data
 
