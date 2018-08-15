@@ -33,7 +33,7 @@
 
     $count_query = "SELECT COUNT(*) FROM MOCK_TABLE";
     $stmt = $pdo_conn->query($count_query);
-    $result = $stmt->execute();
+    $stmt->execute();
     $total_posts = $stmt->fetch()['COUNT(*)'];
 
     if(!isset($total_posts)) {
@@ -125,6 +125,8 @@ function updateOrder() {
     var newOrder = dropdown.options[dropdown.selectedIndex].value;
     var page = getParameterByName('page');
     var limit = getParameterByName('limit');
+    if (page == null) { page = 1; }
+    if (limit == null) { limit = 5; }
     var query = "?page=" + page + "&limit=" + limit + "&order=" + newOrder;
     document.location.search = query;
 }
