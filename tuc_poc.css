@@ -638,23 +638,6 @@ h2 {
   grid-template-areas   : "search_results_sidebar search_results_options"
                           "search_results_sidebar search_results_output"
                           "search_results_sidebar search_results_pagination";
-  /**
-  * grid-gap
-  *
-  *
-  *
-  *
-  *
-  *
-  *
-  *
-  *
-  *
-  *
-  *
-  *
-  * : 2px 2px;
-  */
 }
 
 .search_results_sidebar {
@@ -723,7 +706,7 @@ h2 {
 
 .search_results_pagination {
   border-top       : 2px solid black;
-  background-color : white;
+  background-color : var(--main-color);
   grid-area        : search_results_pagination;
 }
 
@@ -745,7 +728,7 @@ ul.pagination_list {
 li.pagination_ellipses {
   width       : 30px;
   height      : 30px;
-  color       : black;
+  color       : var(--text-light);
   text-align  : center;
   line-height : 30px;
 }
@@ -754,7 +737,7 @@ li.pagination_link {
   width         : 30px;
   height        : 30px;
   margin        : 0 2px 0 2px;
-  color         : black;
+  color         : var(--text-light);
   border-radius : 15px;
 }
 
