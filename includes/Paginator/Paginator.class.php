@@ -81,14 +81,15 @@ class Paginator {
         $last_link = ($this->page + $links_after <= $total_pages) ? ($this->page + $links_after) : ($total_pages);
         $output_str = "";
 
+        $getCopy = $_GET;
         for ($i = $first_link; $i <= $last_link; $i++) {
-            $_GET['page'] = $i;
-            $_GET['limit'] = $this->limit;
+            $getCopy = $i;
+            $getCopy['limit'] = $this->limit;
             $output_str .= "<li class='$li_class";
             if ($i == $this->page) {
                 $output_str.=" $current_page_class";
             }
-            $output_str .= "'><a href=?" . http_build_query($_GET) . ">$i</a></li>";
+            $output_str .= "'><a href=?" . http_build_query($getCopy) . ">$i</a></li>";
         }
         return $output_str;
     }
