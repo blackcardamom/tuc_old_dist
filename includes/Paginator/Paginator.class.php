@@ -27,7 +27,8 @@ class Paginator {
     // Use prepared statement to get data for this page
     // Defaults to page 1 and no limit
     // Return 1 on success, 0 on failure
-    public function updatePage($page = 1, $limit = $total_items) {
+    public function updatePage($page = 1, $limit = null) {
+        $limit = (empty($limit)) ? $this->total_items : $limit;
         // Store variables
         $this->page = (int)$page;
         $this->limit = (int)$limit;
@@ -83,12 +84,11 @@ class Paginator {
         for ($i = $first_link; $i <= $last_link; $i++) {
             $_GET['page'] = $i;
             $_GET['limit'] = $this->limit;
-            $output_str .= "<a href=?" . http_build_query($_GET) . ">";
             $output_str .= "<li class='$li_class";
             if ($i == $this->page) {
                 $output_str.=" $current_page_class";
             }
-            $output_str .= "'>$i</li></a>";
+            $output_str .= "'><a href=?" . http_build_query($_GET) . ">$i</a></li>";
         }
         return $output_str;
     }
