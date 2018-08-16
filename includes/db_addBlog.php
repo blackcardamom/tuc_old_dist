@@ -41,7 +41,6 @@
     // Parseing Markdown into HTML and adding current datetime
 
     $Parsedown = new Parsedown();
-    $data['intro_html']=$Parsedown->text($_POST['intro_md']);
     $data['content_html']=$Parsedown->text($_POST['content_md']);
 
     $newURL_enc = rawurlencode("http://www.theuglycroissant.com/recipe_view?id=".$data['nextID']);

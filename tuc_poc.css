@@ -572,20 +572,20 @@ p {
   padding-left : 3%;
 }
 
-ol {
+.ingredients ol, .method ol {
   padding-left  : 3%;
   list-style    : none;
   counter-reset : item;
 }
 
-ol li:before {
+.ingredients ol li:before, .method ol li:before {
   content           : counter(item)'.';
   margin-right      : 5px;
   font-weight       : bold;
   counter-increment : item;
 }
 
-li::marker {
+.ingredients li::marker, .method li::marker {
   font-weight : bold;
 }
 
