@@ -8,16 +8,6 @@
         <div class='feature_left_arrow button' onclick='changeCard(-1)'><i class='fas fa-arrow-left'></i></div>
         <div class='feature_right_arrow button' onclick='changeCard(1)'><i class='fas fa-arrow-right'></i></div>
         <div class='scrolling-wrapper-flexbox' id='scrolling_container'>
-            <!--
-            <div class='feature_card' id='card1'>
-                <div class='feature_card_img'><a href='recipes/chocolate_cake/recipe.html'><img src='recipes/chocolate_cake/landscape_picture.jpg'></a></div>
-                <div class='feature_card_text'>
-                    <h2><a href='recipes/chocolate_cake/recipe.html'>Chocolate Celebration Cake</a></h2>
-                    <p><i class='fas fa-clock'></i> 1 hour 30 minutes + cooling time </time> &nbsp;&nbsp; <i class='fas fa-utensils'></i> 8 servings</p>
-                    <p>Seeing as this is the first recipe on the website it seems fit for it to be a celebration cake! The most challenging eggless bake I have tackled has to be cake, and I was very happy when this came out just how I wanted. The cake itself
-                        is a little like a muffin, but when you put it together with the ganache I think it would rival any chocolate cake out there. So please, enjoy.</p>
-                </div>
-            </div> -->
             <?php
                 //USE PDOS!?
                 $sql = 'SELECT a.id, a.title, a.recipe_active_time, a.recipe_wait_time, a.recipe_serves, a.intro_html, b.position, b.feature_img, b.feature_id
@@ -46,9 +36,9 @@
                                 <div class='feature_card_img'><a href='recipe_view.php?id=$id'><img src='$feature_img' alt='$title'></a></div>
                                 <div class='feature_card_text'>
                                     <h2><a href='recipe_view.php?id=$id'>$title</a></h2>
-                                    <p><i class='fas fa-clock'></i> $recipe_active_time &nbsp;&nbsp;
-                                        <i class='fas fa-bed' title='Waiting time'></i> $recipe_wait_time &nbsp;&nbsp;
-                                        <i class='fas fa-utensils'></i> $recipe_serves</p>
+                                    <p style='line-height:1.5em;'><span id='no_break'><i class='fas fa-clock'></i> $recipe_active_time &nbsp;&nbsp;</span>
+                                        <span id='no_break'><i class='fas fa-bed' title='Waiting time'></i> $recipe_wait_time &nbsp;&nbsp;</span>
+                                        <span id='no_break'><i class='fas fa-utensils'></i> $recipe_serves</span></p>
                                     $intro_html
                                 </div>
                             </div>";
@@ -62,6 +52,10 @@
     </div>
     <div class="index_blog_wrapper">
         <h1>Recent blogposts</h1>
+        <div class="blog_card">
+            <h2>My First Blog</h2>
+            <p><span class="blog_date_published">5th July 1998.</span> Some sort of description.</p>
+        </div>
     </div>
     <div class="index_sidebar">
         <h3>Advertisments</h3>

@@ -58,16 +58,17 @@
         <img src="<?= $intro_img ?>" alt="<?=$title?>">
     </div>
     <h1><?= $title ?></h1>
-    <p><i class="fas fa-clock" title="Acitve time"></i> <?= $recipe_active_time ?> &nbsp;&nbsp;
-        <i class="fas fa-bed" title="Waiting time"></i> <?= $recipe_wait_time ?> &nbsp;&nbsp;
-        <i class="fas fa-utensils" title="Serving size"></i> <?= $recipe_serves ?> &nbsp;&nbsp;
-        <br id="mobile_linebreak"><br id="mobile_linebreak">
+    <p style="line-height:1.5em;"><span id='no_break'><i class="fas fa-clock" title="Acitve time"></i> <?= $recipe_active_time ?> &nbsp;&nbsp;</span>
+        <span id='no_break'><i class="fas fa-bed" title="Waiting time"></i> <?= $recipe_wait_time ?> &nbsp;&nbsp;</span>
+        <span id='no_break'><i class="fas fa-utensils" title="Serving size"></i> <?= $recipe_serves ?> &nbsp;&nbsp;</span>
+        <br id="mobile_linebreak"><span id='no_break'>
         <a id="fbBtn"><i class="fab fa-facebook button"title="Share to Facebook"></i></a> &nbsp;&nbsp;
         <a href="<?= $social_twtr ?>"><i class="fab fa-twitter button" title="Share to Twitter"></i></a> &nbsp;&nbsp;
         <a href="<?= $social_pnt ?>"><i class="fab fa-pinterest button" title="Share to Pinterest"></i></a> &nbsp;&nbsp;
         <a href="<?= $social_snoo ?>"><i class="fab fa-reddit button" title="Share to Reddit"></i></a> &nbsp;&nbsp;
         <a><i class="fas fa-copy button" title="Copy to clipboard" onclick="copyToClip()"></i></a> &nbsp;&nbsp;
         <a href="<?= $print_pdf ?>"><i class="fas fa-print button"  title="Print recipe"></i></a>
+        </span>
     </p>
     <?= $intro_html ?>
 </div>
