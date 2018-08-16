@@ -37,7 +37,7 @@
 <div class="my_content">
     <h1>Recent Recipes</h1>
 </div>
-
+<div class="card_wrapper">
 <?php
     $sql = "SELECT * FROM recipes ORDER BY date_published DESC LIMIT 5";
     $result = mysqli_query($conn, $sql);
@@ -56,7 +56,7 @@
             $card_img = $row['card_img'];
 
             $recipe_card =
-            '<div class="recipe_card">
+            '<div class="post_card">
                 <div class="recipe_card_img"><a href="recipe_view.php?id='.$id.'"><img src="'.$card_img.'" alt="'.$title.'"></a></div>
                 <div class="recipe_card_title_info">
                     <a href="recipe_view.php?id='.$id.'"><h3>'.$title.'</h3></a>
@@ -71,7 +71,7 @@
         }
     }
 ?>
-
+</div>
 <!-- Include link to recipe search with no restrictions -->
 
 <?php include_once 'footer.php' ?>
