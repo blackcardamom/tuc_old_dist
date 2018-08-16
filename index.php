@@ -3,65 +3,69 @@
     include_once 'includes/conn.inc.php';
 ?>
 
-<div class='feature_parent'>
-    <div class='feature_left_arrow button' onclick='changeCard(-1)'><i class='fas fa-arrow-left'></i></div>
-    <div class='feature_right_arrow button' onclick='changeCard(1)'><i class='fas fa-arrow-right'></i></div>
-    <div class='scrolling-wrapper-flexbox' id='scrolling_container'>
-        <!--
-        <div class='feature_card' id='card1'>
-            <div class='feature_card_img'><a href='recipes/chocolate_cake/recipe.html'><img src='recipes/chocolate_cake/landscape_picture.jpg'></a></div>
-            <div class='feature_card_text'>
-                <h2><a href='recipes/chocolate_cake/recipe.html'>Chocolate Celebration Cake</a></h2>
-                <p><i class='fas fa-clock'></i> 1 hour 30 minutes + cooling time </time> &nbsp;&nbsp; <i class='fas fa-utensils'></i> 8 servings</p>
-                <p>Seeing as this is the first recipe on the website it seems fit for it to be a celebration cake! The most challenging eggless bake I have tackled has to be cake, and I was very happy when this came out just how I wanted. The cake itself
-                    is a little like a muffin, but when you put it together with the ganache I think it would rival any chocolate cake out there. So please, enjoy.</p>
-            </div>
-        </div> -->
-        <?php
-            $sql = 'SELECT a.id, a.title, a.recipe_active_time, a.recipe_wait_time, a.recipe_serves, a.intro_html, b.position, b.feature_img
-                    FROM recipes a
-                    RIGHT JOIN feature_cards b
-                    ON a.id=b.recipe_id
-                    ORDER BY position ASC';
-            $result = mysqli_query($conn, $sql);
-            $resultCheck = mysqli_num_rows($result);
+<div class="index_grid-container">
+    <div class='index_feature_wrapper'>
+        <div class='feature_left_arrow button' onclick='changeCard(-1)'><i class='fas fa-arrow-left'></i></div>
+        <div class='feature_right_arrow button' onclick='changeCard(1)'><i class='fas fa-arrow-right'></i></div>
+        <div class='scrolling-wrapper-flexbox' id='scrolling_container'>
+            <!--
+            <div class='feature_card' id='card1'>
+                <div class='feature_card_img'><a href='recipes/chocolate_cake/recipe.html'><img src='recipes/chocolate_cake/landscape_picture.jpg'></a></div>
+                <div class='feature_card_text'>
+                    <h2><a href='recipes/chocolate_cake/recipe.html'>Chocolate Celebration Cake</a></h2>
+                    <p><i class='fas fa-clock'></i> 1 hour 30 minutes + cooling time </time> &nbsp;&nbsp; <i class='fas fa-utensils'></i> 8 servings</p>
+                    <p>Seeing as this is the first recipe on the website it seems fit for it to be a celebration cake! The most challenging eggless bake I have tackled has to be cake, and I was very happy when this came out just how I wanted. The cake itself
+                        is a little like a muffin, but when you put it together with the ganache I think it would rival any chocolate cake out there. So please, enjoy.</p>
+                </div>
+            </div> -->
+            <?php
+                //USE PDOS!?
+                $sql = 'SELECT a.id, a.title, a.recipe_active_time, a.recipe_wait_time, a.recipe_serves, a.intro_html, b.position, b.feature_img, b.feature_id
+                        FROM recipes a
+                        RIGHT JOIN feature_cards b
+                        ON a.id=b.recipe_id
+                        ORDER BY position ASC';
+                $result = mysqli_query($conn, $sql);
+                $resultCheck = mysqli_num_rows($result);
 
-            if($resultCheck == 0) {
-                echo 'No features returned from datbase';
-            } else {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $id = $row['id'];
-                    $title = $row['title'];
-                    $recipe_active_time = $row['recipe_active_time'];
-                    $recipe_wait_time = $row['recipe_wait_time'];
-                    $recipe_serves = $row['recipe_serves'];
-                    $intro_html = $row['intro_html'];
-                    $feature_img = $row['feature_img'];
+                if($resultCheck == 0) {
+                    echo 'No features returned from datbase';
+                } else {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $id = $row['id'];
+                        $title = $row['title'];
+                        $recipe_active_time = $row['recipe_active_time'];
+                        $recipe_wait_time = $row['recipe_wait_time'];
+                        $recipe_serves = $row['recipe_serves'];
+                        $intro_html = $row['intro_html'];
+                        $feature_img = $row['feature_img'];
+                        $feature_id = $row['feature_id'];
 
-                    $feature_card = "
-                        <div class='feature_card' id='feature$id'>
-                            <div class='feature_card_img'><a href='recipe_view.php?id=$id'><img src='$feature_img' alt='$title'></a></div>
-                            <div class='feature_card_text'>
-                                <h2><a href='recipe_view.php?id=$id'>$title</a></h2>
-                                <p><i class='fas fa-clock'></i> $recipe_active_time &nbsp;&nbsp;
-                                    <i class='fas fa-bed' title='Waiting time'></i> $recipe_wait_time &nbsp;&nbsp;
-                                    <i class='fas fa-utensils'></i> $recipe_serves</p>
-                                $intro_html
-                            </div>
-                        </div>";
-                    echo $feature_card;
+                        $feature_card = "
+                            <div class='feature_card' id='feature$feature_id'>
+                                <div class='feature_card_img'><a href='recipe_view.php?id=$id'><img src='$feature_img' alt='$title'></a></div>
+                                <div class='feature_card_text'>
+                                    <h2><a href='recipe_view.php?id=$id'>$title</a></h2>
+                                    <p><i class='fas fa-clock'></i> $recipe_active_time &nbsp;&nbsp;
+                                        <i class='fas fa-bed' title='Waiting time'></i> $recipe_wait_time &nbsp;&nbsp;
+                                        <i class='fas fa-utensils'></i> $recipe_serves</p>
+                                    $intro_html
+                                </div>
+                            </div>";
+                        echo $feature_card;
+                    }
                 }
-            }
 
-        ?>
+            ?>
 
+        </div>
     </div>
+    <div class="index_blog_wrapper">Blog posts</div>
+    <div class="index_sidebar">Ads</div>
 </div>
 
-<div class='my_content'>
-    <h2 style='margin:0'>Welcome to The Ugly Crossiant</h2>
-    <p>This is the home page, what should we put here?</p>
-</div>
+
+
 <script src='https://code.jquery.com/jquery-1.10.2.js'></script>
 <script>
     var cardNames = $(".feature_card").map(function() { return this.id; }).toArray();
