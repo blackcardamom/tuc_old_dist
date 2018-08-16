@@ -53,10 +53,6 @@
     </div>
     <div class="index_blog_wrapper">
         <h1>Recent blogposts</h1>
-        <!--div class="blog_card">
-            <h2>My First Blog</h2>
-            <p><span class="blog_date_published">5th July 1998.</span> Some sort of description.</p>
-        </div-->
         <?php
             $query = "SELECT * FROM blogposts ORDER BY date_published DESC LIMIT 5";
             $stmt = $pdo_conn->prepare($query);
