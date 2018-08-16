@@ -13,14 +13,14 @@
     // Check user has actually clicked submit
 
     if(!isset($_POST['submit'])) {
-        header("Location: ../new_recipe.php?err=no_submit");
+        header("Location: ../new_blog.php?err=no_submit");
         exit;
     }
 
     // Extract username and password for verification
 
     if(empty($_POST['uid']) || empty($_POST['pwd'])) {
-        header("Location: ../new_recipe.php?err=no_creds");
+        header("Location: ../new_blog.php?err=no_creds");
         exit;
     }
 
@@ -28,7 +28,7 @@
     $pwd = $_POST['pwd'];
 
     if(!checkCredentials($uid,$pwd)) {
-        header("Location: ../new_recipe.php?err=bad_creds");
+        header("Location: ../new_blog.php?err=bad_creds");
         exit;
     }
 
@@ -42,8 +42,7 @@
 
     $Parsedown = new Parsedown();
     $data['intro_html']=$Parsedown->text($_POST['intro_md']);
-    $data['ingredients_html']=$Parsedown->text($_POST['ingredients_md']);
-    $data['method_html']=$Parsedown->text($_POST['method_md']);
+    $data['content_html']=$Parsedown->text($_POST['content_md']);
 
     $newURL_enc = rawurlencode("http://www.theuglycroissant.com/recipe_view?id=".$data['nextID']);
     $data['social_twtr']="http://twitter.com/home?status=" . rawurlencode("Check out this ".$data['title']." on the Ugly Croissant! ") . $newURL_enc;
@@ -61,7 +60,7 @@
 
     // Get list of acceptable keys
 
-    $sql = "SELECT COLUMN_NAME FROM information_schema.columns WHERE table_schema='$dbName' AND table_name='recipes'";
+    $sql = "SELECT COLUMN_NAME FROM information_schema.columns WHERE table_schema='$dbName' AND table_name='blogposts'";
     $result = mysqli_query($conn, $sql);
     $resultCheck = mysqli_num_rows($result);
     if($resultCheck == 0) {
@@ -77,7 +76,7 @@
 
     foreach ($keys as $key) {
         if(!in_array($key, $acceptableKeys)) {
-            header("Location: ../new_recipe.php?err=bad_key&key=$key");
+            header("Location: ../new_blog.php?err=bad_key&key=$key");
             exit;
             //exit('Key "'.$key.'" was not a recognised column. Potential SQL injection attack.');
         }
@@ -89,7 +88,7 @@
     //Now we can prepare an SQL statement to input the recipe into the database
 
     $format = "";
-    $sql = "INSERT into recipes (";
+    $sql = "INSERT into blogposts (";
     foreach($keys as $key) {
         $sql = $sql.$key.", ";
     }
@@ -104,7 +103,7 @@
     // Add the statement and the format to the array of arguments for mysqli_stmt_bind_param
     array_unshift($data, $stmt, $format);
     if (!mysqli_stmt_prepare($stmt,$sql)) {
-        header("Location: ../new_recipe.php?err=sql_fail");
+        header("Location: ../new_blog.php?err=sql_fail");
         exit;
     } else {
         // Bind Paramaters
@@ -117,5 +116,5 @@
         $row = mysqli_fetch_assoc($result);
         $id = $row['LAST_INSERT_ID()'];
         // Return to original page for success message and link to new recipe
-        header("Location: ../new_recipe.php?id=".$id);
+        header("Location: ../new_blog.php?id=".$id);
     }
