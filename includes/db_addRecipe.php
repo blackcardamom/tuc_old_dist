@@ -32,12 +32,11 @@
         exit;
     }
 
+    // Should check that required paramaters are set
+
     // Creating array of data we wish to enter into the new entry
 
     $data = $_POST;
-    unset($data['uid']);
-    unset($data['pwd']);
-    unset($data['submit']);
 
     // Parseing Markdown into HTML and adding current datetime
 
@@ -45,6 +44,16 @@
     $data['intro_html']=$Parsedown->text($_POST['intro_md']);
     $data['ingredients_html']=$Parsedown->text($_POST['ingredients_md']);
     $data['method_html']=$Parsedown->text($_POST['method_md']);
+
+    $newURL_enc = rawurlencode("http://www.theuglycroissant.com/recipe_view?id=".$data['nextID']);
+    $data['social_twtr']="http://twitter.com/home?status=" . rawurlencode("Check out this ".$data['title']." on the Ugly Croissant! ") . $newURL_enc;
+    $data['social_pnt']="http://pinterest.com/pin/create/link/?url=" . rawurlencode("http://www.theuglycroissant.com/recipe_view?id=".$data['nextID']);
+    $data['social_snoo']="http://www.reddit.com/submit?url=" . $newURL_enc ."&title=" . rawurlencode("Check out this ".$data['title']);
+
+    unset($data['uid']);
+    unset($data['pwd']);
+    unset($data['submit']);
+    unset($data['nextID']);
 
     // Getting list of keys for which we have data
 
