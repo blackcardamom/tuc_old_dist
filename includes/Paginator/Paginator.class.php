@@ -28,6 +28,7 @@ class Paginator {
     // Defaults to page 1 and no limit
     // Return 1 on success, 0 on failure
     public function updatePage($page = 1, $limit = null) {
+        // If no limit is provided then we assume there is no limit (equiv. limit=this->total_items)
         $limit = (empty($limit)) ? $this->total_items : $limit;
         // Store variables
         $this->page = (int)$page;
@@ -39,7 +40,7 @@ class Paginator {
         // Create prepared statement
         $this->stmt = $this->pdo->prepare($page_query);
         // Call user function to bind other parameters if it exists
-        if(isset($this->value_bind_func)) {
+        if(!empty($this->value_bind_func)) {
             call_user_func($this->value_bind_func,$this->stmt);
         }
         // Bind paginator parameters
@@ -108,14 +109,22 @@ class Paginator {
     public function getPrevPageQuery() {
         // Take one from the page unless we're already at the start
         $getCopy = $_GET;
-        $getCopy['page'] -= ( ($getCopy['page'] == 1) ? 0 : 1 );
+        if($this->page == 1) {
+            $getCopy['page'] = 1;
+        } else {
+            $getCopy['page'] = $this->page - 1;
+        }
         return http_build_query($getCopy);
     }
 
     public function getNextPageQuery() {
         // Add one to the page unless we're already at the end
         $getCopy = $_GET;
-        $getCopy['page'] += ($getCopy['page'] == ceil($this->total_items / $this->limit)) ? 0 : 1;
+        if($this->page == ceil($this->total_items / $this->limit)) {
+            $getCopy['page'] = $this->page;
+        } else {
+            $getCopy['page'] = $this->page + 1;
+        }
         return http_build_query($getCopy);
     }
 
