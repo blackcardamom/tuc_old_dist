@@ -19,6 +19,7 @@
 <div class="admin_container">
     <h1>Create new recipe (with ID <?= $nextID ?>)</h1><br>
     <form action="includes/db_addRecipe.php" method="post">
+        <input type="hidden" name="nextID" value="<?= (string)$nextID?>">
         <strong>Recipe Title</strong><br>
         <input type="text" name="title" placeholder="Lemon Meringue Pie"><br>
         <strong>Time spent cooking</strong><br>
