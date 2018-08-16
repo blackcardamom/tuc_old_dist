@@ -1,4 +1,15 @@
 <?php
+
+    /*
+    Useful query
+
+    SELECT 'recipes' AS origin_table, id, title, intro_html, date_published, recipe_active_time, recipe_wait_time, recipe_serves, card_img FROM recipes
+    UNION
+    SELECT 'blogposts' AS origin_table, id, title, intro_html, date_published, '','','','' FROM blogposts
+    ORDER BY date_published DESC
+    LIMIT 1 OFFSET 2
+    */
+
     $selected = "recipes";
     $titleSuffix = " - Search Recipes";
     include_once 'header.php';

@@ -60,13 +60,13 @@
                 echo "<h2>We are having technical issues, no blogposts are currently available.</h2>";
             } else {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $blog_card = "
+                    $post_card = "
                     <div class='post_card'>
                         <h2>".$row['title']."</h2>
                         <p><span class='blog_date_published'>". date('jS F Y.',strtotime($row['date_published'])) ."</span> ".$row['intro_html']."</p>
-                        <div class='blog_link'><a href='blogpost_view.php?id=".$row['id']."'><i class='fas fa-plus-circle'></i> View more...</a></div>
+                        <div class='blog_link'><a href='blogpost_view.php?id=".$row['id']."'><i class='fas fa-plus-circle'></i> Read more...</a></div>
                     </div>";
-                    echo $blog_card;
+                    echo $post_card;
                 }
             }
         ?>
