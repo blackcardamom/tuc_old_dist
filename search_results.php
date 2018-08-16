@@ -13,16 +13,16 @@
 
     switch ($_GET['order']) {
         case 0:
-            $query = "SELECT * FROM MOCK_TABLE ORDER BY date_published DESC";
+            $query = "SELECT * FROM recipes ORDER BY date_published DESC";
             break;
         case 1:
-            $query = "SELECT * FROM MOCK_TABLE ORDER BY date_published ASC";
+            $query = "SELECT * FROM recipes ORDER BY date_published ASC";
             break;
         case 2:
-            $query = "SELECT * FROM MOCK_TABLE ORDER BY title ASC";
+            $query = "SELECT * FROM recipes ORDER BY title ASC";
             break;
         case 3:
-            $query = "SELECT * FROM MOCK_TABLE ORDER BY title DESC";
+            $query = "SELECT * FROM recipes ORDER BY title DESC";
             break;
         default:
             echo "<h1 style='text-align:center; background-color:white; margin:0; padding:30px;'>Sorry we are currently experiencing technical issues.</h1>";
@@ -31,7 +31,7 @@
 
     // SWITCH TO PDO IF ADDING SEARCH PARAMTERS
 
-    $count_query = "SELECT COUNT(*) FROM MOCK_TABLE";
+    $count_query = "SELECT COUNT(*) FROM recipes";
     $stmt = $pdo_conn->query($count_query);
     $stmt->execute();
     $total_posts = $stmt->fetch()['COUNT(*)'];
@@ -87,7 +87,7 @@
             $card_img = $row['card_img'];
 
             $recipe_card =
-            '<div class="recipe_card">
+            '<div class="post_card">
                 <div class="recipe_card_img"><a href="recipe_view.php?id='.$id.'"><img src="'.$card_img.'" alt="'.$title.'"></a></div>
                 <div class="recipe_card_title_info">
                     <a href="recipe_view.php?id='.$id.'"><h3>'.$title.'</h3></a>
