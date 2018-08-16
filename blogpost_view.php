@@ -6,7 +6,7 @@
         header("Location: pagenotfound.php");
     } else {
 
-        $sql = "SELECT * FROM recipes WHERE id = :id";
+        $sql = "SELECT * FROM blogposts WHERE id = :id";
         $stmt = $pdo_conn->prepare($sql);
         $stmt->bindValue('id',$_GET['id']);
         $stmt->execute();
@@ -15,17 +15,11 @@
             header("Location: pagenotfound.php");
         } else {
             $title = $row['title'];
-            $recipe_active_time = $row['recipe_active_time'];
-            $recipe_wait_time = $row['recipe_wait_time'];
-            $recipe_serves = $row['recipe_serves'];
             $social_twtr = $row['social_twtr'];
             $social_pnt = $row['social_pnt'];
             $social_snoo = $row['social_snoo'];
-            $print_pdf = $row['print_pdf'];
             $intro_html = $row['intro_html'];
-            $ingredients_html = $row['ingredients_html'];
-            $method_html = $row['method_html'];
-            $intro_img = $row['intro_img'];
+            $content_html = $row['content_html'];
         }
     }
     $titleSuffix=" - $title";
