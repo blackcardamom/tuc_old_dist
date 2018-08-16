@@ -60,8 +60,12 @@
 
         </div>
     </div>
-    <div class="index_blog_wrapper">Blog posts</div>
-    <div class="index_sidebar">Ads</div>
+    <div class="index_blog_wrapper">
+        <h1>Recent blogposts</h1>
+    </div>
+    <div class="index_sidebar">
+        <h3>Advertisments</h3>
+    </div>
 </div>
 
 
