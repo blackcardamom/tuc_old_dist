@@ -1,6 +1,7 @@
 <?php
-    $selected="recipes";
     include_once 'includes/pdo.inc.php';
+
+    // Get all variables we need to load the page
 
     if (empty($_GET['id'])) {
         header("Location: pagenotfound.php");
@@ -22,9 +23,13 @@
             $content_html = $row['content_html'];
         }
     }
+
+    $selected="recipes";
     $titleSuffix=" - $title";
     include_once 'header.php';
 ?>
+
+<!-- We add this script to allow the facebook button to work -->
 
 <script>
   window.fbAsyncInit = function() {
@@ -45,20 +50,22 @@
    }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="blog_container">
-    <h1 class="blog_title"><?= $title ?></h1>
-    <div class="blog_socials"><span id='no_break'>
-        <a id="fbBtn"><i class="fab fa-facebook button"title="Share to Facebook"></i></a> &nbsp;&nbsp;
-        <a href="<?= $social_twtr ?>"><i class="fab fa-twitter button" title="Share to Twitter"></i></a> &nbsp;&nbsp;
-        <a href="<?= $social_pnt ?>"><i class="fab fa-pinterest button" title="Share to Pinterest"></i></a> &nbsp;&nbsp;
-        <a href="<?= $social_snoo ?>"><i class="fab fa-reddit button" title="Share to Reddit"></i></a> &nbsp;&nbsp;
-        <a><i class="fas fa-copy button" title="Copy to clipboard" onclick="copyToClip()"></i></a> &nbsp;&nbsp;
-        </span>
+<div class="blog_grid-container">
+    <div class="blog_container">
+        <h1 class="blog_title"><?= $title ?></h1>
+        <div class="blog_socials"><span id='no_break'>
+            <a id="fbBtn"><i class="fab fa-facebook button"title="Share to Facebook"></i></a> &nbsp;&nbsp;
+            <a href="<?= $social_twtr ?>"><i class="fab fa-twitter button" title="Share to Twitter"></i></a> &nbsp;&nbsp;
+            <a href="<?= $social_pnt ?>"><i class="fab fa-pinterest button" title="Share to Pinterest"></i></a> &nbsp;&nbsp;
+            <a href="<?= $social_snoo ?>"><i class="fab fa-reddit button" title="Share to Reddit"></i></a> &nbsp;&nbsp;
+            <a><i class="fas fa-copy button" title="Copy to clipboard" onclick="copyToClip()"></i></a> &nbsp;&nbsp;
+            </span>
+        </div>
+        <div class="blog_intro"><?= $intro ?></div>
+        <div class="blog_main_content"><?= $content_html ?></div>
     </div>
-    <div class="blog_intro"><?= $intro ?></div>
-    <div class="blog_main_content"><?= $content_html ?></div>
+    <div class="blog_ad_container">AD</div>
 </div>
-<div class="blog_ad_container"></div>
 
 
 <script>

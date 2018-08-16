@@ -44,9 +44,9 @@
     $data['content_html']=$Parsedown->text($_POST['content_md']);
 
     $newURL_enc = rawurlencode("http://www.theuglycroissant.com/recipe_view?id=".$data['nextID']);
-    $data['social_twtr']="http://twitter.com/home?status=" . rawurlencode("Check out this ".$data['title']." on the Ugly Croissant! ") . $newURL_enc;
+    $data['social_twtr']="http://twitter.com/home?status=" . rawurlencode("Check out this blogpost, '".$data['title']."', on The Ugly Croissant! ") . $newURL_enc;
     $data['social_pnt']="http://pinterest.com/pin/create/link/?url=" . $newURL_enc;
-    $data['social_snoo']="http://www.reddit.com/submit?url=" . $newURL_enc ."&title=" . rawurlencode("Check out this ".$data['title']);
+    $data['social_snoo']="http://www.reddit.com/submit?url=" . $newURL_enc ."&title=" . rawurlencode("Check out this blogpost - '".$data['title']."'");
 
     unset($data['uid']);
     unset($data['pwd']);
