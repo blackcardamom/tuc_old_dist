@@ -6,8 +6,10 @@
 
 <div class="index_grid-container">
     <div class='index_feature_wrapper'>
+        <input type="hidden" id="current_card">
         <div class='feature_left_arrow button' onclick='changeCard(-1)'><i class='fas fa-arrow-left'></i></div>
         <div class='feature_right_arrow button' onclick='changeCard(1)'><i class='fas fa-arrow-right'></i></div>
+
         <div class='scrolling-wrapper-flexbox' id='scrolling_container'>
             <?php
                 //USE PDOS!?
@@ -121,13 +123,13 @@
     // Adjusted from https://gist.github.com/andjosh/6764939
     function changeCard(direction) {
         // Typical direction is 1 or -1 (right or left resp.)
-        var currentCard = window.location.hash.substr(1);
+        var currentCard = document.getElementById('current_card').value;
         // No hash means we've just opened the page so must be on the first card
         if (currentCard == '') {
-            currentCard = cardNames[0];
+            var num = 0;
+        } else {
+            var num = parseInt(currentCard, 10);
         }
-        // Finds current card number
-        var num = cardNames.indexOf(currentCard);
         // Calculates new card number
         num = mod((num + direction), cardNames.length);
         // Smooth scrolling
@@ -135,8 +137,8 @@
         var newCard = document.getElementById(cardNames[num]);
         var $newCard = $(newCard)
         scrollTo(container, $newCard.position().left + container.scrollLeft, 500);
-        // Updates hash
-        window.location.hash = '#' + cardNames[num];
+        // Updates hidden input
+        document.getElementById('current_card').value = num;
     }
 </script>
 
