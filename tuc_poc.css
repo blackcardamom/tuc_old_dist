@@ -503,8 +503,6 @@ a.active_topnav {
   background-color    : var(--main-color);
 }
 
-.recipe_intro
-
 .recipe_intro_img {
   display          : block;
   width            : 30%;
@@ -594,7 +592,7 @@ a.active_topnav {
 .blog_grid-container {
   display: grid;
   height: 100%;
-  grid-template-columns: 80% 20%;
+  grid-template-columns: 4fr 1fr;
   grid-gap:2px 2px;
   grid-template-areas: "blog_container blog_ad_container";
 }
@@ -602,20 +600,36 @@ a.active_topnav {
 .blog_container{
     grid-area: blog_container;
     background-color: white;
-    padding: 1%;
 }
 
-.blog_title{}
+.blog_title{
+    border-bottom: 2px solid var(--main-color);
+margin: 2% 1% 0 1%;
+    padding-bottom: 2%;
 
-.blog_socials{}
+}
+
+.blog_socials{
+    text-align: right;
+    padding-top: 2%;
+    padding-right:5%;
+}
 
 .blog_socials i.button{
     color:var(--main-color);
 }
 
-.blog_intro{}
+.blog_intro{
+    margin:2% 0 2% 0;
+    padding:3% 15% 3% 15%;
+    font-size: 1.25em;
+    font-style: italic;
+    background-color: var(--text-light);
+}
 
-.blog_main_content{}
+.blog_main_content{
+    line-height: 1.5em;
+}
 
 .blog_ad_container{
     grid-area: blog_ad_container;
@@ -902,7 +916,7 @@ li.pagination_link a {
 
 @media
   screen
-  and (max-width : 1500px) {
+  and (max-width : 1300px) {
   body {
     /* Normally 5% */
     margin-right : 5%;
