@@ -28,7 +28,8 @@
             $intro_img = $row['intro_img'];
         }
     }
-    $titleSuffix=" - $title";
+    $titlePrefix="$title | ";
+    $meta_desciption = strip_tags($intro_html);  
     include_once 'header.php';
 ?>
 
