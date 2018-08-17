@@ -2,6 +2,7 @@
     include_once 'header.php';
     include_once 'includes/conn.inc.php';
     include_once 'includes/pdo.inc.php';
+    include_once 'includes/base_assumptions.inc.php'
 ?>
 
 <div class="index_grid-container">
@@ -31,14 +32,14 @@
                         $recipe_wait_time = $row['recipe_wait_time'];
                         $recipe_serves = $row['recipe_serves'];
                         $intro_html = $row['intro_html'];
-                        $feature_img = $row['feature_img'];
+                        $feature_img = $website_root . "/" .$row['feature_img'];
                         $feature_id = $row['feature_id'];
 
                         $feature_card = "
                             <div class='feature_card' id='feature$feature_id'>
-                                <div class='feature_card_img'><a href='recipe_view.php?id=$id'><img src='$feature_img' alt='$title'></a></div>
+                                <div class='feature_card_img'><a href='$website_root/recipe_view.php?id=$id'><img src='$feature_img' alt='$title'></a></div>
                                 <div class='feature_card_text'>
-                                    <h2><a href='recipe_view.php?id=$id'>$title</a></h2>
+                                    <h2><a href='$website_root/recipe_view.php?id=$id'>$title</a></h2>
                                     <p style='line-height:1.5em;'><span id='no_break'><i class='fas fa-clock'></i> $recipe_active_time &nbsp;&nbsp;</span>
                                         <span id='no_break'><i class='fas fa-bed' title='Waiting time'></i> $recipe_wait_time &nbsp;&nbsp;</span>
                                         <span id='no_break'><i class='fas fa-utensils'></i> $recipe_serves</span></p>
@@ -64,9 +65,9 @@
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $post_card = "
                     <div class='post_card'>
-                        <h3><a href='blogpost_view.php?id=".$row['id']."'>".$row['title']."</a></h3>
+                        <h3><a href='$website_root/blogpost_view.php?id=".$row['id']."'>".$row['title']."</a></h3>
                         <p><span class='blog_date_published'>". date('jS F Y.',strtotime($row['date_published'])) ."</span> ".$row['intro']."</p>
-                        <div class='blog_link'><a href='blogpost_view.php?id=".$row['id']."'><i class='fas fa-plus-circle'></i> Read more...</a></div>
+                        <div class='blog_link'><a href='$website_root/blogpost_view.php?id=".$row['id']."'><i class='fas fa-plus-circle'></i> Read more...</a></div>
                     </div>";
                     echo $post_card;
                 }

@@ -2,6 +2,7 @@
     include_once 'conn.inc.php';
     include_once 'admin_validate.inc.php';
     include_once 'parsedown/Parsedown.php';
+    include_once 'base_assumptions.php';
 
     function makeValuesReferenced(&$arr){
         $refs = array();
@@ -13,14 +14,14 @@
     // Check user has actually clicked submit
 
     if(!isset($_POST['submit'])) {
-        header("Location: ../new_recipe.php?err=no_submit");
+        header("Location: $website_root/new_recipe.php?err=no_submit");
         exit;
     }
 
     // Extract username and password for verification
 
     if(empty($_POST['uid']) || empty($_POST['pwd'])) {
-        header("Location: ../new_recipe.php?err=no_creds");
+        header("Location: $website_root/new_recipe.php?err=no_creds");
         exit;
     }
 
@@ -28,7 +29,7 @@
     $pwd = $_POST['pwd'];
 
     if(!checkCredentials($uid,$pwd)) {
-        header("Location: ../new_recipe.php?err=bad_creds");
+        header("Location: $website_root/new_recipe.php?err=bad_creds");
         exit;
     }
 
@@ -45,7 +46,7 @@
     $data['ingredients_html']=$Parsedown->text($_POST['ingredients_md']);
     $data['method_html']=$Parsedown->text($_POST['method_md']);
 
-    $newURL_enc = rawurlencode("http://www.theuglycroissant.com/recipe_view?id=".$data['nextID']);
+    $newURL_enc = rawurlencode($website_root."/recipe_view?id=".$data['nextID']);
     $data['social_twtr']="http://twitter.com/home?status=" . rawurlencode("Check out this ".$data['title']." on the Ugly Croissant! ") . $newURL_enc;
     $data['social_pnt']="http://pinterest.com/pin/create/link/?url=" . $newURL_enc;
     $data['social_snoo']="http://www.reddit.com/submit?url=" . $newURL_enc ."&title=" . rawurlencode("Check out this ".$data['title']);
@@ -77,7 +78,7 @@
 
     foreach ($keys as $key) {
         if(!in_array($key, $acceptableKeys)) {
-            header("Location: ../new_recipe.php?err=bad_key&key=$key");
+            header("Location: $website_root/new_recipe.php?err=bad_key&key=$key");
             exit;
             //exit('Key "'.$key.'" was not a recognised column. Potential SQL injection attack.');
         }
@@ -104,7 +105,7 @@
     // Add the statement and the format to the array of arguments for mysqli_stmt_bind_param
     array_unshift($data, $stmt, $format);
     if (!mysqli_stmt_prepare($stmt,$sql)) {
-        header("Location: ../new_recipe.php?err=sql_fail");
+        header("Location: $website_root/new_recipe.php?err=sql_fail");
         exit;
     } else {
         // Bind Paramaters
@@ -117,5 +118,5 @@
         $row = mysqli_fetch_assoc($result);
         $id = $row['LAST_INSERT_ID()'];
         // Return to original page for success message and link to new recipe
-        header("Location: ../new_recipe.php?id=".$id);
+        header("Location: $website_root/new_recipe.php?id=".$id);
     }

@@ -1,4 +1,9 @@
-<?php $selected="contact"; $titleSuffix=" - Contact";  include_once 'header.php'; ?>
+<?php
+    $selected="contact";
+    $titleSuffix=" - Contact";
+    include_once 'header.php';
+    include_once 'includes/base_assumptions.inc.php';
+?>
 
 <?php
     // Make sure that the user actually wants to send a message
@@ -92,7 +97,7 @@
 
     <!-- To avoid losing previous input we put back old input
          We also change the input class depending on whether the input was deemed acceptable -->
-    <form method="post" action="contact.php">
+    <form method="post" action="<?= $website_root ?>/contact.php">
         <label for="name">Name</label>
         <input type="text" name="name" placeholder="Your name..." value="<?= $name ?>" class = "<?= $fieldTypes['name'] ?>">
 

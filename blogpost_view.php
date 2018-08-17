@@ -1,10 +1,11 @@
 <?php
     include_once 'includes/pdo.inc.php';
+    include_once 'includes/base_assumptions.inc.php';
 
     // Get all variables we need to load the page
 
     if (empty($_GET['id'])) {
-        header("Location: pagenotfound.php");
+        header("Location: $website_root/pagenotfound.php");
     } else {
 
         $sql = "SELECT * FROM blogposts WHERE id = :id";
@@ -13,7 +14,7 @@
         $stmt->execute();
 
         if (!($row = $stmt->fetch(PDO::FETCH_ASSOC))) {
-            header("Location: pagenotfound.php");
+            header("Location: $website_root/pagenotfound.php");
         } else {
             $title = $row['title'];
             $social_twtr = $row['social_twtr'];

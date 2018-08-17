@@ -1,7 +1,12 @@
-<?php $selected="about"; $titleSuffix=" - About"; include_once 'header.php'; ?>
+<?php
+    $selected="about";
+    $titleSuffix=" - About";
+    include_once 'includes/base_assumptions.inc.php';
+    include_once 'header.php';
+?>
 
 <div class="about_content">
-    <div class="about_img"><img src="assets/portrait2.jpg" alt="Portrait of The Ugly Croissant baker"></div>
+    <div class="about_img"><img src="<?=$website_root?>/assets/portrait2.jpg" alt="Portrait of The Ugly Croissant baker"></div>
     <h2 style="margin:0;padding-top:0.5em">Welcome to The Ugly Crossiant</h2>
     <p>This is the home of all of my eggless recipes both sweet and savoury alike. I have designed these to be delicious, whether you choose to eat eggs or not, so please dive straight in.</p>
     <p><strong>A little about myself</strong></p>

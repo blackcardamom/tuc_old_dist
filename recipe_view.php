@@ -1,9 +1,10 @@
 <?php
-    $selected="recipes";
+
     include_once 'includes/pdo.inc.php';
+    include_once 'includes/base_assumptions.inc.php';
 
     if (empty($_GET['id'])) {
-        header("Location: pagenotfound.php");
+        header("Location: $website_root/pagenotfound.php");
     } else {
 
         $sql = "SELECT * FROM recipes WHERE id = :id";
@@ -12,7 +13,7 @@
         $stmt->execute();
 
         if (!($row = $stmt->fetch(PDO::FETCH_ASSOC))) {
-            header("Location: pagenotfound.php");
+            header("Location: $website_root/pagenotfound.php");
         } else {
             $title = $row['title'];
             $recipe_active_time = $row['recipe_active_time'];
@@ -25,11 +26,12 @@
             $intro_html = $row['intro_html'];
             $ingredients_html = $row['ingredients_html'];
             $method_html = $row['method_html'];
-            $intro_img = $row['intro_img'];
+            $intro_img = $website_root . "/" . $row['intro_img'];
         }
     }
+    $selected="recipes";
     $titlePrefix="$title | ";
-    $meta_desciption = strip_tags($intro_html);  
+    $meta_desciption = strip_tags($intro_html);
     include_once 'header.php';
 ?>
 

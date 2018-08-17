@@ -2,6 +2,7 @@
     $titleSuffix=" - New recipe";
     include_once 'header.php';
     include_once 'includes/conn.inc.php';
+    include_once 'includes/base_assumptions.inc.php';
 
     $sql = "SELECT `AUTO_INCREMENT`
             FROM  INFORMATION_SCHEMA.TABLES
@@ -18,7 +19,7 @@
 
 <div class="admin_container">
     <h1>Create new recipe (with ID <?= $nextID ?>)</h1><br>
-    <form action="includes/db_addRecipe.php" method="post">
+    <form action="<?= $website_root ?>/includes/db_addRecipe.php" method="post">
         <input type="hidden" name="nextID" value="<?= (string)$nextID?>">
         <strong>Recipe Title</strong><br>
         <input type="text" name="title" placeholder="Lemon Meringue Pie"><br>
