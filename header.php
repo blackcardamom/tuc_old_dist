@@ -28,7 +28,7 @@
 
         <!-- Google meta tags -->
         <?php if(!empty($meta_desciption)) : ?>
-            <meta name="desription" content="<?= $meta_desciption?>">
+            <meta name="Desription" content="<?= $meta_desciption?>">
         <?php endif; ?>
 
         <!-- Open Graph meta tags -->
