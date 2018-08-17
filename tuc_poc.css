@@ -13,9 +13,9 @@
 
 body {
   margin-top       : 1%;
-  margin-right     : 15%;
+  margin-right     : 17%;
   margin-bottom    : 1%;
-  margin-left      : 15%;
+  margin-left      : 17%;
   background-color : var(--background-color);
   font-family      : Arial,
                      Helvetica,
@@ -51,7 +51,7 @@ a {
 }
 
 a i.button {
-  color : white;
+  color : white;date_publishe
 }
 
 .my_content {
@@ -157,11 +157,22 @@ img.portait {
     background-color: white;
 }
 
+.index_blog_wrapper .post_card:last-child {
+    border-bottom: 2px solid black;
+}
+
+.index_blog_wrapper h2.recent_blog_title {
+    text-align: left;
+    background-color: var(--main-color);
+    color: var(--text-light);
+    margin:0;
+    padding:2%;
+}
+
 .index_sidebar {
     grid-area: index_sidebar;
-    background-color: var(--main-color);
+    background-color: white;
     border-left: 2px solid var(--background-color);
-    color:var(--text-light);
     padding: 1%;
 }
 
@@ -180,13 +191,16 @@ span.blog_date_published {
 }
 
 .blog_link {
+    z-index: -9999;
     text-align: right;
-    padding-bottom:5px;
+    padding-bottom:4px;
     padding-right: 1%;
 
 }
 
 .blog_link a{
+    position:relative;
+    bottom:0;
     text-decoration: none;
     color: var(--main-color);
     background-color: var(--background-color);
@@ -916,7 +930,7 @@ li.pagination_link a {
 
 @media
   screen
-  and (max-width : 1300px) {
+  and (max-width : 1400px) {
   body {
     /* Normally 5% */
     margin-right : 5%;

@@ -54,9 +54,9 @@
         </div>
     </div>
     <div class="index_blog_wrapper">
-        <h1>Recent blogposts</h1>
+        <h2 class="recent_blog_title">Recent blogposts</h2>
         <?php
-            $query = "SELECT * FROM blogposts ORDER BY date_published DESC LIMIT 5";
+            $query = "SELECT * FROM MOCK_BLOGS ORDER BY intro DESC LIMIT 5";
             $stmt = $pdo_conn->prepare($query);
             if (!$stmt->execute()) {
                 echo "<h2>We are having technical issues, no blogposts are currently available.</h2>";
@@ -64,7 +64,7 @@
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $post_card = "
                     <div class='post_card'>
-                        <h2><a href='blogpost_view.php?id=".$row['id']."'>".$row['title']."</a></h2>
+                        <h3><a href='blogpost_view.php?id=".$row['id']."'>".$row['title']."</a></h3>
                         <p><span class='blog_date_published'>". date('jS F Y.',strtotime($row['date_published'])) ."</span> ".$row['intro']."</p>
                         <div class='blog_link'><a href='blogpost_view.php?id=".$row['id']."'><i class='fas fa-plus-circle'></i> Read more...</a></div>
                     </div>";
