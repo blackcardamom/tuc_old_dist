@@ -29,9 +29,14 @@
             $intro_img = $website_root . "/" . $row['intro_img'];
         }
     }
+
     $selected="recipes";
     $titlePrefix="$title | ";
     $meta_desciption = strip_tags($intro_html);
+
+    $meta_iscontent = 1;
+    $meta_image = $intro_img;
+    $meta_url = $website_root ."/recipe_view.php?id=" . htmlspecialchars($_GET['id']);
     include_once 'header.php';
 ?>
 

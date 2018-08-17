@@ -11,6 +11,9 @@
     if( !isset($meta_iscontent) || !isset($meta_image) || !isset($meta_url) ) {
         $meta_iscontent = false;
     }
+    if( !isset($meta_index) ) {
+        $meta_index = true;
+    }
  ?>
 
 <!DOCTYPE html>
@@ -28,12 +31,17 @@
             <meta name="desription" content="<?= $meta_desciption?>">
         <?php endif; ?>
 
-        <!-- Open Graph meta tage -->
+        <!-- Open Graph meta tags -->
         <?php if($meta_iscontent) : ?>
             <meta property="og:title" content="<?= $titlePrefix ?>The Ugly Croissant<?= $titleSuffix ?>">
             <meta property="og:type" contet="website">
             <meta property="og:image" content="<?= $meta_image ?>">
             <meta property="og:url" content="<?= $meta_url ?>">
+        <?php endif; ?>
+
+        <!-- Robots tags -->
+        <?php if(!$meta_index) : ?>
+            <meta property="robots" content="noindex">
         <?php endif; ?>
     </head>
 

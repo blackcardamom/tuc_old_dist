@@ -26,7 +26,11 @@
     }
 
     $selected="recipes";
-    $titleSuffix=" - $title";
+    $titlePrefix="$title | ";
+    $meta_desciption = strip_tags($intro);
+
+    $meta_iscontent = 1;
+    $meta_url = $website_root ."/blogpost_view.php?id=" . htmlspecialchars($_GET['id']);
     include_once 'header.php';
 ?>
 

@@ -1,5 +1,6 @@
 <?php
     $titleSuffix=" - New recipe";
+    $meta_index = false;
     include_once 'header.php';
     include_once 'includes/conn.inc.php';
     include_once 'includes/base_assumptions.inc.php';
