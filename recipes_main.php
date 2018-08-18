@@ -2,7 +2,7 @@
     $selected = "recipes";
     $titleSuffix=" - Recipes";
     include_once 'header.php';
-    include_once 'includes/conn.inc.php';
+    include_once 'includes/pdo.inc.php';
     include_once 'includes/base_assumptions.inc.php';
 ?>
 
@@ -39,15 +39,16 @@
 </div>
 <?php
     $sql = "SELECT * FROM recipes ORDER BY date_published DESC LIMIT 5";
-    $result = mysqli_query($conn, $sql);
-    $resultCheck = mysqli_num_rows($result);
+    //$result = mysqli_query($conn, $sql);
+    //$resultCheck = mysqli_num_rows($result);
 
-    if($resultCheck == 0) {
-        echo "No recipes returned from datbase";
+    if(!($stmt = $pdo_conn->prepare($sql)) ) {
+        echo "Database error";
     } else {
-        while ($row = mysqli_fetch_assoc($result)) {
+        $stmt->execute();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $id = $row['id'];
-            $title = $row['title'];
+            $title = $row['title'];$row = mysqli_fetch_assoc($result)
             $recipe_active_time = $row['recipe_active_time'];
             $recipe_wait_time = $row['recipe_wait_time'];
             $recipe_serves = $row['recipe_serves'];
