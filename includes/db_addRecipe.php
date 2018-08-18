@@ -55,6 +55,7 @@
     unset($data['uid']);
     unset($data['pwd']);
     unset($data['submit']);
+    $nextID=$data['nextID'];
     unset($data['nextID']);
 
     // Getting list of keys for which we have data
@@ -84,34 +85,27 @@
 
     //Now we can prepare an SQL statement to input the recipe into the database
 
-    $format = "";
-    $sql = "INSERT into recipes (";
+    $sql = "INSERT into RECIPES (";
     foreach($keys as $key) {
         $sql = $sql.$key.", ";
     }
     $sql = substr($sql,0,-2).") VALUES (";
     foreach($keys as $key) {
-        $sql = $sql."?, ";
-        $format = $format."s";
+        $sql = $sql.":". $key .", ";
     }
     $sql = substr($sql,0,-2).")";
 
-    $stmt = mysqli_stmt_init($conn);
-    // Add the statement and the format to the array of arguments for mysqli_stmt_bind_param
-    array_unshift($data, $stmt, $format);
-    if (!mysqli_stmt_prepare($stmt,$sql)) {
+
+    if ( !($stmt = $pdo_conn->prepare($sql)) ) {
         header("Location: $website_root/new_recipe.php?err=sql_fail");
         exit;
     } else {
         // Bind Paramaters
-        call_user_func_array("mysqli_stmt_bind_param",makeValuesReferenced($data));
+        foreach($keys as $key) {
+            $stmt->bindValue($key,$data[$key]);
+        }
         // Submit new recipe
-        mysqli_stmt_execute($stmt);
-        // Determine id of new recipe
-        $sql = "SELECT LAST_INSERT_ID();";
-        $result = mysqli_query($conn, $sql);
-        $row = mysqli_fetch_assoc($result);
-        $id = $row['LAST_INSERT_ID()'];
+        $stmt->execute();
         // Return to original page for success message and link to new recipe
-        header("Location: $website_root/new_recipe.php?id=".$id);
+        header("Location: $website_root/new_recipe.php?id=".$nextID);
     }
