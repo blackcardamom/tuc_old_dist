@@ -34,7 +34,7 @@
         <div class="container_overlay"></div>
     </a>
 </div>
-<div class="my_content">
+<div class="recent_recipes_title">
     <h1>Recent Recipes</h1>
 </div>
 <?php

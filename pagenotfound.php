@@ -4,8 +4,8 @@
     include_once 'header.php';
 ?>
 
-<div class="my_content">
-    <h1 style="text-align:center;"> Sorry this page could not be found </h1>
+<div style="background-color: white; padding:2%;">
+    <h1 style="text-align:center;padding:0;"> Sorry this page could not be found </h1>
 </div>
 
 <?php include_once 'footer.php'; ?>
