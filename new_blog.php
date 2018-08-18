@@ -40,14 +40,10 @@
 </div>
 
 <script>
-//var intro_mde = new SimpleMDE({ element: document.getElementById("intro_mde") });
 var content_mde = new SimpleMDE({ element: document.getElementById("content_mde") });
-
-//var intro_md_input = document.getElementById("intro_md_input")
 var content_md_input = document.getElementById("content_md_input")
 
 function onNewBlogSubmit() {
-    //intro_md_input.value = intro_mde.value();
     content_md_input.value = content_mde.value();
 }
 </script>
