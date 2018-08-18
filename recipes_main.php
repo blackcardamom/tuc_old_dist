@@ -35,7 +35,7 @@
     </a>
 </div>
 <div class="recent_recipes_title">
-    <h1>Recent Recipes</h1>
+    <h2>Recent Recipes</h2>
 </div>
 <?php
     $sql = "SELECT * FROM recipes ORDER BY date_published DESC LIMIT 5";
