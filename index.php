@@ -1,6 +1,5 @@
 <?php
     include_once 'header.php';
-    include_once 'includes/conn.inc.php';
     include_once 'includes/pdo.inc.php';
     include_once 'includes/base_assumptions.inc.php'
 ?>
@@ -19,13 +18,12 @@
                         RIGHT JOIN feature_cards b
                         ON a.id=b.recipe_id
                         ORDER BY position ASC';
-                $result = mysqli_query($conn, $sql);
-                $resultCheck = mysqli_num_rows($result);
 
-                if($resultCheck == 0) {
-                    echo 'No features returned from datbase';
+                if( !($stmt = $pdo_conn->prepare($sql)) ) {
+                    echo 'Database error';
                 } else {
-                    while ($row = mysqli_fetch_assoc($result)) {
+                    $stmt->execute();
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         $id = $row['id'];
                         $title = $row['title'];
                         $recipe_active_time = $row['recipe_active_time'];
