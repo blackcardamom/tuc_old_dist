@@ -57,7 +57,7 @@
     <div class="index_blog_wrapper">
         <h2 class="recent_blog_title">Recent blogposts</h2>
         <?php
-            $query = "SELECT * FROM MOCK_BLOGS ORDER BY intro DESC LIMIT 5";
+            $query = "SELECT * FROM blogposts ORDER BY intro DESC LIMIT 5";
             $stmt = $pdo_conn->prepare($query);
             if (!$stmt->execute()) {
                 echo "<h2>We are having technical issues, no blogposts are currently available.</h2>";
