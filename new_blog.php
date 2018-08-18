@@ -2,17 +2,18 @@
     $titleSuffix=" - New blog";
     $meta_index = false;
     include_once 'header.php';
-    include_once 'includes/conn.inc.php';
+    include_once 'includes/pdo.inc.php';
     include_once 'includes/base_assumptions.inc.php';
 
     $sql = "SELECT `AUTO_INCREMENT`
             FROM  INFORMATION_SCHEMA.TABLES
-            WHERE TABLE_SCHEMA = '$dbName'
+            WHERE TABLE_SCHEMA = :dbName
             AND   TABLE_NAME   = 'blogposts';";
 
-    $result = mysqli_query($conn, $sql);
-    $resultCheck = mysqli_num_rows($result);
-    $nextID = mysqli_fetch_assoc($result)['AUTO_INCREMENT'];
+    $stmt = $pdo_conn->prepare($sql);
+    $stmt->bindValue(':dbName', $dbName);
+    $stmt->execute();
+    $nextID = $stmt->fetch(PDO::FETCH_ASSOC)['AUTO_INCREMENT'];
 ?>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
