@@ -1,18 +1,23 @@
 <?php
+    include_once 'pdo.inc.php';
     include_once 'conn.inc.php';
 
-    // Returns 1 if user exists otherwise returns 0
+    // Returns true if user exists otherwise returns false
+    // If the statement fails to prepare then we return -1
     function userExists($uid) {
-        $conn = $GLOBALS['conn'];
-        $sql = "SELECT * FROM users WHERE uid=?";
-        $stmt = mysqli_stmt_init($conn);
-        if (!mysqli_stmt_prepare($stmt,$sql)) {
+        $pdo_conn = $GLOBALS['pdo_conn'];
+        $sql = "SELECT * FROM users WHERE uid=:uid";
+        if ( !($stmt = $pdo_conn->prepare($sql)) ) {
             echo "SQL statement failed to prepare";
+            return -1;
         } else {
-            mysqli_stmt_bind_param($stmt,'s',$uid);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-            return mysqli_num_rows($result);
+            $stmt->bindValue(':uid',$uid);
+            $stmt->execute();
+            if(!($result = $stmt->fetch())) {
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 
@@ -20,18 +25,19 @@
     // Returns 1 if credentials agree with an entry in the database
     // Otherwise returns 0
     function checkCredentials($uid, $pwd) {
-        $conn = $GLOBALS['conn'];
-        if (userExists($uid)) {
-            $sql = "SELECT pwd FROM users WHERE uid=?";
-            $stmt = mysqli_stmt_init($conn);
-            if (!mysqli_stmt_prepare($stmt,$sql)) {
+        $pdo_conn = $GLOBALS['pdo_conn'];
+        $uidExists = userExists($uid);
+        if ($uidExists === -1) {
+            return -1;
+        } elseif ($uidExists) {
+            $sql = "SELECT pwd FROM users WHERE uid=:uid";
+            if ( !($stmt = $pdo_conn->prepare($sql)) ) {
                 echo "SQL statement failed to prepare";
+                return -1;
             } else {
-                mysqli_stmt_bind_param($stmt,'s',$uid);
-                mysqli_stmt_execute($stmt);
-                $result = mysqli_stmt_get_result($stmt);
-                $row = mysqli_fetch_assoc($result);
-                $server_pwd_response = $row['pwd'];
+                $stmt->bindValue(':uid',$uid);
+                $stmt->execute();
+                $server_pwd_response = $stmt->fetch(PDO::FETCH_ASSOC)['pwd'];
                 return password_verify($pwd, $server_pwd_response);
             }
         } else {
