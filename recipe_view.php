@@ -37,6 +37,7 @@
     $meta_iscontent = 1;
     $meta_image = $intro_img;
     $meta_url = $website_root ."/recipe_view.php?id=" . htmlspecialchars($_GET['id']);
+    $meta_jsonmarkup = "recipe";
     include_once 'header.php';
 ?>
 

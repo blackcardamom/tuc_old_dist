@@ -14,7 +14,11 @@
     if( !isset($meta_index) ) {
         $meta_index = true;
     }
+    if(!isset($meta_jsonmarkup)) {
+        $meta_jsonmarkup = false;
+    }
     include_once 'includes/base_assumptions.inc.php';
+    include_once 'includes/json_markup.inc.php';
  ?>
 
 <!DOCTYPE html>
@@ -43,6 +47,13 @@
         <!-- Robots tags -->
         <?php if(!$meta_index) : ?>
             <meta property="robots" content="noindex">
+        <?php endif; ?>
+
+        <!-- Structured data markup -->
+        <?php if($meta_jsonmarkup) :?>
+            <script type="application/ld+json">
+                <?= markupRecipeJSON($_GET['id']) ?>
+            </script>
         <?php endif; ?>
     </head>
 
