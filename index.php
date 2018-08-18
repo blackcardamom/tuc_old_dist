@@ -40,9 +40,9 @@
                                 <div class='feature_card_img'><a href='$website_root/recipe_view.php?id=$id'><img src='$feature_img' alt='$title'></a></div>
                                 <div class='feature_card_text'>
                                     <h2><a href='$website_root/recipe_view.php?id=$id'>$title</a></h2>
-                                    <p style='line-height:1.5em;'><span id='no_break'><i class='fas fa-clock'></i> $recipe_active_time &nbsp;&nbsp;</span>
-                                        <span id='no_break'><i class='fas fa-bed' title='Waiting time'></i> $recipe_wait_time &nbsp;&nbsp;</span>
-                                        <span id='no_break'><i class='fas fa-utensils'></i> $recipe_serves</span></p>
+                                    <p style='line-height:1.5em;'><span class='no_break'><i class='fas fa-clock'></i> $recipe_active_time &nbsp;&nbsp;</span>
+                                        <span class='no_break'><i class='fas fa-bed' title='Waiting time'></i> $recipe_wait_time &nbsp;&nbsp;</span>
+                                        <span class='no_break'><i class='fas fa-utensils'></i> $recipe_serves</span></p>
                                     $intro_html
                                 </div>
                             </div>";
