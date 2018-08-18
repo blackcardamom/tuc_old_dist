@@ -48,7 +48,7 @@
         $stmt->execute();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $id = $row['id'];
-            $title = $row['title'];$row = mysqli_fetch_assoc($result)
+            $title = $row['title'];
             $recipe_active_time = $row['recipe_active_time'];
             $recipe_wait_time = $row['recipe_wait_time'];
             $recipe_serves = $row['recipe_serves'];
