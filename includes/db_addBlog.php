@@ -1,5 +1,6 @@
 <?php
     include_once 'conn.inc.php';
+    include_once 'pdo.inc.php';
     include_once 'admin_validate.inc.php';
     include_once 'parsedown/Parsedown.php';
     include_once 'base_assumptions.inc.php';
@@ -60,17 +61,11 @@
 
     // Get list of acceptable keys
 
-    $sql = "SELECT COLUMN_NAME FROM information_schema.columns WHERE table_schema='$dbName' AND table_name='blogposts'";
-    $result = mysqli_query($conn, $sql);
-    $resultCheck = mysqli_num_rows($result);
-    if($resultCheck == 0) {
-        echo "No acceptable keys returned from datbase";
-    } else {
-        $acceptableKeys = Array();
-        while ($row = mysqli_fetch_assoc($result)) {
-            array_push($acceptableKeys, $row['COLUMN_NAME']);
-        }
-    }
+    $sql = "SELECT COLUMN_NAME FROM information_schema.columns WHERE table_schema=:dbName AND table_name='blogposts'";
+    $stmt = $pdo_conn->prepare($sql);
+    $stmt->bindValue(':dbName',$dbName);
+    $stmt->execute();
+    $acceptableKeys = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
     // Make sure all keys are acceptable
 
