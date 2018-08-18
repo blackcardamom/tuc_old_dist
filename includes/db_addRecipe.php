@@ -2,7 +2,7 @@
     include_once 'conn.inc.php';
     include_once 'admin_validate.inc.php';
     include_once 'parsedown/Parsedown.php';
-    include_once 'base_assumptions.php';
+    include_once 'base_assumptions.inc.php';
 
     function makeValuesReferenced(&$arr){
         $refs = array();
