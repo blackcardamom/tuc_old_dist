@@ -322,6 +322,10 @@ span.blog_date_published {
   background-color : white;
 }
 
+.about_content p{
+    padding-right: 1%;
+}
+
 .about_img {
   display          : block;
   width            : 30%;
