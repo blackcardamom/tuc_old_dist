@@ -69,7 +69,7 @@
     <p style="line-height:1.5em;"><span class='no_break'><i class="fas fa-clock" title="Acitve time"></i> <?= $recipe_active_time ?> &nbsp;&nbsp;</span>
         <span class='no_break'><i class="fas fa-bed" title="Waiting time"></i> <?= $recipe_wait_time ?> &nbsp;&nbsp;</span>
         <span class='no_break'><i class="fas fa-utensils" title="Serving size"></i> <?= $recipe_serves ?> &nbsp;&nbsp;</span>
-        <br id="mobile_linebreak"><span id='no_break'>
+        <br id="mobile_linebreak"><span class='no_break'>
         <a id="fbBtn"><i class="fab fa-facebook button"title="Share to Facebook"></i></a> &nbsp;&nbsp;
         <a href="<?= $social_twtr ?>"><i class="fab fa-twitter button" title="Share to Twitter"></i></a> &nbsp;&nbsp;
         <a href="<?= $social_pnt ?>"><i class="fab fa-pinterest button" title="Share to Pinterest"></i></a> &nbsp;&nbsp;
