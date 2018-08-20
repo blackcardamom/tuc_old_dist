@@ -48,7 +48,8 @@
     $data['method_html']=$Parsedown->text($_POST['method_md']);
 
     $newURL_enc = rawurlencode($website_root."/recipe_view?id=".$data['nextID']);
-    $data['social_twtr']="http://twitter.com/home?status=" . rawurlencode("Check out this ".$data['title']." on the Ugly Croissant! ") . $newURL_enc;
+    //$data['social_twtr']="http://twitter.com/home?status=" . rawurlencode("Check out this ".$data['title']." on the Ugly Croissant! ") . $newURL_enc;
+    $data['social_twtr']="https://twitter.com/intent/tweet?text=". rawurlencode("Check out this ".$data['title']." on the Ugly Croissant")."&url=" .$newURL_enc;
     $data['social_pnt']="http://pinterest.com/pin/create/link/?url=" . $newURL_enc;
     $data['social_snoo']="http://www.reddit.com/submit?url=" . $newURL_enc ."&title=" . rawurlencode("Check out this ".$data['title']);
 
@@ -85,7 +86,7 @@
 
     //Now we can prepare an SQL statement to input the recipe into the database
 
-    $sql = "INSERT into RECIPES (";
+    $sql = "INSERT into recipes (";
     foreach($keys as $key) {
         $sql = $sql.$key.", ";
     }
@@ -102,7 +103,7 @@
     } else {
         // Bind Paramaters
         foreach($keys as $key) {
-            $stmt->bindValue($key,$data[$key]);
+            $stmt->bindValue(":".$key,$data[$key]);
         }
         // Submit new recipe
         $stmt->execute();
