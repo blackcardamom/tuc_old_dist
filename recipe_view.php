@@ -41,26 +41,6 @@
     include_once 'header.php';
 ?>
 
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId            : '1079304678904325',
-      autoLogAppEvents : true,
-      xfbml            : true,
-      version          : 'v3.1'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
-
 <div class="recipe_intro">
     <div class="recipe_intro_img">
         <img src="<?= $intro_img ?>" alt="<?=$title?>">
@@ -70,7 +50,7 @@
         <span class='no_break'><i class="fas fa-bed" title="Waiting time"></i> <?= $recipe_wait_time ?> &nbsp;&nbsp;</span>
         <span class='no_break'><i class="fas fa-utensils" title="Serving size"></i> <?= $recipe_serves ?> &nbsp;&nbsp;</span>
         <br id="mobile_linebreak"><span class='no_break'>
-        <a id="fbBtn"><i class="fab fa-facebook button"title="Share to Facebook"></i></a> &nbsp;&nbsp;
+        <a href="<?= $social_fb ?>"><i class="fab fa-facebook button" title="Share to Facebook"></i></a> &nbsp;&nbsp;
         <a href="<?= $social_twtr ?>"><i class="fab fa-twitter button" title="Share to Twitter"></i></a> &nbsp;&nbsp;
         <a href="<?= $social_pnt ?>"><i class="fab fa-pinterest button" title="Share to Pinterest"></i></a> &nbsp;&nbsp;
         <a href="<?= $social_snoo ?>"><i class="fab fa-reddit button" title="Share to Reddit"></i></a> &nbsp;&nbsp;
@@ -90,15 +70,5 @@
         <?= $method_html ?>
     </div>
 </div>
-
-<script>
-document.getElementById('fbBtn').onclick = function() {
-  FB.ui({
-    method: 'share',
-    display: 'popup',
-    href: window.location.href,
-  }, function(response){});
-}
-</script>
 
 <?php include_once 'footer.php'; ?>
