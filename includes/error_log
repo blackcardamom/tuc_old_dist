@@ -1,0 +1,10 @@
+[21-Aug-2018 13:28:27 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'vwmnpccl_webaccess'@'quedex.pacwebhosting.co.uk' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/pdo.inc.php:14
+Stack trace:
+#0 /home/vwmnpccl/public_html/test_files_please_ignore/includes/pdo.inc.php(14): PDO->__construct('mysql:host=www....', 'vwmnpccl_webacc...', NULL)
+#1 {main}
+  thrown in /home/vwmnpccl/public_html/test_files_please_ignore/includes/pdo.inc.php on line 14
+[21-Aug-2018 13:31:56 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'vwmnpccl_webaccess'@'quedex.pacwebhosting.co.uk' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/pdo.inc.php:14
+Stack trace:
+#0 /home/vwmnpccl/public_html/test_files_please_ignore/includes/pdo.inc.php(14): PDO->__construct('mysql:host=www....', 'vwmnpccl_webacc...', NULL)
+#1 {main}
+  thrown in /home/vwmnpccl/public_html/test_files_please_ignore/includes/pdo.inc.php on line 14
