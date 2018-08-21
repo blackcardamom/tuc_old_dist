@@ -44,10 +44,11 @@
     $Parsedown = new Parsedown();
     $data['content_html']=$Parsedown->text($_POST['content_md']);
 
-    $newURL_enc = rawurlencode($website_root."/recipe_view?id=".$data['nextID']);
-    $data['social_twtr']="http://twitter.com/home?status=" . rawurlencode("Check out this blogpost, '".$data['title']."', on The Ugly Croissant! ") . $newURL_enc;
-    $data['social_pnt']="http://pinterest.com/pin/create/link/?url=" . $newURL_enc;
-    $data['social_snoo']="http://www.reddit.com/submit?url=" . $newURL_enc ."&title=" . rawurlencode("Check out this blogpost - '".$data['title']."'");
+    $newURL_enc = rawurlencode($website_root."/blogpost_view?id=".$data['nextID']);
+    $data['social_fb'] = "https://www.facebook.com/sharer/sharer.php?u=".$newURL_enc;
+    $data['social_twtr']="https://twitter.com/intent/tweet?text=". rawurlencode("Check out blogpost '".$data['title']."', on the Ugly Croissant")."&url=" .$newURL_enc;
+    $data['social_pnt']="http://pinterest.com/pin/create/link/?url=" . $newURL_enc . "&media=" . rawurlencode($website_root."/".$data['intro_img']);
+    $data['social_snoo']="http://www.reddit.com/submit?url=" . $newURL_enc ."&title=" . rawurlencode("Check out this blogpost -  '".$data['title']."'");
 
     unset($data['uid']);
     unset($data['pwd']);
