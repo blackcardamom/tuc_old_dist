@@ -41,29 +41,121 @@
 
     // Setup default values for unspecified paramaters
 
-    $_GET['page'] = (empty($_GET['page'])) ? 1 : $_GET['page'];
-    $_GET['limit'] = (empty($_GET['limit'])) ? 5 : $_GET['limit'];
-    $_GET['order'] = (empty($_GET['order'])) ? 0 : $_GET['order'];
+    $_GET['page'] = (!isset($_GET['page'])) ? 1 : $_GET['page'];
+    $_GET['limit'] = (!isset($_GET['limit'])) ? 5 : $_GET['limit'];
+    $_GET['order'] = (!isset($_GET['order'])) ? 0 : $_GET['order'];
+    $_GET['show'] = (!isset($_GET['show'])) ? 'all' : $_GET['show'];
+    $_GET['tag'] = (!isset($_GET['tag'])) ? array() : $_GET['tag'];
 
-    switch ($_GET['order']) {
-        case 0:
-            $query = "SELECT * FROM recipes ORDER BY date_published DESC";
+    // Setting some flags to help construct the query and sanitizing 'show'
+
+    switch($_GET['show']) {
+        case 'all':
+            $searchRecipes = true;
+            $searchBlogposts = true;
             break;
-        case 1:
-            $query = "SELECT * FROM recipes ORDER BY date_published ASC";
+        case 'recipes':
+            $searchRecipes = true;
+            $searchBlogposts = false;
             break;
-        case 2:
-            $query = "SELECT * FROM recipes ORDER BY title ASC";
-            break;
-        case 3:
-            $query = "SELECT * FROM recipes ORDER BY title DESC";
+        case 'blogposts':
+            $searchRecipes = false;
+            $searchBlogposts = true;
             break;
         default:
             echo "<h1 style='text-align:center; background-color:white; margin:0; padding:30px;'>Sorry we are currently experiencing technical issues.</h1>";
             exit;
     }
 
-    $paginator = new Paginator($pdo_conn,$query);
+    // Let's construct the search query
+    $master_query = "";
+
+    if($searchRecipes) {
+        // Build recipe query
+        $master_query .= "SELECT 'recipes' AS origin_table, r.id, r.title, r.intro_html, r.date_published, r.recipe_active_time, r.recipe_wait_time, r.recipe_serves, r.card_img
+                          FROM MOCK_recipes_tagmap tm, MOCK_DATA r, tags t
+                          WHERE tm.tag_id = t.id ";
+
+        // We only want to add this clause if we have tags
+        if(!empty($_GET['tag'])) {
+            $master_query .= "AND (t.name IN (";
+            $first_tag = true;
+            // Loop through tags and add placeholders
+            foreach($_GET['tag'] as $num => $tag) {
+                if($first_tag) {
+                    $master_query .= ":recipe_tag".$num;
+                    $first_tag = false;
+                } else {
+                    $master_query .= ", :recipe_tag".$num;
+                }
+            }
+            $master_query .=")) ";
+        }
+
+        $master_query .=  "AND r.id = tm.recipe_id GROUP BY r.id";
+    }
+    if($searchRecipes && $searchBlogposts) {
+        // If we're searching both tables then we need to union the results
+        $master_query .= " UNION ";
+    }
+    if($searchBlogposts) {
+        // Build blogpost query
+        $master_query .= "SELECT 'blogposts' AS origin_table, b.id, b.title, b.intro, b.date_published, '', '', '', ''
+                          FROM MOCK_blogposts_tagmap tm, MOCK_BLOGS b, tags t
+                          WHERE tm.tag_id = t.id ";
+
+        // We only want to add this clause if we have tags
+        if(!empty($_GET['tag'])) {
+            $master_query .= "AND (t.name IN (";
+            $first_tag = true;
+            // Loop through tags and add placeholders
+            foreach($_GET['tag'] as $num => $tag) {
+                if($first_tag) {
+                    $master_query .= ":blogpost_tag".$num;
+                    $first_tag = false;
+                } else {
+                    $master_query .= ", :blogpost_tag".$num;
+                }
+            }
+            $master_query .=")) ";
+        }
+
+        $master_query .= "AND b.id = tm.blogpost_id GROUP BY b.id";
+    }
+
+    // Now we need to add the order to sort the posts
+
+    switch ($_GET['order']) {
+        case 0:
+            $master_query .= " ORDER BY date_published DESC";
+            break;
+        case 1:
+            $master_query .= " ORDER BY date_published ASC";
+            break;
+        case 2:
+            $master_query .= " ORDER BY title ASC";
+            break;
+        case 3:
+            $master_query .= " ORDER BY title DESC";
+            break;
+        default:
+            echo "<h1 style='text-align:center; background-color:white; margin:0; padding:30px;'>Sorry we are currently experiencing technical issues.</h1>";
+            exit;
+    }
+
+    echo $master_query;
+
+
+    // Now we need the callback function that binds the actual value of the tags to the prepared statement
+    function bindTags($stmt) {
+        foreach($_GET['tag'] as $num => $tag) {
+            $stmt->bindValue(':recipe_tag'.$num,$_GET['tag'][$num]);
+            $stmt->bindValue(':blogpost_tag'.$num,$_GET['tag'][$num]);
+        }
+    }
+
+
+    $paginator = new Paginator($pdo_conn,$master_query, 'bindTags');
     $paginator->updatePage($_GET['page'],$_GET['limit']);
 
 ?>
@@ -98,6 +190,8 @@
     <div class="search_results_output">
         <?php
         while($row = $paginator->fetchNextRow()) {
+            echo "Hi";
+            print_r($row);
             $id = $row['id'];
             $title = $row['title'];
             $recipe_active_time = $row['recipe_active_time'];
