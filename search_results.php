@@ -8,6 +8,28 @@
     SELECT 'blogposts' AS origin_table, id, title, intro, date_published, '','','','' FROM blogposts
     ORDER BY date_published DESC
     LIMIT 1 OFFSET 2
+
+    Tag query
+
+    SELECT 'recipes' AS origin_table, r.id, r.title, r.intro_html, r.date_published, r.recipe_active_time, r.recipe_wait_time, r.recipe_serves, r.card_img
+    FROM MOCK_recipes_tagmap tm, MOCK_DATA r, tags t
+    WHERE tm.tag_id = t.id
+    AND (t.name IN ('bread', 'cake'))
+    AND r.id = tm.recipe_id
+    GROUP BY r.id
+
+    UNION
+
+    SELECT 'blogposts' AS origin_table, b.id, b.title, b.intro, b.date_published, '', '', '', ''
+    FROM MOCK_blogposts_tagmap tm, MOCK_BLOGS b, tags t
+    WHERE tm.tag_id = t.id
+    AND (t.name IN ('bread', 'cake'))
+    AND b.id = tm.blogpost_id
+    GROUP BY b.id
+
+    ORDER BY date_published DESC
+    LIMIT 5 OFFSET 10
+
     */
 
     $selected = "recipes";
@@ -41,23 +63,9 @@
             exit;
     }
 
-    // SWITCH TO PDO IF ADDING SEARCH PARAMTERS
+    $paginator = new Paginator($pdo_conn,$query);
+    $paginator->updatePage($_GET['page'],$_GET['limit']);
 
-    $count_query = "SELECT COUNT(*) FROM recipes";
-    $stmt = $pdo_conn->query($count_query);
-    $stmt->execute();
-    $total_posts = $stmt->fetch()['COUNT(*)'];
-
-    if(!isset($total_posts)) {
-        echo "<h1 style='text-align:center; background-color:white; margin:0; padding:30px;'>Sorry we are currently experiencing technical issues.</h1>";
-        exit;
-    } elseif ($total_posts  == 0) {
-        echo "<h1 style='text-align:center; background-color:white; margin:0; padding:30px;'>Sorry we don't have any posts to show you.</h1>";
-        exit;
-    } else {
-        $paginator = new Paginator($pdo_conn,$query,$total_posts);
-        $paginator->updatePage($_GET['page'],$_GET['limit']);
-    }
 ?>
 
 
