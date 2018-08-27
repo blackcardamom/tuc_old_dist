@@ -51,12 +51,6 @@
 
     $searchRecipes = ($_GET['search'] === "all") || ($_GET['search'] === "recipes");
     $searchBlogposts = ($_GET['search'] === "all") || ($_GET['search'] === "blogposts");
-/*
-    if( !$searchRecipes & !$searchBlogposts) {
-        echo "<h1 style='text-align:center; background-color:white; margin:0; padding:30px;'>Sorry we are currently experiencing technical issues.</h1>";
-        exit;
-    }
-*/
     // Let's construct the search query
     $master_query = "";
 
