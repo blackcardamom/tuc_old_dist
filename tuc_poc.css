@@ -807,12 +807,34 @@ textarea.badResponse {
   border-right     : 2px solid var(--background-color);
   background-color : var(--main-color);
   grid-area        : search_results_sidebar;
+  color:var(--text-light);
+  padding: 2%;
 }
 
 .search_results_options {
   padding          : 0 2% 0 2%;
   background-color : white;
   grid-area        : search_results_options;
+}
+
+.search_results_showing{
+    margin-bottom:20px;
+
+}
+
+.search_results_filters {
+    ;
+}
+
+.search_results_filters span.active_filter {
+    background-color: var(--background-color-translucent);
+    padding: 5px;
+    line-height: 32px;
+    border-radius: 2px;
+}
+
+.search_results_filters span.inactive_filter {
+
 }
 
 .limit_select {

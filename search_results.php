@@ -44,41 +44,30 @@
     $_GET['page'] = (!isset($_GET['page'])) ? 1 : $_GET['page'];
     $_GET['limit'] = (!isset($_GET['limit'])) ? 5 : $_GET['limit'];
     $_GET['order'] = (!isset($_GET['order'])) ? 0 : $_GET['order'];
-    $_GET['show'] = (!isset($_GET['show'])) ? 'all' : $_GET['show'];
+    $_GET['search'] = (!isset($_GET['search'])) ? 'all' : $_GET['search'];
     $_GET['tag'] = (!isset($_GET['tag'])) ? array() : $_GET['tag'];
 
-    // Setting some flags to help construct the query and sanitizing 'show'
+    // Setting some flags to help construct the query and sanitizing 'search'
 
-    switch($_GET['show']) {
-        case 'all':
-            $searchRecipes = true;
-            $searchBlogposts = true;
-            break;
-        case 'recipes':
-            $searchRecipes = true;
-            $searchBlogposts = false;
-            break;
-        case 'blogposts':
-            $searchRecipes = false;
-            $searchBlogposts = true;
-            break;
-        default:
-            echo "<h1 style='text-align:center; background-color:white; margin:0; padding:30px;'>Sorry we are currently experiencing technical issues.</h1>";
-            exit;
+    $searchRecipes = ($_GET['search'] === "all") || ($_GET['search'] === "recipes");
+    $searchBlogposts = ($_GET['search'] === "all") || ($_GET['search'] === "blogposts");
+/*
+    if( !$searchRecipes & !$searchBlogposts) {
+        echo "<h1 style='text-align:center; background-color:white; margin:0; padding:30px;'>Sorry we are currently experiencing technical issues.</h1>";
+        exit;
     }
-
+*/
     // Let's construct the search query
     $master_query = "";
 
     if($searchRecipes) {
         // Build recipe query
-        $master_query .= "SELECT 'recipes' AS origin_table, r.id, r.title, r.intro_html, r.date_published, r.recipe_active_time, r.recipe_wait_time, r.recipe_serves, r.card_img
-                          FROM MOCK_recipes_tagmap tm, MOCK_DATA r, tags t
-                          WHERE tm.tag_id = t.id ";
+        $master_query .= "SELECT 'recipes' AS origin_table, r.id, r.title, r.intro_html AS intro, r.date_published, r.recipe_active_time, r.recipe_wait_time, r.recipe_serves, r.card_img
+                          FROM recipes_tagmap tm, MOCK_TABLE r, tags t ";
 
         // We only want to add this clause if we have tags
         if(!empty($_GET['tag'])) {
-            $master_query .= "AND (t.name IN (";
+            $master_query .= "WHERE tm.tag_id = t.id AND (t.name IN (";
             $first_tag = true;
             // Loop through tags and add placeholders
             foreach($_GET['tag'] as $num => $tag) {
@@ -89,10 +78,10 @@
                     $master_query .= ", :recipe_tag".$num;
                 }
             }
-            $master_query .=")) ";
+            $master_query .=")) AND r.id = tm.recipe_id ";
         }
 
-        $master_query .=  "AND r.id = tm.recipe_id GROUP BY r.id";
+        $master_query .=  "GROUP BY r.id";
     }
     if($searchRecipes && $searchBlogposts) {
         // If we're searching both tables then we need to union the results
@@ -100,13 +89,12 @@
     }
     if($searchBlogposts) {
         // Build blogpost query
-        $master_query .= "SELECT 'blogposts' AS origin_table, b.id, b.title, b.intro, b.date_published, '', '', '', ''
-                          FROM MOCK_blogposts_tagmap tm, MOCK_BLOGS b, tags t
-                          WHERE tm.tag_id = t.id ";
+        $master_query .= "SELECT 'blogposts' AS origin_table, b.id, b.title, b.intro AS intro, b.date_published,  '' AS recipe_active_time, '' AS recipe_wait_time, '' AS recipe_serves, '' AS card_img
+                          FROM blogposts_tagmap tm, MOCK_BLOGS b, tags t ";
 
         // We only want to add this clause if we have tags
         if(!empty($_GET['tag'])) {
-            $master_query .= "AND (t.name IN (";
+            $master_query .= "WHERE tm.tag_id = t.id AND (t.name IN (";
             $first_tag = true;
             // Loop through tags and add placeholders
             foreach($_GET['tag'] as $num => $tag) {
@@ -117,10 +105,10 @@
                     $master_query .= ", :blogpost_tag".$num;
                 }
             }
-            $master_query .=")) ";
+            $master_query .=")) AND b.id = tm.blogpost_id ";
         }
 
-        $master_query .= "AND b.id = tm.blogpost_id GROUP BY b.id";
+        $master_query .= "GROUP BY b.id";
     }
 
     // Now we need to add the order to sort the posts
@@ -143,26 +131,60 @@
             exit;
     }
 
-    echo $master_query;
-
 
     // Now we need the callback function that binds the actual value of the tags to the prepared statement
     function bindTags($stmt) {
         foreach($_GET['tag'] as $num => $tag) {
-            $stmt->bindValue(':recipe_tag'.$num,$_GET['tag'][$num]);
-            $stmt->bindValue(':blogpost_tag'.$num,$_GET['tag'][$num]);
+            if ($GLOBALS['searchRecipes']) {
+                $stmt->bindValue("recipe_tag".$num,$tag);
+            }
+            if ($GLOBALS['searchBlogposts']) {
+                $stmt->bindValue("blogpost_tag".$num,$tag);
+            }
         }
     }
 
+    // Now we pass this query onto our paginator
 
     $paginator = new Paginator($pdo_conn,$master_query, 'bindTags');
     $paginator->updatePage($_GET['page'],$_GET['limit']);
+
+    // We need a list of all possible tags and how many recipes have that tag in order to fill out the filters sidebar
+
+    $tag_query =   "SELECT a.tag_id, b.name, COUNT(*) FROM
+                    (SELECT 'recipes' AS tagging, tm_id,tag_id FROM recipes_tagmap UNION SELECT 'blogposts' AS tagging, tm_id,tag_id FROM blogposts_tagmap) a, tags b
+                    WHERE a.tag_id=b.id
+                    GROUP BY tag_id
+                    ORDER BY COUNT(*) DESC";
+    $tag_stmt = $pdo_conn->prepare($tag_query);
+    $tag_stmt->execute();
+
+    function addTagToQuery($name) {
+        $getCopy=$_GET;
+        array_push($getCopy["tag"],$name);
+        return http_build_query($getCopy);
+    }
 
 ?>
 
 
 <div class="search_results_grid-container">
     <div class="search_results_sidebar">
+        <div class="search_results_showing">
+            <strong>Showing: </strong><br>
+            <input type="checkbox" id="recipes_check" onclick="updateSearching()" name="recipes"<?= $searchRecipes ? "checked" : null ?>> Recipes <br>
+            <input type="checkbox" id="blogposts_check" onclick="updateSearching()" name="blogposts"<?= $searchBlogposts ? "checked" : null ?>> Blogposts
+        </div>
+        <div class="search_results_filters">
+            <strong>Filters: </strong><br>
+            <?php foreach($_GET['tag'] as $tag) : ?>
+                <span class="active_filter"><?= $tag ?></span>
+            <?endforeach; ?><br>
+            <?php while ($row = $tag_stmt->fetch(PDO::FETCH_ASSOC)) :
+                if (!in_array($row['name'], $_GET['tag'])) : ?>
+                <a href="?<?= addTagToQuery($row['name']) ?>"><span class="inactive_filter"><?= $row['name'] ." (".$row['COUNT(*)'].")" ?></span></a><br>
+            <?php endif; endwhile; ?>
+        </div>
     </div>
     <div class="search_results_options">
         <div class="limit_select">
@@ -190,32 +212,41 @@
     <div class="search_results_output">
         <?php
         while($row = $paginator->fetchNextRow()) {
-            echo "Hi";
-            print_r($row);
-            $id = $row['id'];
-            $title = $row['title'];
-            $recipe_active_time = $row['recipe_active_time'];
-            $recipe_wait_time = $row['recipe_wait_time'];
-            $recipe_serves = $row['recipe_serves'];
-            $intro_html = $row['intro_html'];
-            $card_img = $website_root . "/" . $row['card_img'];
+            if($row['origin_table'] === "recipes") {
+                $id = $row['id'];
+                $title = $row['title'];
+                $recipe_active_time = $row['recipe_active_time'];
+                $recipe_wait_time = $row['recipe_wait_time'];
+                $recipe_serves = $row['recipe_serves'];
+                $intro = $row['intro'];
+                $card_img = $website_root . "/" . $row['card_img'];
 
-            $recipe_card =
-            '<div class="post_card">
-                <div class="recipe_card_img"><a href="'. $website_root .'/recipe_view.php?id='.$id.'"><img src="'.$card_img.'" alt="'.$title.'"></a></div>
-                <div class="recipe_card_title_info">
-                    <a href="'. $website_root .'/recipe_view.php?id='.$id.'"><h3>'.$title.'</h3></a>
-                    <p><span class="no_break"><i class="fas fa-clock"></i> '.$recipe_active_time.' &nbsp;&nbsp; </span>
-                    <span class="no_break"><i class="fas fa-bed"></i> '.$recipe_wait_time.' &nbsp;&nbsp; </span>
-                    <span class="no_break"><i class="fas fa-utensils"></i> '.$recipe_serves.' </span></p>
-                </div>
-                <div class="recipe_card_text">'.$intro_html.'</div>
-            </div>';
+                $recipe_card =
+                '<div class="post_card">
+                    <div class="recipe_card_img"><a href="'. $website_root .'/recipe_view.php?id='.$id.'"><img src="'.$card_img.'" alt="'.$title.'"></a></div>
+                    <div class="recipe_card_title_info">
+                        <a href="'. $website_root .'/recipe_view.php?id='.$id.'"><h3>'.$title.'</h3></a>
+                        <p><span class="no_break"><i class="fas fa-clock"></i> '.$recipe_active_time.' &nbsp;&nbsp; </span>
+                        <span class="no_break"><i class="fas fa-bed"></i> '.$recipe_wait_time.' &nbsp;&nbsp; </span>
+                        <span class="no_break"><i class="fas fa-utensils"></i> '.$recipe_serves.' </span></p>
+                    </div>
+                    <div class="recipe_card_text">'.$intro.'</div>
+                </div>';
 
-            echo $recipe_card;
+                echo $recipe_card;
+            } elseif($row['origin_table'] === "blogposts") {
+                $post_card = "
+                <div class='post_card'>
+                    <h3><a href='$website_root/blogpost_view.php?id=".$row['id']."'>".$row['title']."</a></h3>
+                    <p><span class='blog_date_published'>". date('jS F Y.',strtotime($row['date_published'])) ."</span> ".$row['intro']."</p>
+                    <div class='blog_link'><a href='$website_root/blogpost_view.php?id=".$row['id']."'><i class='fas fa-plus-circle'></i> Read more...</a></div>
+                </div>";
+                echo $post_card;
+            }
         }
         ?>
     </div>
+
     <div class="search_results_pagination">
         <ul class = "horizontal_list pagination_list">
             <li class="pagination_nav_arrow"><a href="?<?= $paginator->getFirstPageQuery()?>"><i class="fas fa-angle-double-left"></i></a></li>
@@ -231,21 +262,78 @@
 
 <script>
 
-// From https://stackoverflow.com/a/5158301
-function getParameterByName(name) {
-    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+console.log(queryToObject(window.location.search));
+
+function queryToObject(query) {
+    var outObj = {};
+    var expr = new RegExp('[^?&]+', 'g');
+    while( match = expr.exec(query) ) {
+        // We have found a key-value pair in the query so we split and decode it
+        var splitMatch = match[0].split("=");
+        var key = decodeURIComponent(splitMatch[0]);
+        var value = decodeURIComponent(splitMatch[1]);
+        // We need to check if its an array item
+        var bracketExpr = new RegExp("\\[.*\\]",'g');
+        if(bracketExpr.test(key)) {
+            // We need to figure out the name of the array
+            var arrayName = key.slice(0,key.search(bracketExpr));
+            // We need to check the array exists
+            if (!Array.isArray(outObj[arrayName])) {
+                outObj[arrayName] = [];
+            }
+            // Now we need to find what position in the array we are
+            var subkey = key.match(bracketExpr)[0].slice(1,-1)
+            // If there isn't a subkey (i.e. arrayName[]=value) then we just push to the array
+            if (subkey== "") {
+                outObj[arrayName].push(value);
+            } else {
+                outObj[arrayName][subkey]=value;
+            }
+        } else {
+            // If its not an array item we just add it to the object
+            outObj[key]=value;
+        }
+    }
+    return outObj;
+}
+
+function objectToQuery(obj) {
+    var outStr = "?";
+    var first_loop = true;
+    for(var key in obj) {
+        if(Array.isArray(obj[key])) {
+            for(var subkey in obj[key]) {
+                outStr += key+"["+subkey+"]="+encodeURIComponent(obj[key][subkey])+"&";
+            }
+        } else {
+            outStr += key+"="+encodeURIComponent(obj[key])+"&";
+        }
+    }
+    return outStr.slice(0,-1);
 }
 
 function updateOrder() {
     var dropdown = document.getElementById("order_dropdown");
     var newOrder = dropdown.options[dropdown.selectedIndex].value;
-    var page = getParameterByName('page');
-    var limit = getParameterByName('limit');
-    if (page == null) { page = 1; }
-    if (limit == null) { limit = 5; }
-    var query = "?page=" + page + "&limit=" + limit + "&order=" + newOrder;
-    document.location.search = query;
+    var queryObj = queryToObject(window.location.search);
+    queryObj['order'] = newOrder;
+    window.location.search = objectToQuery(queryObj);
+}
+
+function updateSearching() {
+    var queryObj = queryToObject(window.location.search);
+    var recipes = document.getElementById("recipes_check").checked;
+    var blogposts = document.getElementById("blogposts_check").checked
+    if (recipes && blogposts) {
+        queryObj['search'] = 'all';
+    } else if (recipes) {
+        queryObj['search'] = 'recipes';
+    } else if (blogposts) {
+        queryObj['search'] = 'blogposts';
+    } else{
+        queryObj['search'] = 'none';
+    }
+    window.location.search = objectToQuery(queryObj);
 }
 
 </script>

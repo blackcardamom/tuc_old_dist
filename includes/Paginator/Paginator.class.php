@@ -144,4 +144,8 @@ class Paginator {
         return http_build_query($getCopy);
     }
 
+    public function getTotalItems() {
+        return $this->total_items;
+    }
+
 }
