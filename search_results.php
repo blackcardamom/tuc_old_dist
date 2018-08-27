@@ -145,6 +145,8 @@
 
     // We need a list of all possible tags and how many recipes have that tag in order to fill out the filters sidebar
 
+    // NEED TO CHANGE TAGS BASED ON CURRENT SEARCHING
+
     $tag_query =   "SELECT a.tag_id, b.name, COUNT(*) FROM
                     (SELECT 'recipes' AS tagging, tm_id,tag_id FROM recipes_tagmap UNION SELECT 'blogposts' AS tagging, tm_id,tag_id FROM blogposts_tagmap) a, tags b
                     WHERE a.tag_id=b.id
