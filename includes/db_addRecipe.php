@@ -108,5 +108,5 @@
         // Submit new recipe
         $stmt->execute();
         // Return to original page for success message and link to new recipe
-        header("Location: $website_root/new_recipe.php?id=".$nextID);
+        header("Location: $website_root/recipe_view.php?id=".$nextID);
     }

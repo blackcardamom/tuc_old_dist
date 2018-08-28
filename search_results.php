@@ -147,13 +147,26 @@
 
     // NEED TO CHANGE TAGS BASED ON CURRENT SEARCHING
 
+
+    $tag_table = "";
+    if ($searchRecipes) {
+        $tag_table .= "SELECT 'recipes' AS tagging, tm_id,tag_id FROM recipes_tagmap";
+    }
+    if ($searchRecipes && $searchBlogposts) {
+        $tag_table .= " UNION ";
+    }
+    if ($searchBlogposts) {
+        $tag_table .= "SELECT 'blogposts' AS tagging, tm_id,tag_id FROM blogposts_tagmap";
+    }
     $tag_query =   "SELECT a.tag_id, b.name, COUNT(*) FROM
-                    (SELECT 'recipes' AS tagging, tm_id,tag_id FROM recipes_tagmap UNION SELECT 'blogposts' AS tagging, tm_id,tag_id FROM blogposts_tagmap) a, tags b
+                    (".$tag_table.") a, tags b
                     WHERE a.tag_id=b.id
                     GROUP BY tag_id
                     ORDER BY COUNT(*) DESC";
     $tag_stmt = $pdo_conn->prepare($tag_query);
     $tag_stmt->execute();
+
+    // Helpful functions to create user interface
 
     function addTagToQuery($name) {
         $getCopy=$_GET;
@@ -161,25 +174,46 @@
         return http_build_query($getCopy);
     }
 
+    function removeTagFromQuery($index) {
+        $getCopy=$_GET;
+        array_splice($getCopy['tag'],$index,1);
+        return http_build_query($getCopy);
+    }
+
+    // Now we just need a session variable to keep the filters open when adding tags in mobile
+    if(!isset($_COOKIE['sidebar_open'])) {
+        setcookie('sidebar_open','false',time() + 3600, "/");
+    }
+
 ?>
 
 
-<div class="search_results_grid-container">
+<div class="search_results_grid-container<?= $_COOKIE['sidebar_open']==="true" ? " sidebar_open" : "" ?>" id="search_grid">
     <div class="search_results_sidebar">
+        <div class="search_results_sidebar_title" onclick="toggleSearchSidebar()" id="search_results_sidebar_title">
+            <h3>Refine search <i class="fas fa-caret-<?= $_COOKIE['sidebar_open']==="true" ? "up" : "down" ?>" id="sidebar_toggle"></i> </h3>
+        </div>
         <div class="search_results_showing">
             <strong>Showing: </strong><br>
             <input type="checkbox" id="recipes_check" onclick="updateSearching()" name="recipes"<?= $searchRecipes ? "checked" : null ?>> Recipes <br>
             <input type="checkbox" id="blogposts_check" onclick="updateSearching()" name="blogposts"<?= $searchBlogposts ? "checked" : null ?>> Blogposts
         </div>
+        <strong>Filters: </strong><br>
         <div class="search_results_filters">
-            <strong>Filters: </strong><br>
-            <?php foreach($_GET['tag'] as $tag) : ?>
-                <span class="active_filter"><?= $tag ?></span>
-            <?endforeach; ?><br>
+            <div class="search_results_active_filters">
+                <?php foreach($_GET['tag'] as $index => $tag) : ?>
+                    <div class="active_filter">
+                        <?= $tag ?>
+                        <a href="?<?= removeTagFromQuery($index) ?>"><i class="fas fa-times-circle"></i></a>
+                    </div>
+                <?endforeach; ?><br>
+            </div>
+            <div class="search_results_inactive_filters">
             <?php while ($row = $tag_stmt->fetch(PDO::FETCH_ASSOC)) :
                 if (!in_array($row['name'], $_GET['tag'])) : ?>
-                <a href="?<?= addTagToQuery($row['name']) ?>"><span class="inactive_filter"><?= $row['name'] ." (".$row['COUNT(*)'].")" ?></span></a><br>
+                <a href="?<?= addTagToQuery($row['name']) ?>"><span class="inactive_filter"><?= $row['name'] ." (".$row['COUNT(*)'].")" ?></span></a>
             <?php endif; endwhile; ?>
+            </div>
         </div>
     </div>
     <div class="search_results_options">
@@ -235,7 +269,7 @@
                 <div class='post_card'>
                     <h3><a href='$website_root/blogpost_view.php?id=".$row['id']."'>".$row['title']."</a></h3>
                     <p><span class='blog_date_published'>". date('jS F Y.',strtotime($row['date_published'])) ."</span> ".$row['intro']."</p>
-                    <div class='blog_link'><a href='$website_root/blogpost_view.php?id=".$row['id']."'><i class='fas fa-plus-circle'></i> Read more...</a></div>
+                    <div class='blog_link'><a href='$website_root/bloindex.phpgpost_view.php?id=".$row['id']."'><i class='fas fa-plus-circle'></i> Read more...</a></div>
                 </div>";
                 echo $post_card;
             }
@@ -330,6 +364,28 @@ function updateSearching() {
         queryObj['search'] = 'none';
     }
     window.location.search = objectToQuery(queryObj);
+}
+
+// setCookie taken from https://www.w3schools.com/js/js_cookies.asp
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function toggleSearchSidebar() {
+    var x = document.getElementById("search_grid");
+    var y = document.getElementById("sidebar_toggle");
+    if (x.className === "search_results_grid-container") {
+        x.className += " sidebar_open";
+        y.className = "fas fa-caret-up";
+        setCookie("sidebar_open","true",1)
+    } else {
+        x.className = "search_results_grid-container";
+        y.className = "fas fa-caret-down";
+        setCookie("sidebar_open","false",1)
+    }
 }
 
 </script>

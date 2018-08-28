@@ -105,5 +105,5 @@
         // Submit new blog
         $stmt->execute();
         // Return to original page for success message and link to new blog
-        header("Location: $website_root/new_blog.php?id=".$nextID);
+        header("Location: $website_root/blogpost_view.php?id=".$nextID);
     }
