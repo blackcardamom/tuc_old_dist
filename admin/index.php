@@ -3,6 +3,12 @@
     include_once '../includes/base_assumptions.inc.php';
     include_once '../includes/admin_validate.inc.php';
 
+    session_start();
+    if (isset($_SESSION['uid'])) {
+        header("LocatioN: recipes.php");
+        exit;
+    }
+
     $goodLogin = isset($_POST['submit']) && checkCredentials($_POST['uid'],$_POST['pwd']);
 ?>
 
@@ -25,9 +31,11 @@
             </form>
         </div>
     </div>
-<?php else : ?>
-    <!-- Show admin index page -->
-    <?php include_once 'header.php'; ?>
-    Login
-<?php endif; ?>
-<?php include_once 'footer.php'; ?>
+<?php
+    else :
+
+        $_SESSION['uid'] = $_POST['uid'];
+        header("Location: recipes.php");
+    endif;
+    include_once 'footer.php';
+?>
