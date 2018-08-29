@@ -50,8 +50,8 @@ body#loginBody {
   text-align : center;
 }
 
-.login_form p{
-    color:var(--text-light);
+.login_form p {
+  color : var(--text-light);
 }
 
 .login_form input {
