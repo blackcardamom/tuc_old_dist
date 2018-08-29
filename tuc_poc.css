@@ -73,6 +73,26 @@ a i.button {
   padding:2%;
 }
 
+.recipe_main_post_wrapper .post_card:last-child {
+    border-bottom: 2px solid black;
+}
+
+.recipe_main_show_all{
+    display:block;
+    float:left;
+    width:100%;
+    background-color:white;
+    text-align: right;
+}
+
+.recipe_main_show_all h3{
+    margin:0.5em 2em;
+}
+
+.recipe_main_show_all h3 a{
+    color:inherit;
+}
+
 img.banner {
   display : block;
   width   : 100%;
