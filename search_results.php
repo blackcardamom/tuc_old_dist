@@ -136,8 +136,6 @@
             exit;
     }
 
-    echo $master_query;
-
     // Now we need the callback function that binds the actual value of the tags to the prepared statement
     function bindTags($stmt) {
         foreach($_GET['tag'] as $num => $tag) {
