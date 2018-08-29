@@ -52,6 +52,7 @@ class Paginator {
         $this->stmt->bindValue(':paginator_offset',$offset, PDO::PARAM_INT);
         // Execute query
         return $this->stmt->execute();
+        $this->stmt->debugDumpParams();
     }
 
     // Get next row from the data obtained by updatePage()

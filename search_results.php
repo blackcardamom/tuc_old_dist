@@ -32,9 +32,6 @@
 
     */
 
-    $selected = "recipes";
-    $titleSuffix = " - Search Recipes";
-    include_once 'header.php';
     include_once 'includes/Paginator/Paginator.class.php';
     include_once 'includes/pdo.inc.php';
     include_once 'includes/base_assumptions.inc.php';
@@ -51,6 +48,21 @@
 
     $searchRecipes = ($_GET['search'] === "all") || ($_GET['search'] === "recipes");
     $searchBlogposts = ($_GET['search'] === "all") || ($_GET['search'] === "blogposts");
+
+    // Including header
+
+    if ($searchRecipes && $searchBlogposts) {
+        $selected = "";
+        $titleSuffix = " - Search site";
+    } elseif ($searchRecipes) {
+        $selected = "recipes";
+        $titleSuffix = " - Search recipes";
+    } elseif ($searchBlogposts) {
+        $titleSuffix = " - Search blogposts";
+    }
+    include_once 'header.php';
+
+
     // Let's construct the search query
     $master_query = "";
 
@@ -104,7 +116,6 @@
 
         $master_query .= "GROUP BY b.id";
     }
-
     // Now we need to add the order to sort the posts
 
     switch ($_GET['order']) {
@@ -125,6 +136,7 @@
             exit;
     }
 
+    echo $master_query;
 
     // Now we need the callback function that binds the actual value of the tags to the prepared statement
     function bindTags($stmt) {

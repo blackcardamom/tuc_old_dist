@@ -73,10 +73,6 @@ a i.button {
   padding:2%;
 }
 
-.recipe_main_post_wrapper .post_card:last-child {
-    border-bottom: 2px solid black;
-}
-
 .recipe_main_show_all{
     display:block;
     float:left;
@@ -111,6 +107,14 @@ img.portait {
   overflow         : auto;
   border-top: 2px solid black;
   background-color : white;
+}
+
+.recipe_main_post_wrapper .post_card:last-child {
+    border-bottom: 2px solid black;
+}
+
+.index_blog_wrapper .post_card:nth-last-child(2) {
+    border-bottom: 2px solid black;
 }
 
 .post_card a{

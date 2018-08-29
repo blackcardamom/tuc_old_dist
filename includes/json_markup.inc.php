@@ -1,6 +1,5 @@
 <?php
 
-    include_once 'pdo.inc.php';
     include_once 'base_assumptions.inc.php';
 
     $json_nikki = array(
@@ -9,10 +8,9 @@
         "familyName" => "Easton"
     );
 
-    function markupRecipeJSON($id) {
-        $pdo_conn = $GLOBALS['pdo_conn'];
+    function markupRecipeJSON($pdo,$id) {
         $query = "SELECT * FROM recipes WHERE id = :id";
-        $stmt = $pdo_conn->prepare($query);
+        $stmt = $pdo->prepare($query);
         $stmt->bindValue(':id',$id,PDO::PARAM_INT);
         $stmt->execute();
         $recipe = $stmt->fetch(PDO::FETCH_ASSOC);

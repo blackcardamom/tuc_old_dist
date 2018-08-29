@@ -52,7 +52,7 @@
         <!-- Structured data markup -->
         <?php if($meta_jsonmarkup) :?>
             <script type="application/ld+json">
-                <?= markupRecipeJSON($_GET['id']) ?>
+                <?= markupRecipeJSON($pdo_conn,$_GET['id']) ?>
             </script>
         <?php endif; ?>
     </head>
