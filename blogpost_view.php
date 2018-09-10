@@ -17,6 +17,7 @@
             header("Location: $website_root/pagenotfound.php");
         } else {
             $title = $row['title'];
+            $social_fb = $row['social_fb'];
             $social_twtr = $row['social_twtr'];
             $social_pnt = $row['social_pnt'];
             $social_snoo = $row['social_snoo'];
@@ -34,32 +35,11 @@
     include_once 'header.php';
 ?>
 
-<!-- We add this script to allow the facebook button to work -->
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId            : '1079304678904325',
-      autoLogAppEvents : true,
-      xfbml            : true,
-      version          : 'v3.1'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
 <div class="blog_grid-container">
     <div class="blog_container">
         <h1 class="blog_title"><?= $title ?></h1>
         <div class="blog_socials"><span id='no_break'>
-            <a id="fbBtn"><i class="fab fa-facebook button"title="Share to Facebook"></i></a> &nbsp;&nbsp;
+            <a href="<?= $social_fb ?>"><i class="fab fa-facebook button" title="Share to Facebook"></i></a> &nbsp;&nbsp;
             <a href="<?= $social_twtr ?>"><i class="fab fa-twitter button" title="Share to Twitter"></i></a> &nbsp;&nbsp;
             <a href="<?= $social_pnt ?>"><i class="fab fa-pinterest button" title="Share to Pinterest"></i></a> &nbsp;&nbsp;
             <a href="<?= $social_snoo ?>"><i class="fab fa-reddit button" title="Share to Reddit"></i></a> &nbsp;&nbsp;
@@ -72,15 +52,5 @@
     <div class="blog_ad_container">AD</div>
 </div>
 
-
-<script>
-document.getElementById('fbBtn').onclick = function() {
-  FB.ui({
-    method: 'share',
-    display: 'popup',
-    href: window.location.href,
-  }, function(response){});
-}
-</script>
 
 <?php include_once 'footer.php'; ?>

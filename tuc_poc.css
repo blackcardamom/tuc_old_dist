@@ -52,7 +52,7 @@ a {
 }
 
 a i.button {
-  color : white;date_publishe
+  color : white;
 }
 
 .recent_recipes_title {
@@ -673,10 +673,14 @@ margin: 2% 1% 0 1%;
     color:var(--main-color);
 }
 
+.blog_socials i.button:active{
+    color:var(--accent-color);
+}
+
 .blog_intro{
     margin:2% 0 2% 0;
-    padding:3% 15% 3% 15%;
-    font-size: 1.25em;
+    padding:3% 10% 3% 10%;
+    font-size: 1em;
     font-style: italic;
     background-color: var(--text-light);
 }

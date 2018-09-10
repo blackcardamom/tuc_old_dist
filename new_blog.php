@@ -26,8 +26,7 @@
         <strong>Blog Title</strong><br>
         <input type="text" name="title" placeholder="Lemon Meringue Pie"><br>
         <strong>Intro Text</strong><br>
-        <textarea id="intro_mde"></textarea>
-        <input type="hidden" name="intro" id="intro_input">
+        <textarea name="intro"></textarea>
         <strong>Content Markdown Editor</strong><br>
         <textarea id="content_mde"></textarea>
         <input type="hidden" name="content_md" id="content_md_input">
