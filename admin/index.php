@@ -5,7 +5,7 @@
 
     session_start();
     if (isset($_SESSION['uid'])) {
-        header("LocatioN: recipes.php");
+        header("Location: recipes.php");
         exit;
     }
 

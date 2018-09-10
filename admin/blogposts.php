@@ -8,6 +8,7 @@
         exit;
     }
     print_r($_SESSION);
+    session_destroy();
 ?>
 
 <?php include_once 'footer.php'; ?>

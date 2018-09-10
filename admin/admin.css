@@ -15,6 +15,11 @@ body {
   margin           : 0;
   padding          : 0;
   background-color : var(--background-color);
+  font-family: sans-serif;
+}
+
+input:focus, button:focus {
+    outline: none;
 }
 
 /* Login page */
@@ -119,7 +124,59 @@ nav a.selected {
     color: var(--accent-color);
 }
 
+/* Recipe page */
 
+.top_options{
+    font-size: 1.25em;
+    padding-top: 10px;
+    display: flex;
+    float: left;
+    width: 100%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.top_filters {
+    padding-bottom: 10px;
+}
+
+.top_filters form{
+    display: inline;
+}
+
+.top_filters input {
+    padding          : 10px;
+    margin:0 5px;
+    border           : 0;
+    border-radius    : 5px;
+    background-color : var(--main-color);
+    color: white;
+    box-shadow       : 2px 2px 8px -2px black;
+    width:75%;
+}
+
+.top_filters input#title_input {
+    width: 50%;
+}
+
+.top_filters input#id_input {
+    width:5%;
+}
+
+.top_filters button {
+    padding          : 10px 10px;
+    color            : white;
+    border           : 0;
+    border-radius    : 5px;
+    background-color : var(--accent-color);
+    box-shadow       : 2px 2px 8px -2px black;
+}
+
+.results_table {
+    display: block;
+    float: left;
+    width:100%;
+}
 
 @media
   screen
