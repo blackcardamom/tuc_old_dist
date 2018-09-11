@@ -180,13 +180,19 @@
 
     function addTagToQuery($name) {
         $getCopy=$_GET;
+        // Add new tag to the tags array
         array_push($getCopy["tag"],$name);
+        // Return to page 1
+        $getCopy['page'] = 1;
         return http_build_query($getCopy);
     }
 
     function removeTagFromQuery($index) {
         $getCopy=$_GET;
+        // Remove tag at $index from the tags array
         array_splice($getCopy['tag'],$index,1);
+        // Return to page 1
+        $getCopy['page'] = 1;
         return http_build_query($getCopy);
     }
 
@@ -357,13 +363,15 @@ function updateOrder() {
     var newOrder = dropdown.options[dropdown.selectedIndex].value;
     var queryObj = queryToObject(window.location.search);
     queryObj['order'] = newOrder;
+    // After changing search order return to page 1
+    queryObj['page'] = 1;
     window.location.search = objectToQuery(queryObj);
 }
 
 function updateSearching() {
     var queryObj = queryToObject(window.location.search);
     var recipes = document.getElementById("recipes_check").checked;
-    var blogposts = document.getElementById("blogposts_check").checked
+    var blogposts = document.getElementById("blogposts_check").checked;
     if (recipes && blogposts) {
         queryObj['search'] = 'all';
     } else if (recipes) {
@@ -373,6 +381,8 @@ function updateSearching() {
     } else{
         queryObj['search'] = 'none';
     }
+    // After changing search radius return to page 1
+    queryObj['page'] = 1;
     window.location.search = objectToQuery(queryObj);
 }
 

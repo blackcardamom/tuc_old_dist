@@ -29,7 +29,7 @@
 </div>
 <div class="container">
     <img src="<?= $website_root ?>/assets/Bread_crop.jpg">
-    <div class="bottom-right">Other</div>
+    <div class="bottom-right">All Recipes</div>
     <a href="<?= $website_root."/search_results.php?search=recipes"?>">
         <div class="container_overlay"></div>
     </a>
