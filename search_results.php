@@ -69,7 +69,7 @@
     if($searchRecipes) {
         // Build recipe query
         $master_query .= "SELECT 'recipes' AS origin_table, r.id, r.title, r.intro_html AS intro, r.date_published, r.recipe_active_time, r.recipe_wait_time, r.recipe_serves, r.card_img
-                          FROM recipes_tagmap tm, MOCK_TABLE r, tags t ";
+                          FROM recipes_tagmap tm, recipes r, tags t ";
 
         // We only want to add this clause if we have tags
         if(!empty($_GET['tag'])) {
@@ -96,7 +96,7 @@
     if($searchBlogposts) {
         // Build blogpost query
         $master_query .= "SELECT 'blogposts' AS origin_table, b.id, b.title, b.intro AS intro, b.date_published,  '' AS recipe_active_time, '' AS recipe_wait_time, '' AS recipe_serves, '' AS card_img
-                          FROM blogposts_tagmap tm, MOCK_BLOGS b, tags t ";
+                          FROM blogposts_tagmap tm, blogposts b, tags t ";
 
         // We only want to add this clause if we have tags
         if(!empty($_GET['tag'])) {
