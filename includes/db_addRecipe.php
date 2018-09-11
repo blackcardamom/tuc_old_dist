@@ -1,9 +1,24 @@
 <?php
-    include_once 'conn.inc.php';
-    include_once 'pdo.inc.php';
     include_once 'admin_validate.inc.php';
     include_once 'parsedown/Parsedown.php';
     include_once 'base_assumptions.inc.php';
+
+    $dbHost       = "localhost";
+    $creds = parse_ini_file("/home/vwmnpccl/etc/creds.ini");
+    $dbName = $creds['dbName'];
+    $dbUsername = $creds['adminUser'];
+    $dbPassword = $creds['adminPwd'];
+
+
+    // Set DSN
+    $dsn = "mysql:host=".$dbHost.";dbname=".$dbName;
+
+    // Create PDO instance
+    try {
+        $admin_conn = new PDO($dsn,$dbUsername,$dbPassword);
+    }  catch (PDOException $e) {
+        echo 'Connection failed: ' . $e->getMessage();
+    }
 
     function makeValuesReferenced(&$arr){
         $refs = array();
@@ -66,7 +81,7 @@
     // Get list of acceptable keys
 
     $sql = "SELECT COLUMN_NAME FROM information_schema.columns WHERE table_schema=:dbName AND table_name='recipes'";
-    $stmt = $pdo_conn->prepare($sql);
+    $stmt = $admin_conn->prepare($sql);
     $stmt->bindValue(':dbName',$dbName);
     $stmt->execute();
     $acceptableKeys = $stmt->fetchAll(PDO::FETCH_COLUMN);
@@ -97,7 +112,7 @@
     $sql = substr($sql,0,-2).")";
 
 
-    if ( !($stmt = $pdo_conn->prepare($sql)) ) {
+    if ( !($stmt = $admin_conn->prepare($sql)) ) {
         header("Location: $website_root/new_recipe.php?err=sql_fail");
         exit;
     } else {
