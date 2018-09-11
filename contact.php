@@ -107,7 +107,7 @@
 <div class="contact_container">
     <h1>Contact Info</h1>
     <p>
-        <strong>E-mail: </strong><a href="mailto:theuglycroissant@gmail.com">theuglycroissant@gmail.com</a> or use the form below.<br><br>
+        <strong>E-mail: </strong><a href="mailto:admin@theuglycroissant.com">admin@theuglycroissant.com</a> or use the form below.<br><br>
         <strong>Social Media: </strong><a href="https://www.instagram.com/theuglycroissant/" style="color:white;text-decoration:none;"><i class="fab fa-instagram" style="font-size:1.5em;position:relative;top:0.125em;"></i> @theuglycroissant</a>
     </p>
     <h1>Contact Form</h1>
