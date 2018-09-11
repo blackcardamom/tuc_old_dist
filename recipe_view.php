@@ -4,7 +4,7 @@
     include_once 'includes/base_assumptions.inc.php';
 
     if (empty($_GET['id'])) {
-        header("Location: $website_root/pagenotfound.php");
+        header("Location: $website_root/pagenotfound.php?err=no_id_provided");
     } else {
 
         $sql = "SELECT * FROM recipes WHERE id = :id";
@@ -13,7 +13,7 @@
         $stmt->execute();
 
         if (!($row = $stmt->fetch(PDO::FETCH_ASSOC))) {
-            header("Location: $website_root/pagenotfound.php");
+            header("Location: $website_root/pagenotfound.php?err=no_recipe_".$_GET['id']);
         } else {
             $title = $row['title'];
             $recipe_active_time = $row['recipe_active_time'];
