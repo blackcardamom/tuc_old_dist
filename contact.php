@@ -69,8 +69,6 @@
             $mailTo = "theuglycroissant@gmail.com";
             $headers = "From: $address";
             $text = "$name submitted the following message through the online contact form:\n\n$msg";
-            mail($mailTo, "Contact Form: ".$subject, $text, $headers);
-
 
             $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
             try {
@@ -79,7 +77,7 @@
                 $mail->Host = 'mail.theuglycroissant.com';            // Specify main SMTP server
                 $mail->SMTPAuth = true;                               // Enable SMTP authentication
                 $mail->Username = 'contact_form@theuglycroissant.com';// SMTP username
-                $creds = parse_ini_file("/home/vwmnpccl/etc/db_creds.ini");       // Get the creds for the email server
+                $creds = parse_ini_file("/home/vwmnpccl/etc/creds.ini");       // Get the creds for the email server
                 $mail->Password = $creds['contactPwd'];                           // SMTP password
                 $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
                 $mail->Port = 465;                                    // TCP port to connect to
