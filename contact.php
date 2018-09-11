@@ -3,10 +3,16 @@
     $titleSuffix=" - Contact";
     include_once 'header.php';
     include_once 'includes/base_assumptions.inc.php';
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
+    require 'includes/PHPMailer/src/Exception.php';
+    require 'includes/PHPMailer/src/PHPMailer.php';
+    require 'includes/PHPMailer/src/SMTP.php';
 ?>
 
 <?php
-    // Make sure that the user actually wants to send a message
+    // Initialise all variables we plan to use
 
     $resp = Array();
     $fieldTypes = Array(
@@ -64,7 +70,36 @@
             $headers = "From: $address";
             $text = "$name submitted the following message through the online contact form:\n\n$msg";
             mail($mailTo, "Contact Form: ".$subject, $text, $headers);
-            array_push($resp,"success");
+
+
+            $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+            try {
+                //Server settings                        // Enable verbose debug output
+                $mail->isSMTP();                                      // Set mailer to use SMTP
+                $mail->Host = 'mail.theuglycroissant.com';            // Specify main SMTP server
+                $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                $mail->Username = 'contact_form@theuglycroissant.com';// SMTP username
+                $creds = parse_ini_file("/home/vwmnpccl/etc/db_creds.ini");       // Get the creds for the email server
+                $mail->Password = $creds['contactPwd'];                           // SMTP password
+                $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+                $mail->Port = 465;                                    // TCP port to connect to
+
+                //Recipients
+                $mail->setFrom($address, $name);
+                $mail->addAddress('theuglycroissant@gmail.com', 'The Ugly Croissant');     // Add a recipient
+                $mail->addReplyTo($address, $name);
+
+                //Content
+                $mail->isHTML(false);
+                $mail->Subject = $subject;
+                $mail->Body    = "$name submitted the following message through the online contact form:\n\n$msg";
+
+                $mail->send();
+                array_push($resp,"success");
+
+            } catch (Exception $e) {
+                echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+            }
         }
     }
 ?>
