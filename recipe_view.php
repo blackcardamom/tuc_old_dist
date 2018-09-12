@@ -30,8 +30,8 @@
             $intro_img = $website_root . "/" . $row['intro_img'];
 
             $active_time_span = (empty($recipe_active_time)) ? "" : '<span class="no_break"><i class="fas fa-clock"></i> '.$recipe_active_time.' &nbsp;&nbsp; </span>';
-            $wait_time_span = (empty($recipe_active_time)) ? "" : '<span class="no_break"><i class="fas fa-bed"></i> '.$recipe_wait_time.' &nbsp;&nbsp; </span>';
-            $serves_span = (empty($recipe_active_time)) ? "" : '<span class="no_break"><i class="fas fa-utensils"></i> '.$recipe_serves.' </span>';
+            $wait_time_span = (empty($recipe_wait_time)) ? "" : '<span class="no_break"><i class="fas fa-bed"></i> '.$recipe_wait_time.' &nbsp;&nbsp; </span>';
+            $serves_span = (empty($recipe_serves)) ? "" : '<span class="no_break"><i class="fas fa-utensils"></i> '.$recipe_serves.' </span>';
 
             $info_span = $active_time_span . $wait_time_span . $serves_span;
         }
