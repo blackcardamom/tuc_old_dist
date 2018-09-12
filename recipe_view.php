@@ -28,6 +28,12 @@
             $ingredients_html = $row['ingredients_html'];
             $method_html = $row['method_html'];
             $intro_img = $website_root . "/" . $row['intro_img'];
+
+            $active_time_span = (empty($recipe_active_time)) ? "" : '<span class="no_break"><i class="fas fa-clock"></i> '.$recipe_active_time.' &nbsp;&nbsp; </span>';
+            $wait_time_span = (empty($recipe_active_time)) ? "" : '<span class="no_break"><i class="fas fa-bed"></i> '.$recipe_wait_time.' &nbsp;&nbsp; </span>';
+            $serves_span = (empty($recipe_active_time)) ? "" : '<span class="no_break"><i class="fas fa-utensils"></i> '.$recipe_serves.' </span>';
+
+            $info_span = $active_time_span . $wait_time_span . $serves_span;
         }
     }
 
@@ -47,9 +53,7 @@
         <img src="<?= $intro_img ?>" alt="<?=$title?>">
     </div>
     <h1><?= $title ?></h1>
-    <p style="line-height:1.5em;"><span class='no_break'><i class="fas fa-clock" title="Acitve time"></i> <?= $recipe_active_time ?> &nbsp;&nbsp;</span>
-        <span class='no_break'><i class="fas fa-bed" title="Waiting time"></i> <?= $recipe_wait_time ?> &nbsp;&nbsp;</span>
-        <span class='no_break'><i class="fas fa-utensils" title="Serving size"></i> <?= $recipe_serves ?> &nbsp;&nbsp;</span>
+    <p style="line-height:1.5em;"><?= $info_span ?>
         <br id="mobile_linebreak"><span class='no_break'>
         <a href="<?= $social_fb ?>"><i class="fab fa-facebook button" title="Share to Facebook"></i></a> &nbsp;&nbsp;
         <a href="<?= $social_twtr ?>"><i class="fab fa-twitter button" title="Share to Twitter"></i></a> &nbsp;&nbsp;

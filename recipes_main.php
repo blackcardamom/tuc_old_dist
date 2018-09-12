@@ -56,14 +56,16 @@
                 $intro_html = $row['intro_html'];
                 $card_img = $website_root . '/' .$row['card_img'];
 
+                $active_time_span = (empty($recipe_active_time)) ? "" : '<span class="no_break"><i class="fas fa-clock"></i> '.$recipe_active_time.' &nbsp;&nbsp; </span>';
+                $wait_time_span = (empty($recipe_active_time)) ? "" : '<span class="no_break"><i class="fas fa-bed"></i> '.$recipe_wait_time.' &nbsp;&nbsp; </span>';
+                $serves_span = (empty($recipe_active_time)) ? "" : '<span class="no_break"><i class="fas fa-utensils"></i> '.$recipe_serves.' </span>';
+
                 $recipe_card =
                 '<div class="post_card">
                     <div class="recipe_card_img"><a href="'. $website_root .'/recipe_view.php?id='.$id.'"><img src="'.$card_img.'" alt="'.$title.'"></a></div>
                     <div class="recipe_card_title_info">
                         <a href="'. $website_root .'/recipe_view.php?id='.$id.'"><h3>'.$title.'</h3></a>
-                        <p><span class="no_break"><i class="fas fa-clock"></i> '.$recipe_active_time.' &nbsp;&nbsp; </span>
-                        <span class="no_break"><i class="fas fa-bed"></i> '.$recipe_wait_time.' &nbsp;&nbsp; </span>
-                        <span class="no_break"><i class="fas fa-utensils"></i> '.$recipe_serves.'</span></p>
+                        <p>'.$active_time_span.$wait_time_span.$serves_span.'</p>
                     </div>
                     <div class="recipe_card_text">'.$intro_html.'</div>
                 </div>';
