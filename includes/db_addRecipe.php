@@ -62,7 +62,7 @@
     $data['ingredients_html']=$Parsedown->text($_POST['ingredients_md']);
     $data['method_html']=$Parsedown->text($_POST['method_md']);
 
-    $newURL_enc = rawurlencode($website_root."/recipe_view?id=".$data['nextID']);
+    $newURL_enc = rawurlencode($website_root."/recipe_view.php?id=".$data['nextID']);
     $data['social_fb'] = "https://www.facebook.com/sharer/sharer.php?u=".$newURL_enc;
     $data['social_twtr']="https://twitter.com/intent/tweet?text=". rawurlencode("Check out this ".$data['title']." on the Ugly Croissant")."&url=" .$newURL_enc;
     $data['social_pnt']="http://pinterest.com/pin/create/link/?url=" . $newURL_enc . "&media=" . rawurlencode($website_root."/".$data['intro_img']);
