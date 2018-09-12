@@ -32,6 +32,7 @@
         <title><?= $titlePrefix ?>The Ugly Croissant<?= $titleSuffix ?></title>
 
         <!-- Favicons -->
+        <link rel="shortcut icon" type="image/png" href="<?= $website_root ?>/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="180x180" href="<?= $website_root ?>/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="<?= $website_root ?>/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="<?= $website_root ?>/favicon-16x16.png">
