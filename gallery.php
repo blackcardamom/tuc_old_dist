@@ -8,7 +8,7 @@
 <div class="gallery_wrapper">
     <div class="gallery_selection_window">
         <?php
-            $path = $website_root."/gallery/" ;
+            $path = "gallery/" ;
             $acceptableExtensions = Array("jpg", "jpeg", "JPG", "png", "PNG");
 
             $dir = new DirectoryIterator($path);
