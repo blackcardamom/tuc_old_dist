@@ -1,0 +1,71 @@
+[21-Aug-2018 13:28:27 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'vwmnpccl_webaccess'@'quedex.pacwebhosting.co.uk' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/pdo.inc.php:14
+Stack trace:
+#0 /home/vwmnpccl/public_html/test_files_please_ignore/includes/pdo.inc.php(14): PDO->__construct('mysql:host=www....', 'vwmnpccl_webacc...', NULL)
+#1 {main}
+  thrown in /home/vwmnpccl/public_html/test_files_please_ignore/includes/pdo.inc.php on line 14
+[21-Aug-2018 13:31:56 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'vwmnpccl_webaccess'@'quedex.pacwebhosting.co.uk' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/pdo.inc.php:14
+Stack trace:
+#0 /home/vwmnpccl/public_html/test_files_please_ignore/includes/pdo.inc.php(14): PDO->__construct('mysql:host=www....', 'vwmnpccl_webacc...', NULL)
+#1 {main}
+  thrown in /home/vwmnpccl/public_html/test_files_please_ignore/includes/pdo.inc.php on line 14
+[11-Sep-2018 11:36:44 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 11:37:00 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 11:41:27 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 11:41:27 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/vwmnpccl/public_html/test_files_please_ignore/includes/add_admin.php on line 17
+[11-Sep-2018 11:41:27 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/vwmnpccl/public_html/test_files_please_ignore/includes/add_admin.php on line 21
+[11-Sep-2018 11:41:27 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, null given in /home/vwmnpccl/public_html/test_files_please_ignore/includes/add_admin.php on line 22
+[11-Sep-2018 11:42:21 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/vwmnpccl/public_html/test_files_please_ignore/includes/add_admin.php on line 21
+[11-Sep-2018 11:42:21 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, null given in /home/vwmnpccl/public_html/test_files_please_ignore/includes/add_admin.php on line 22
+[11-Sep-2018 11:43:48 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/vwmnpccl/public_html/test_files_please_ignore/includes/add_admin.php on line 21
+[11-Sep-2018 11:43:48 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, null given in /home/vwmnpccl/public_html/test_files_please_ignore/includes/add_admin.php on line 22
+[11-Sep-2018 11:44:22 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/vwmnpccl/public_html/test_files_please_ignore/includes/add_admin.php on line 22
+[11-Sep-2018 11:44:22 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, null given in /home/vwmnpccl/public_html/test_files_please_ignore/includes/add_admin.php on line 23
+[11-Sep-2018 11:45:57 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/vwmnpccl/public_html/test_files_please_ignore/includes/add_admin.php on line 22
+[11-Sep-2018 11:45:57 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, null given in /home/vwmnpccl/public_html/test_files_please_ignore/includes/add_admin.php on line 23
+[11-Sep-2018 11:47:25 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 11:47:54 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 11:55:49 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 11:56:02 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 11:57:07 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 13:08:46 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 13:08:46 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addRecipe.php:84
+Stack trace:
+#0 {main}
+  thrown in /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addRecipe.php on line 84
+[11-Sep-2018 13:10:52 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 13:10:52 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addRecipe.php:84
+Stack trace:
+#0 {main}
+  thrown in /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addRecipe.php on line 84
+[11-Sep-2018 13:14:47 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 13:14:47 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addRecipe.php:84
+Stack trace:
+#0 {main}
+  thrown in /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addRecipe.php on line 84
+[11-Sep-2018 13:17:29 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 13:17:29 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addRecipe.php:84
+Stack trace:
+#0 {main}
+  thrown in /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addRecipe.php on line 84
+[11-Sep-2018 13:17:59 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 13:17:59 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addRecipe.php:20) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addRecipe.php on line 48
+[11-Sep-2018 13:20:54 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 13:20:54 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addRecipe.php:84
+Stack trace:
+#0 {main}
+  thrown in /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addRecipe.php on line 84
+[11-Sep-2018 13:21:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 13:21:18 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addRecipe.php:85
+Stack trace:
+#0 {main}
+  thrown in /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addRecipe.php on line 85
+[11-Sep-2018 13:21:37 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 13:21:37 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addRecipe.php:85
+Stack trace:
+#0 {main}
+  thrown in /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addRecipe.php on line 85
+[11-Sep-2018 13:26:36 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 13:31:34 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 14:13:29 UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/db_addBlog.php on line 24
+[11-Sep-2018 14:16:48 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8
+[11-Sep-2018 14:18:38 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/vwmnpccl/public_html/test_files_please_ignore/includes/conn.inc.php on line 8

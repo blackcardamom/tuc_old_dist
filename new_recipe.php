@@ -1,0 +1,73 @@
+<?php
+    $titleSuffix=" - New recipe";
+    $meta_index = false;
+    include_once 'header.php';
+    include_once 'includes/pdo.inc.php';
+    include_once 'includes/base_assumptions.inc.php';
+
+    $sql = "SELECT `AUTO_INCREMENT`
+            FROM  INFORMATION_SCHEMA.TABLES
+            WHERE TABLE_SCHEMA = :dbName
+            AND   TABLE_NAME   = 'recipes';";
+
+    $stmt = $pdo_conn->prepare($sql);
+    $stmt->bindValue(':dbName', $dbName);
+    $stmt->execute();
+    $nextID = $stmt->fetch(PDO::FETCH_ASSOC)['AUTO_INCREMENT'];
+?>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+<div class="admin_container">
+    <h1>Create new recipe (with ID <?= $nextID ?>)</h1><br>
+    <form action="<?= $website_root ?>/includes/db_addRecipe.php" method="post">
+        <input type="hidden" name="nextID" value="<?= (string)$nextID?>">
+        <strong>Recipe Title</strong><br>
+        <input type="text" name="title" placeholder="Lemon Meringue Pie"><br>
+        <strong>Time spent cooking</strong><br>
+        <input type="text" name="recipe_active_time" placeholder="2 hours 30 minutes"><br>
+        <strong>Time spent waiting</strong><br>
+        <input type="text" name="recipe_wait_time" placeholder="3 hours + overnight"><br>
+        <strong>Recipe servings</strong><br>
+        <input type="text" name="recipe_serves" placeholder="A hungry Tom"><br>
+        <strong>Intro Markdown Editor</strong><br>
+        <textarea id="intro_mde"></textarea>
+        <input type="hidden" name="intro_md" id="intro_md_input">
+        <strong>Ingredients Markdown Editor</strong><br>
+        <textarea id="ingredients_mde"></textarea>
+        <input type="hidden" name="ingredients_md" id="ingredients_md_input">
+        <strong>Method Markdown Editor</strong><br>
+        <textarea id="method_mde"></textarea>
+        <input type="hidden" name="method_md" id="method_md_input">
+        <strong>Path to intro image</strong><br>
+        <input type="text" name="intro_img" value="recipes/<?= $nextID ?>/"><br>
+        <strong>Path to card image</strong><br>
+        <input type="text" name="card_img" value="recipes/<?= $nextID ?>/"<br>
+        <strong>Path to printable pdf</strong><br>
+        <input type="text" name="print_pdf" value="recipes/<?= $nextID ?>/"><br>
+        <strong>Username</strong> &nbsp;&nbsp;
+        <input type="password" name="uid"> &nbsp;&nbsp; <br id="mobile_linebreak"> <br id="mobile_linebreak">
+        <strong>Password</strong> &nbsp;&nbsp;
+        <input type="password" name="pwd"> &nbsp;&nbsp; <br id="mobile_linebreak"> <br id="mobile_linebreak">
+        <input type="submit" name="submit" onclick="onNewRecipeSubmit()">
+    </form>
+</div>
+
+<script>
+var intro_mde = new SimpleMDE({ element: document.getElementById("intro_mde") });
+var ingredients_mde = new SimpleMDE({ element: document.getElementById("ingredients_mde") });
+var method_mde = new SimpleMDE({ element: document.getElementById("method_mde") });
+
+var intro_md_input = document.getElementById("intro_md_input")
+var ingredients_md_input = document.getElementById("ingredients_md_input")
+var method_md_input = document.getElementById("method_md_input")
+
+function onNewRecipeSubmit() {
+    intro_md_input.value = intro_mde.value();
+    ingredients_md_input.value = ingredients_mde.value();
+    method_md_input.value = method_mde.value();
+}
+</script>
+
+<?php include_once 'footer.php'; ?>
