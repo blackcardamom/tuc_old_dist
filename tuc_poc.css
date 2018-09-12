@@ -638,11 +638,11 @@ a.active_topnav {
   font-weight : bold;
 }
 
-.ingredients li, .method li {
+.method li {
     padding-top: 20px;
 }
 
-.ingredients li:first-child, .method li:first-child {
+.method li:first-child {
     padding-top:0;
 }
 
