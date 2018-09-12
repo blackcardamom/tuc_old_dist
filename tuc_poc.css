@@ -176,7 +176,7 @@ img.portait {
   height: 100%;
   grid-template-columns: 3fr 1fr;
   grid-template-rows: max-content max-content;
-  grid-template-areas: "index_feature_wrapper index_feature_wrapper" "index_blog_wrapper index_sidebar";
+  grid-template-areas: "index_feature_wrapper index_feature_wrapper" "index_blog_wrapper index_blog_wrapper";
 }
 
 .index_feature_wrapper {
@@ -664,7 +664,7 @@ a.active_topnav {
   height: 100%;
   grid-template-columns: 4fr 1fr;
   grid-gap:2px 2px;
-  grid-template-areas: "blog_container blog_ad_container";
+  grid-template-areas: "blog_container blog_container";
 }
 
 .blog_container{

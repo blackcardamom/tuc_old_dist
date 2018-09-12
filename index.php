@@ -75,9 +75,9 @@
             <h3><a href="<?= $website_root?>/search_results.php?search=blogposts">View all blogposts...</a></h3>
         </div>
     </div>
-    <div class="index_sidebar">
+    <!--div class="index_sidebar">
         <h3>Advertisments</h3>
-    </div>
+    </div-->
 </div>
 
 

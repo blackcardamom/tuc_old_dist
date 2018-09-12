@@ -47,7 +47,7 @@
         </div>
         <div class="blog_main_content"><?= $content_html ?></div>
     </div>
-    <div class="blog_ad_container">AD</div>
+    <!--div class="blog_ad_container">AD</div-->
 </div>
 
 
