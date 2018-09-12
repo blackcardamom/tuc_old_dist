@@ -55,7 +55,7 @@
     <h1><?= $title ?></h1>
     <p style="line-height:1.5em;"><?= $info_span ?>
         <br id="mobile_linebreak"><span class='no_break'>
-        <a href="<?= $social_fb ?>"><i class="fab fa-facebook button" title="Share to Facebook"></i></a> &nbsp;&nbsp;
+        &nbsp;&nbsp; <a href="<?= $social_fb ?>"><i class="fab fa-facebook button" title="Share to Facebook"></i></a> &nbsp;&nbsp;
         <a href="<?= $social_twtr ?>"><i class="fab fa-twitter button" title="Share to Twitter"></i></a> &nbsp;&nbsp;
         <a href="<?= $social_pnt ?>"><i class="fab fa-pinterest button" title="Share to Pinterest"></i></a> &nbsp;&nbsp;
         <a href="<?= $social_snoo ?>"><i class="fab fa-reddit button" title="Share to Reddit"></i></a> &nbsp;&nbsp;

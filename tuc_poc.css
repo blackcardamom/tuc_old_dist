@@ -35,10 +35,6 @@ p {
     padding: 0;
 }
 
-.button:active {
-  color : var(--accent-color);
-}
-
 #mobile_linebreak {
   display : none;
 }
@@ -54,6 +50,14 @@ a {
 
 a i.button {
   color : white;
+}
+
+.button:active {
+  color : var(--accent-color);
+}
+
+.button.fa-print {
+    color: var(--accent-color);
 }
 
 .recent_recipes_title {
