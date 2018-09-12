@@ -629,7 +629,7 @@ a.active_topnav {
 }
 
 .ingredients ol, .method ol {
-  padding-left  : 3%;
+  padding-left  : 2%;
   list-style    : none;
   counter-reset : item;
 }
@@ -794,6 +794,10 @@ input[type=submit]:hover {
   padding-left     : 5%;
   color            : white;
   background-color : var(--main-color);
+}
+
+.contact_container h1, .contact_container p {
+    padding-left:0;
 }
 
 input.goodResponse {
