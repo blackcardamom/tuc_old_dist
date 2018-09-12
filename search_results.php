@@ -289,7 +289,7 @@
                 <div class='post_card'>
                     <h3><a href='$website_root/blogpost_view.php?id=".$row['id']."'>".$row['title']."</a></h3>
                     <p><span class='blog_date_published'>". date('jS F Y.',strtotime($row['date_published'])) ."</span> ".$row['intro']."</p>
-                    <div class='blog_link'><a href='$website_root/bloindex.phpgpost_view.php?id=".$row['id']."'><i class='fas fa-plus-circle'></i> Read more...</a></div>
+                    <div class='blog_link'><a href='$website_root/blogpost_view.php?id=".$row['id']."'><i class='fas fa-plus-circle'></i> Read more...</a></div>
                 </div>";
                 echo $post_card;
             }
