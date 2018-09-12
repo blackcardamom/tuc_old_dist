@@ -638,6 +638,14 @@ a.active_topnav {
   font-weight : bold;
 }
 
+.ingredients li, .method li {
+    padding-top: 20px;
+}
+
+.ingredients li:first-child, .method li:first-child {
+    padding-top:0;
+}
+
 .recipe_gallery {
   border-top : var(--background-color) solid 2px;
 }
