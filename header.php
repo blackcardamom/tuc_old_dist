@@ -34,13 +34,13 @@
 
         <!-- Google meta tags -->
         <?php if(!empty($meta_desciption)) : ?>
-            <meta name="Desription" content="<?= $meta_desciption?>">
+            <meta name="description" content="<?= $meta_desciption?>">
         <?php endif; ?>
 
         <!-- Open Graph meta tags -->
         <?php if($meta_iscontent) : ?>
             <meta property="og:title" content="<?= $titlePrefix ?>The Ugly Croissant<?= $titleSuffix ?>">
-            <meta property="og:type" contet="website">
+            <meta property="og:type" content="website">
             <meta property="og:image" content="<?= $meta_image ?>">
             <meta property="og:url" content="<?= $meta_url ?>">
         <?php endif; ?>
