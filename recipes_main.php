@@ -7,28 +7,28 @@
 ?>
 
 <div class="container">
-    <img src="<?= $website_root ?>/assets/Celebration_cake_crop.jpg">
+    <img src="<?= $website_root ?>/assets/Celebration_cake_crop_web.jpg">
     <div class="bottom-right">Cakes</div>
     <a href="<?= $website_root."/search_results.php?tag[]=cake&search=recipes"?>">
         <div class="container_overlay"></div>
     </a>
 </div>
 <div class="container">
-    <img src="<?= $website_root ?>/assets/tart_crop.JPG">
+    <img src="<?= $website_root ?>/assets/tart_crop_web.jpg">
     <div class="bottom-right">Tarts</div>
     <a href="<?= $website_root."/search_results.php?tag[]=tart&search=recipes"?>">
         <div class="container_overlay"></div>
     </a>
 </div>
 <div class="container">
-    <img src="<?= $website_root ?>/assets/cookies_crop.JPG">
+    <img src="<?= $website_root ?>/assets/cookies_crop_web.jpg">
     <div class="bottom-right">Biscuits</div>
     <a href="<?= $website_root."/search_results.php?tag[]=biscuit&search=recipes"?>">
         <div class="container_overlay"></div>
     </a>
 </div>
 <div class="container">
-    <img src="<?= $website_root ?>/assets/Bread_crop.jpg">
+    <img src="<?= $website_root ?>/assets/Bread_crop_web.jpg">
     <div class="bottom-right">All Recipes</div>
     <a href="<?= $website_root."/search_results.php?search=recipes"?>">
         <div class="container_overlay"></div>
