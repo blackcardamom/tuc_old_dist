@@ -28,9 +28,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
         <link rel="stylesheet" href="tuc_poc.css">
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <meta name="theme-color" content="#48494B"/>
         <title><?= $titlePrefix ?>The Ugly Croissant<?= $titleSuffix ?></title>
+
+        <!-- Favicons -->
+        <link rel="apple-touch-icon" sizes="180x180" href="<?= $website_root ?>/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="<?= $website_root ?>/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="<?= $website_root ?>/favicon-16x16.png">
+        <link rel="manifest" href="<?= $website_root ?>/site.webmanifest">
+        <link rel="mask-icon" href="<?= $website_root ?>/safari-pinned-tab.svg" color="#48494b">
+        <meta name="msapplication-TileColor" content="#48494b">
+        <meta name="theme-color" content="#48494B">
 
         <!-- Google meta tags -->
         <?php if(!empty($meta_desciption)) : ?>
