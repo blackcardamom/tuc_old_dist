@@ -450,6 +450,11 @@ span.blog_date_published {
   text-decoration : none;
 }
 
+.recipe_card_title_info h3 {
+    padding-top:  0.5em;
+    margin: 0;
+}
+
 .recipe_card_img {
   width          : calc(24% - 0.5em);
   float          : left;
