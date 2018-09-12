@@ -68,12 +68,11 @@
 
     if($searchRecipes) {
         // Build recipe query
-        $master_query .= "SELECT 'recipes' AS origin_table, r.id, r.title, r.intro_html AS intro, r.date_published, r.recipe_active_time, r.recipe_wait_time, r.recipe_serves, r.card_img
-                          FROM recipes_tagmap tm, recipes r, tags t ";
+        $master_query .= "SELECT 'recipes' AS origin_table, r.id, r.title, r.intro_html AS intro, r.date_published, r.recipe_active_time, r.recipe_wait_time, r.recipe_serves, r.card_img ";
 
         // We only want to add this clause if we have tags
         if(!empty($_GET['tag'])) {
-            $master_query .= "WHERE tm.tag_id = t.id AND (t.name IN (";
+            $master_query .= "FROM recipes_tagmap tm, recipes r, tags t WHERE tm.tag_id = t.id AND (t.name IN (";
             $first_tag = true;
             // Loop through tags and add placeholders
             foreach($_GET['tag'] as $num => $tag) {
@@ -85,6 +84,8 @@
                 }
             }
             $master_query .=")) AND r.id = tm.recipe_id ";
+        } else {
+            $master_query .= "FROM recipes r ";
         }
 
         $master_query .=  "GROUP BY r.id";
@@ -95,12 +96,11 @@
     }
     if($searchBlogposts) {
         // Build blogpost query
-        $master_query .= "SELECT 'blogposts' AS origin_table, b.id, b.title, b.intro AS intro, b.date_published,  '' AS recipe_active_time, '' AS recipe_wait_time, '' AS recipe_serves, '' AS card_img
-                          FROM blogposts_tagmap tm, blogposts b, tags t ";
+        $master_query .= "SELECT 'blogposts' AS origin_table, b.id, b.title, b.intro AS intro, b.date_published,  '' AS recipe_active_time, '' AS recipe_wait_time, '' AS recipe_serves, '' AS card_img ";
 
         // We only want to add this clause if we have tags
         if(!empty($_GET['tag'])) {
-            $master_query .= "WHERE tm.tag_id = t.id AND (t.name IN (";
+            $master_query .= "FROM blogposts_tagmap tm, blogposts b, tags t WHERE tm.tag_id = t.id AND (t.name IN (";
             $first_tag = true;
             // Loop through tags and add placeholders
             foreach($_GET['tag'] as $num => $tag) {
@@ -112,6 +112,8 @@
                 }
             }
             $master_query .=")) AND b.id = tm.blogpost_id ";
+        } else {
+            $master_query .= "FROM blogposts b ";
         }
 
         $master_query .= "GROUP BY b.id";
@@ -135,8 +137,6 @@
             echo "<h1 style='text-align:center; background-color:white; margin:0; padding:30px;'>Sorry we are currently experiencing technical issues.</h1>";
             exit;
     }
-
-    echo $master_query;
 
     // Now we need the callback function that binds the actual value of the tags to the prepared statement
     function bindTags($stmt) {
