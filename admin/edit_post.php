@@ -11,6 +11,7 @@
     // Make sure we have been passed an acceptable type
     $acceptableTypes = Array("recipe","blogpost");
     if(!in_array($_GET['type'],$acceptableTypes)) {
+        session_destroy();
         header("Location: index.php");
         exit;
     }
