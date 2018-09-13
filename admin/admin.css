@@ -234,6 +234,7 @@ td.actions_cell i {
 
 ul.horizontal_list {
     list-style-type: none;
+    padding: 0;
 }
 
 ul.horizontal_list li{
