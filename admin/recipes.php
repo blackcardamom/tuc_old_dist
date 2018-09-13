@@ -106,8 +106,8 @@
         <tr>
             <td><?= $row['id'] ?></td>
             <td><?= $row['title'] ?></td>
-            <td class="actions_cell"><a href="edit_recipe.php?id=<?= $row['id'] ?>"><i class="fas fa-pencil-alt"></i></a> &nbsp; &nbsp;
-                 <a href="delete_recipe.php?id=<?= $row['id'] ?>"><i class="fas fa-trash-alt"></i></a></td>
+            <td class="actions_cell"><a href="edit_post.php?type=recipe&id=<?= $row['id'] ?>"><i class="fas fa-pencil-alt"></i></a> &nbsp; &nbsp;
+                 <a href="delete_post.php?type=recipe&id=<?= $row['id'] ?>"><i class="fas fa-trash-alt"></i></a></td>
         </tr>
         <?php endwhile; ?>
     </table>
