@@ -42,6 +42,9 @@
         <meta name="theme-color" content="#48494B">
 
         <!-- Google meta tags -->
+
+        <meta name="google-site-verification" content="qBP1cWkJvFTJuHy_OWfnHZvXzSaF1ya0FMYSaE3JOVo" />
+
         <?php if(!empty($meta_desciption)) : ?>
             <meta name="description" content="<?= $meta_desciption?>">
         <?php endif; ?>
