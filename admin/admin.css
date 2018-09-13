@@ -172,10 +172,119 @@ nav a.selected {
     box-shadow       : 2px 2px 8px -2px black;
 }
 
-.results_table {
+.top_filters button:active {
+    box-shadow: none;
+}
+
+.results_table_wrapper {
     display: block;
     float: left;
     width:100%;
+}
+
+.results_table_wrapper table {
+    background-color: white;
+    border: 1px solid black;
+    border-collapse: collapse;
+    width:90%;
+    margin-left: 5%;
+}
+
+.results_table_wrapper th,td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.results_table_wrapper table tr:hover {
+    background-color: var(--background-color);
+}
+
+tr.results_table_header {
+    background-color: var(--main-color);
+    color: var(--text-light);
+}
+
+.results_table_wrapper table tr.results_table_header:hover {
+    background-color: var(--main-color);
+}
+
+tr.results_table_header th{
+    padding:10px;
+    border-bottom-width: 3px;
+    text-align: left;
+}
+
+td.actions_cell {
+    text-align: center;
+    width: 1%;
+    white-space: nowrap;
+}
+
+td.actions_cell i {
+    color: var(--main-color);
+    text-shadow: 1.5px 1.5px var(--background-color);
+}
+
+.pagination_wrapper {
+    display: block;
+    float: left;
+    width:100%;
+    text-align: center;
+}
+
+ul.horizontal_list {
+    list-style-type: none;
+}
+
+ul.horizontal_list li{
+    display: inline-block;
+}
+
+li.pagination_link {
+  width         : 30px;
+  height        : 30px;
+  margin        : 0 2px 0 2px;
+  color         : black;
+}
+
+li.pagination_link:hover {
+  background-color : var(--main-color);
+  color: var(--text-light)
+}
+
+li.pagination_link:active {
+  color            : white;
+  background-color : var(--accent-color);
+}
+
+li.pagination_link a {
+  display         : block;
+  width           : 100%;
+  color           : inherit;
+  text-align      : center;
+  text-decoration : none;
+  line-height     : 30px;
+}
+
+li.pagination_link.current_page {
+  color            : white;
+  background-color : var(--accent-color);
+}
+
+li.pagination_nav_arrow {
+  width         : 30px;
+  height        : 30px;
+  color         : var(--main-color);
+  border-radius : 15px;
+}
+
+li.pagination_nav_arrow a {
+  display         : block;
+  width           : 100%;
+  color           : inherit;
+  text-align      : center;
+  text-decoration : none;
+  line-height     : 30px;
 }
 
 @media
