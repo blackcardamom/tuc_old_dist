@@ -8,6 +8,7 @@
   --background-color-translucent : rgba(203, 207, 214,0.35);
   --text-light                   : #f2f2f2;
   --badResponse-red              : rgb(255,90,90);
+  --action-red                   : rgb(255,70,70);
   --goodResponse-green           : rgb(90,255,90);
 }
 
@@ -292,7 +293,7 @@ li.pagination_nav_arrow a {
     position: fixed;
     bottom: 2%;
     right: 2%;
-    background-color: var(--badResponse-red);
+    background-color: var(--action-red);
     width: 50px;
     height:50px;
     line-height: 50px;
