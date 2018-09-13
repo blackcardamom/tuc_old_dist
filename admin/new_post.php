@@ -34,7 +34,6 @@
         include_once '../includes/parsedown/Parsedown.php';
         include_once '../includes/base_assumptions.inc.php';
 
-        echo "creds : ".checkCredentials($_POST['uid'],$_POST['pwd'])." : creds";
         if(empty($_POST['uid']) || empty($_POST['pwd'])) {
             $postErrors[] = "no_creds";
         } elseif(!checkCredentials($_POST['uid'],$_POST['pwd'])) {
@@ -141,6 +140,7 @@ include_once 'topnav.php';
 
 <?php if($successfulPost): ?>
 <p>You have successful posted a <?= $_GET['type'] ?> with ID <?= $nextID ?></p>
+<p>View it <a href="<?= $website_root."/".$_GET['type'] ?>_view.php?id=<?= $nextID ?>">here</a>.</p>
 <?php elseif($_GET['type'] === "recipe"): ?>
 
     <?php
@@ -222,7 +222,7 @@ include_once 'topnav.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
     <div class="form_container">
-        <h1>Create new recipe (with ID <?= $nextID ?>)</h1><br>
+        <h1>Create new blogpost (with ID <?= $nextID ?>)</h1><br>
         <form action="new_post.php?type=blogpost" method="post">
             <input type="hidden" name="nextID" value="<?= (string)$nextID?>">
             <strong>Blog Title</strong><br>
