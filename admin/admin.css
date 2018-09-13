@@ -293,7 +293,7 @@ li.pagination_nav_arrow a {
     position: fixed;
     bottom: 2%;
     right: 2%;
-    background-color: var(--action-red);
+    background-color: var(--accent-color);
     width: 50px;
     height:50px;
     line-height: 50px;
@@ -311,6 +311,15 @@ li.pagination_nav_arrow a {
     color: white;
     font-size: 25px;
     display: block;
+}
+
+/* New post form */
+
+.form_container {
+    display: block;
+    float: left;
+    width: 80%;
+    margin-left: 10%;
 }
 
 @media
