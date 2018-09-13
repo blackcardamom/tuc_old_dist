@@ -123,6 +123,7 @@
         <li class="pagination_nav_arrow"><a href="?<?= $paginator->getLastPageQuery()?>"><i class="fas fa-angle-double-right"></i></a></li>
     </ul>
 </div>
+<div class="new_post_button"><a href="new_blogpost.php">+</a></div>
 
 <script>
 

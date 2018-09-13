@@ -124,7 +124,7 @@ nav a.selected {
     color: var(--accent-color);
 }
 
-/* Recipe page */
+/* Recipes/Blogposts page */
 
 .top_options{
     font-size: 1.25em;
@@ -286,6 +286,30 @@ li.pagination_nav_arrow a {
   text-align      : center;
   text-decoration : none;
   line-height     : 30px;
+}
+
+.new_post_button {
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+    background-color: var(--badResponse-red);
+    width: 50px;
+    height:50px;
+    line-height: 50px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 2px 2px 8px -2px black;
+}
+
+.new_post_button:active {
+    box-shadow: none;
+}
+
+.new_post_button a {
+    text-decoration: none;
+    color: white;
+    font-size: 25px;
+    display: block;
 }
 
 @media
