@@ -1,6 +1,5 @@
 <?php
-    include_once '../includes/pdo.inc.php';
-    include_once '../includes/base_assumptions.inc.php';
+    include_once 'admin.inc.php';
     include_once '../includes/admin_validate.inc.php';
 
     session_start();
@@ -33,7 +32,7 @@
     </div>
 <?php
     else :
-
+        $loginBody = false;
         $_SESSION['uid'] = $_POST['uid'];
         header("Location: recipes.php");
     endif;
