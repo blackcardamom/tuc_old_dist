@@ -95,7 +95,7 @@
                 if(!in_array($key, $acceptableKeys)) {
                     // We have been attacked so we don't give them any error message
                     session_destroy();
-                    header("Location: index.php&bad_key=".$key."&sql=".$sql);
+                    header("Location: index.php");
                     exit;
                 }
             }
