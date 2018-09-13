@@ -84,7 +84,7 @@
 
                 //Recipients
                 $mail->setFrom($address, $name);
-                $mail->addAddress('theuglycroissant@gmail.com', 'The Ugly Croissant');     // Add a recipient
+                $mail->addAddress('admin@theuglycroissant.com', 'The Ugly Croissant');     // Add a recipient
                 $mail->addReplyTo($address, $name);
 
                 //Content
@@ -106,7 +106,8 @@
     <h1>Contact Info</h1>
     <p>
         <strong>E-mail: </strong><a href="mailto:admin@theuglycroissant.com">admin@theuglycroissant.com</a> or use the form below.<br><br>
-        <strong>Social Media: </strong><a href="https://www.instagram.com/theuglycroissant/" style="color:white;text-decoration:none;"><i class="fab fa-instagram" style="font-size:1.5em;position:relative;top:0.125em;"></i> @theuglycroissant</a>
+        <strong>Social Media: </strong><span class="no_break"><a href="https://www.instagram.com/theuglycroissant/" style="color:white;text-decoration:none;"><i class="fab fa-instagram" style="font-size:1.5em;position:relative;top:0.125em;"></i> @theuglycroissant</a></span>
+                                         &nbsp;  &nbsp; <span class="no_break"><a href="https://www.facebook.com/theuglycroissant" style="color:white;text-decoration:none;"><i class="fab fa-facebook" style="font-size:1.5em;position:relative;top:0.125em;"></i> The Ugly Croissant</a></span>
     </p>
     <h1>Contact Form</h1>
     <?php
