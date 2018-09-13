@@ -1,6 +1,5 @@
 <?php
     include_once 'pdo.inc.php';
-    include_once 'conn.inc.php';
 
     // Returns true if user exists otherwise returns false
     // If the statement fails to prepare then we return -1
