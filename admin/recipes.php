@@ -123,7 +123,7 @@
         <li class="pagination_nav_arrow"><a href="?<?= $paginator->getLastPageQuery()?>"><i class="fas fa-angle-double-right"></i></a></li>
     </ul>
 </div>
-<div class="new_post_button"><a href="new_recipe.php">+</a></div>
+<div class="new_post_button"><a href="new_post.php?type=recipe">+</a></div>
 
 <script>
 
