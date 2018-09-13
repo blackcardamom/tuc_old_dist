@@ -192,19 +192,19 @@ include_once 'topnav.php';
     </div>
 
     <script>
-    var intro_mde = new SimpleMDE({ element: document.getElementById("intro_mde") });
-    var ingredients_mde = new SimpleMDE({ element: document.getElementById("ingredients_mde") });
-    var method_mde = new SimpleMDE({ element: document.getElementById("method_mde") });
+        var intro_mde = new SimpleMDE({ element: document.getElementById("intro_mde") });
+        var ingredients_mde = new SimpleMDE({ element: document.getElementById("ingredients_mde") });
+        var method_mde = new SimpleMDE({ element: document.getElementById("method_mde") });
 
-    var intro_md_input = document.getElementById("intro_md_input")
-    var ingredients_md_input = document.getElementById("ingredients_md_input")
-    var method_md_input = document.getElementById("method_md_input")
+        var intro_md_input = document.getElementById("intro_md_input")
+        var ingredients_md_input = document.getElementById("ingredients_md_input")
+        var method_md_input = document.getElementById("method_md_input")
 
-    function onNewRecipeSubmit() {
-        intro_md_input.value = intro_mde.value();
-        ingredients_md_input.value = ingredients_mde.value();
-        method_md_input.value = method_mde.value();
-    }
+        function onNewRecipeSubmit() {
+            intro_md_input.value = intro_mde.value();
+            ingredients_md_input.value = ingredients_mde.value();
+            method_md_input.value = method_mde.value();
+        }
     </script>
 
 <?php elseif($_GET['type'] === "blogpost"):?>
@@ -241,12 +241,12 @@ include_once 'topnav.php';
     </div>
 
     <script>
-    var content_mde = new SimpleMDE({ element: document.getElementById("content_mde") });
-    var content_md_input = document.getElementById("content_md_input")
+        var content_mde = new SimpleMDE({ element: document.getElementById("content_mde") });
+        var content_md_input = document.getElementById("content_md_input")
 
-    function onNewBlogSubmit() {
-        content_md_input.value = content_mde.value();
-    }
+        function onNewBlogSubmit() {
+            content_md_input.value = content_mde.value();
+        }
     </script>
 
 <?php else:
