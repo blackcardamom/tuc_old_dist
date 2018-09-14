@@ -337,14 +337,16 @@ include_once 'topnav.php';
                     // We need to add the li elements based on $_POST['tags']
                         if(!empty($_POST['tags'])) {
                             $tags = json_decode($_POST['tags']);
-                            foreach($tags[0] as $tag) {
-                                echo "<li id='tag_".$tag."'>".$tag." <a onclick='removeTag(0,".'"'.$tag.'"'.")'><i class='fas fa-times-circle'></i></a></li>";
-                             }
-                             foreach($tags as $id => $tag) {
-                                 if($id !== 0 && $tag !== null) {
-                                     echo "<li id='tag_".$id."'>".$tag." <a onclick='removeTag(".$id.",".'"'.$tag.'"'.")'><i class='fas fa-times-circle'></i></a></li>";
-                                 }
-                             }
+                            if(!empty($tags[0])) {
+                                foreach($tags[0] as $tag) {
+                                    echo "<li id='tag_".$tag."'>".$tag." <a onclick='removeTag(0,".'"'.$tag.'"'.")'><i class='fas fa-times-circle'></i></a></li>";
+                                }
+                            }
+                            foreach($tags as $id => $tag) {
+                                if($id !== 0 && $tag !== null) {
+                                    echo "<li id='tag_".$id."'>".$tag." <a onclick='removeTag(".$id.",".'"'.$tag.'"'.")'><i class='fas fa-times-circle'></i></a></li>";
+                                }
+                            }
                         }
                     ?>
                 </ul>
@@ -357,7 +359,7 @@ include_once 'topnav.php';
 
             <label>Password</label> &nbsp;&nbsp;
             <input type="password" name="pwd"> &nbsp;&nbsp; <br id="mobile_linebreak"> <br id="mobile_linebreak">
-            <input type="submit" name="submit" onclick="onNewRecipeSubmit()">
+            <button type="submit" name="submit" onclick="onNewRecipeSubmit()" class="action_button">Submit</button>
         </form>
     </div>
 
@@ -413,14 +415,16 @@ include_once 'topnav.php';
                     // We need to add the li elements based on $_POST['tags']
                         if(!empty($_POST['tags'])) {
                             $tags = json_decode($_POST['tags']);
-                            foreach($tags[0] as $tag) {
-                                echo "<li id='tag_".$tag."'>".$tag." <a onclick='removeTag(0,".'"'.$tag.'"'.")'><i class='fas fa-times-circle'></i></a></li>";
-                             }
-                             foreach($tags as $id => $tag) {
-                                 if($id !== 0 && $tag !== null) {
-                                     echo "<li id='tag_".$id."'>".$tag." <a onclick='removeTag(".$id.",".'"'.$tag.'"'.")'><i class='fas fa-times-circle'></i></a></li>";
+                            if(!empty($tags[0])) {
+                                foreach($tags[0] as $tag) {
+                                    echo "<li id='tag_".$tag."'>".$tag." <a onclick='removeTag(0,".'"'.$tag.'"'.")'><i class='fas fa-times-circle'></i></a></li>";
                                  }
-                             }
+                            }
+                            foreach($tags as $id => $tag) {
+                                if($id !== 0 && $tag !== null) {
+                                    echo "<li id='tag_".$id."'>".$tag." <a onclick='removeTag(".$id.",".'"'.$tag.'"'.")'><i class='fas fa-times-circle'></i></a></li>";
+                                }
+                            }
                         }
                     ?>
                 </ul>
@@ -433,7 +437,7 @@ include_once 'topnav.php';
 
             <label>Password</label> &nbsp;&nbsp;
             <input type="password" name="pwd"> &nbsp;&nbsp; <br id="mobile_linebreak"> <br id="mobile_linebreak">
-            <input type="submit" name="submit" onclick="onNewBlogSubmit()">
+            <button type="submit" name="submit" onclick="onNewRecipeSubmit()" class="action_button">Submit</button>
         </form>
     </div>
 
