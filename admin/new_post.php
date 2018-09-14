@@ -47,6 +47,9 @@
             unset($data['uid']);
             unset($data['pwd']);
             unset($data['submit']);
+            unset($data['tag_search_bar']);
+            $tags = json_decode($data['tags']);               // We'll need this to add tags later
+            unset($data['tags']);
             $nextID = $data['nextID'];                        // We'll need this for later
             unset($data['nextID']);
 
@@ -141,23 +144,26 @@ include_once 'topnav.php';
 <?php if($successfulPost): ?>
 <p>You have successful posted a <?= $_GET['type'] ?> with ID <?= $nextID ?></p>
 <p>View it <a href="<?= $website_root."/".$_GET['type'] ?>_view.php?id=<?= $nextID ?>">here</a>.</p>
-<?php elseif($_GET['type'] === "recipe"): ?>
+<?php else: ?>
 
     <?php
+        // This code is common to all forms
         $sql = "SELECT `AUTO_INCREMENT`
                 FROM  INFORMATION_SCHEMA.TABLES
                 WHERE TABLE_SCHEMA = :dbName
-                AND   TABLE_NAME   = 'recipes';";
+                AND   TABLE_NAME   = :tableName;";
 
         $stmt = $admin_pdo->prepare($sql);
         $stmt->bindValue(':dbName', $dbName);
+        $stmt->bindValue(':tableName', $_GET['type']."s");
         $stmt->execute();
         $nextID = $stmt->fetch(PDO::FETCH_ASSOC)['AUTO_INCREMENT'];
     ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-    <!-- Tag live search -->
     <script>
+    // Code for tag live search
+
     // Adapted from https://www.w3schools.com/php/php_ajax_livesearch.asp
     function showResult(str) {
         var divToUpdate = document.getElementById("livesearch");
@@ -182,13 +188,64 @@ include_once 'topnav.php';
         xmlhttp.send();
     }
 
-    function addTag(tag) {
+    // We create an array with the first position containing an array of new tags to add
+    // Subsequent positions correpond to the IDs of existing tags
+    // We set them true if we wish to add them otherwise we leave them null
+    function addTag(id,tag) {
+        // Retrieve the array
         var tags = JSON.parse(document.getElementById("tags").value);
-        if(!tags.includes(tag)) {tags.push(tag);}
+        // Make sure it is an array
+        if(!Array.isArray(tags)) {
+            tags = [];
+        }
+        if (id == 0) {
+            // We are adding a new tag
+            // Make sure tags[0] is an array
+            if(!Array.isArray(tags[0])) {
+                tags[0] = [];
+            }
+            if(!tags[0].includes(tag)) {
+                tags[0].push(tag);
+                document.getElementById("tags_display").innerHTML += "<li id='tag_"+tag+"'>"+tag+" <a onclick='removeTag(0,"+'"'+tag+'"'+")'><i class='fas fa-times-circle'></i></a></li>";
+            }
+        } else {
+            // We are adding an existing tag
+            if(!tags[id]) {
+                tags[id]= true;
+                document.getElementById("tags_display").innerHTML += "<li id='tag_"+id+"'>"+tag+" <a onclick='removeTag("+id+","+'"'+tag+'"'+")'><i class='fas fa-times-circle'></i></a></li>";
+            }
+        }
         document.getElementById("tags").value = JSON.stringify(tags);
-        document.getElementById("tags_display").innerHTML = JSON.stringify(tags);
+    }
+
+    // Taken from https://www.abeautifulsite.net/adding-and-removing-elements-on-the-fly-using-javascript
+    function removeElement(elementId) {
+        // Removes an element from the document
+        var element = document.getElementById(elementId);
+        element.parentNode.removeChild(element);
+    }
+
+    function removeTag(id,tag) {
+        var tags = JSON.parse(document.getElementById("tags").value);
+        if (id == 0) {
+            // We are removing a new tag
+            var index = tags[0].indexOf(tag);
+            if (index > -1) {
+              tags[0].splice(index, 1);
+            }
+            removeElement("tag_"+tag);
+        } else {
+            // We are remvoing an existing tag
+            tags[id]= null;
+            removeElement("tag_"+id);
+        }
+        document.getElementById("tags").value = JSON.stringify(tags);
     }
     </script>
+
+
+<?php if($_GET['type'] === "recipe"): ?>
+
     <div class="form_container">
         <h1>Create new recipe (with ID <?= $nextID ?>)</h1><br>
         <?php
@@ -240,8 +297,8 @@ include_once 'topnav.php';
 
             <label>Tags</label>
             <input type="hidden" name="tags" id="tags" value = "[]">
-            <div class="new_post_active_tags" id="tags_display"></div>
-            <input type="text" size="30" onkeyup="showResult(this.value)" name="tag_input" class="search_bar">
+            <div class="new_post_active_tags"><ul id="tags_display"></ul></div>
+            <input type="text" size="30" onkeyup="showResult(this.value)" name="tag_search_bar" class="search_bar" placeholder="Search for tags...">
             <div id="livesearch" class="empty_search_results"></div>
 
             <label>Username</label> &nbsp;&nbsp;
@@ -270,19 +327,7 @@ include_once 'topnav.php';
     </script>
 
 <?php elseif($_GET['type'] === "blogpost"):?>
-    <?php
-        $sql = "SELECT `AUTO_INCREMENT`
-                FROM  INFORMATION_SCHEMA.TABLES
-                WHERE TABLE_SCHEMA = :dbName
-                AND   TABLE_NAME   = 'blogposts';";
 
-        $stmt = $admin_pdo->prepare($sql);
-        $stmt->bindValue(':dbName', $dbName);
-        $stmt->execute();
-        $nextID = $stmt->fetch(PDO::FETCH_ASSOC)['AUTO_INCREMENT'];
-    ?>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
     <div class="form_container">
         <h1>Create new blogpost (with ID <?= $nextID ?>)</h1><br>
         <?php
@@ -309,6 +354,12 @@ include_once 'topnav.php';
             <textarea id="content_mde"><?= empty($_POST['content_md']) ? "" : $_POST['content_md']?></textarea>
             <input type="hidden" name="content_md" id="content_md_input">
 
+            <label>Tags</label>
+            <input type="hidden" name="tags" id="tags" value = "[]">
+            <div class="new_post_active_tags"><ul id="tags_display"></ul></div>
+            <input type="text" size="30" onkeyup="showResult(this.value)" name="tag_input" class="search_bar" placeholder="Search for tags...">
+            <div id="livesearch" class="empty_search_results"></div>
+
             <label>Username</label> &nbsp;&nbsp;
             <input type="text" class="uid" name="uid"<?= empty($_POST['uid']) ? "" : " value = '".$_POST['uid']."'"?>> &nbsp;&nbsp; <br id="mobile_linebreak"> <br id="mobile_linebreak">
 
@@ -334,4 +385,4 @@ include_once 'topnav.php';
     exit;
 ?>
 
-<?php endif; ?>
+<?php endif; endif;?>

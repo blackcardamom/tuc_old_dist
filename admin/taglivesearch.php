@@ -15,11 +15,11 @@
         if($row['name'] === $_GET['q']) {
             $foundCurrentTag = true;
         }
-        echo "<tr><td><a onclick='addTag(".'"'.$row['name'].'"'.")'>".$row['name']."</a></td></tr>";
+        echo "<tr><td><a onclick='addTag(".$row['id'].',"'.$row['name'].'"'.")'>".$row['name']."</a></td></tr>";
     }
 
     if(!$foundCurrentTag) {
-        echo "<tr><td class='new_tag'><a onclick='addTag(".'"'.$_GET['q'].'"'.")'>".$_GET['q']."</a></td></tr>";
+        echo "<tr><td class='new_tag'><a onclick='addTag(0,".'"'.$_GET['q'].'"'.")'>".$_GET['q']."</a></td></tr>";
     }
 
     echo "</table>";
