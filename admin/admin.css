@@ -453,6 +453,13 @@ td.new_tag {
     box-shadow: none;
 }
 
+.successful_post_wrapper {
+    display: block;
+    width: 100%;
+    float: left;
+    text-align: center;
+}
+
 @media
   screen
   and (max-width : 1200px) {
