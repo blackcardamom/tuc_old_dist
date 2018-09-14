@@ -320,7 +320,7 @@ include_once 'topnav.php';
                     ?>
                 </ul>
             </div>
-            <input type="text" size="30" onkeyup="showResult(this.value)" name="tag_search_bar" class="search_bar" placeholder="Search for tags...">
+            <input type="text" size="30" onkeyup="showResult(this.value)" name="tag_search_bar" class="search_bar" placeholder="Search for tags..." autocomplete="off">
             <div id="livesearch" class="empty_search_results"></div>
 
             <label>Username</label> &nbsp;&nbsp;
@@ -396,7 +396,7 @@ include_once 'topnav.php';
                     ?>
                 </ul>
             </div>
-            <input type="text" size="30" onkeyup="showResult(this.value)" name="tag_search_bar" class="search_bar" placeholder="Search for tags...">
+            <input type="text" size="30" onkeyup="showResult(this.value)" name="tag_search_bar" class="search_bar" placeholder="Search for tags..." autocomplete="off">
             <div id="livesearch" class="empty_search_results"></div>
 
             <label>Username</label> &nbsp;&nbsp;
