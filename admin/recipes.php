@@ -40,7 +40,7 @@
 
     // We figure out the master query
 
-    $master_query = "SELECT * FROM MOCK_TABLE";
+    $master_query = "SELECT * FROM recipes";
     $searchTitle = !empty($_GET['title']);
     $searchID = !empty($_GET['id']);
 
