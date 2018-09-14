@@ -128,6 +128,10 @@
                 $successfulPost = true;
             }
 
+            // Now we need to add the new tags to the database
+
+            // Now we need to add the tagmaps to the database
+
         }
     }
 
@@ -209,9 +213,10 @@ include_once 'topnav.php';
                 document.getElementById("tags_display").innerHTML += "<li id='tag_"+tag+"'>"+tag+" <a onclick='removeTag(0,"+'"'+tag+'"'+")'><i class='fas fa-times-circle'></i></a></li>";
             }
         } else {
+            console.log(id+":"+tag);
             // We are adding an existing tag
-            if(!tags[id]) {
-                tags[id]= true;
+            if(tags[id] == null) {
+                tags[id] = tag;
                 document.getElementById("tags_display").innerHTML += "<li id='tag_"+id+"'>"+tag+" <a onclick='removeTag("+id+","+'"'+tag+'"'+")'><i class='fas fa-times-circle'></i></a></li>";
             }
         }
@@ -296,8 +301,25 @@ include_once 'topnav.php';
             <input type="text" name="print_pdf" value="<?= empty($_POST["print_pdf"]) ? "recipes/".$nextID."/" : $_POST["print_pdf"] ?>"><br>
 
             <label>Tags</label>
-            <input type="hidden" name="tags" id="tags" value = "[]">
-            <div class="new_post_active_tags"><ul id="tags_display"></ul></div>
+            <input type="hidden" name="tags" id="tags" value='<?= empty($_POST['tags']) ? "[]" : $_POST['tags'] ?>'>
+            <div class="new_post_active_tags">
+                <ul id="tags_display">
+                    <?php
+                    // We need to add the li elements based on $_POST['tags']
+                        if(!empty($_POST['tags'])) {
+                            $tags = json_decode($_POST['tags']);
+                            foreach($tags[0] as $tag) {
+                                echo "<li id='tag_".$tag."'>".$tag." <a onclick='removeTag(0,".'"'.$tag.'"'.")'><i class='fas fa-times-circle'></i></a></li>";
+                             }
+                             foreach($tags as $id => $tag) {
+                                 if($id !== 0 && $tag !== null) {
+                                     echo "<li id='tag_".$id."'>".$tag." <a onclick='removeTag(".$id.",".'"'.$tag.'"'.")'><i class='fas fa-times-circle'></i></a></li>";
+                                 }
+                             }
+                        }
+                    ?>
+                </ul>
+            </div>
             <input type="text" size="30" onkeyup="showResult(this.value)" name="tag_search_bar" class="search_bar" placeholder="Search for tags...">
             <div id="livesearch" class="empty_search_results"></div>
 
@@ -355,9 +377,26 @@ include_once 'topnav.php';
             <input type="hidden" name="content_md" id="content_md_input">
 
             <label>Tags</label>
-            <input type="hidden" name="tags" id="tags" value = "[]">
-            <div class="new_post_active_tags"><ul id="tags_display"></ul></div>
-            <input type="text" size="30" onkeyup="showResult(this.value)" name="tag_input" class="search_bar" placeholder="Search for tags...">
+            <input type="hidden" name="tags" id="tags" value='<?= empty($_POST['tags']) ? "[]" : $_POST['tags'] ?>'>
+            <div class="new_post_active_tags">
+                <ul id="tags_display">
+                    <?php
+                    // We need to add the li elements based on $_POST['tags']
+                        if(!empty($_POST['tags'])) {
+                            $tags = json_decode($_POST['tags']);
+                            foreach($tags[0] as $tag) {
+                                echo "<li id='tag_".$tag."'>".$tag." <a onclick='removeTag(0,".'"'.$tag.'"'.")'><i class='fas fa-times-circle'></i></a></li>";
+                             }
+                             foreach($tags as $id => $tag) {
+                                 if($id !== 0 && $tag !== null) {
+                                     echo "<li id='tag_".$id."'>".$tag." <a onclick='removeTag(".$id.",".'"'.$tag.'"'.")'><i class='fas fa-times-circle'></i></a></li>";
+                                 }
+                             }
+                        }
+                    ?>
+                </ul>
+            </div>
+            <input type="text" size="30" onkeyup="showResult(this.value)" name="tag_search_bar" class="search_bar" placeholder="Search for tags...">
             <div id="livesearch" class="empty_search_results"></div>
 
             <label>Username</label> &nbsp;&nbsp;
