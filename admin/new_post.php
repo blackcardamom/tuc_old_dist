@@ -129,9 +129,25 @@
             }
 
             // Now we need to add the new tags to the database
-
+            foreach($tags[0] as $newTag) {
+                $sql = "INSERT INTO tags(name) VALUES (:newTag); SELECT LAST_INSERT_ID()";
+                $stmt = $admin_pdo->prepare($sql);
+                $stmt->bindValue('newTag',$newTag);
+                $stmt->execute();
+                $newIndex = $stmt->fetch(PDO::FETCH_ASSOC)["LAST_INSERT_ID()"];
+                $tags[$newIndex] = $newTag;
+            }
+            
             // Now we need to add the tagmaps to the database
-
+            foreach($tags as $key => $tag) {
+                if(!$key===0 && $tag !== null) {
+                    $sql = "INSERT INTO ".$_GET['type']."s_tagmap(".$_GET['type']."_id,tag_id) VALUES (:post_id,:tag_id)";
+                    $stmt = $admin_pdo->prepare($sql);
+                    $stmt->bindValue('post_id',$nextID);
+                    $stmt->bindValue('tag_id',$key);
+                    $stmt->execute();
+                }
+            }
         }
     }
 
