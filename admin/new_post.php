@@ -128,28 +128,35 @@
                 $successfulPost = true;
             }
 
-            // Now we need to add the new tags to the database
-            foreach($tags[0] as $newTag) {
-                $sql = "INSERT INTO tags(name) VALUES (:newTag)";
-                $stmt = $admin_pdo->prepare($sql);
-                $stmt->bindValue('newTag',$newTag);
-                $stmt->execute();
-                $sql = "SELECT LAST_INSERT_ID()";
-                $stmt = $admin_pdo->prepare($sql);
-                $stmt->execute();
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                $newIndex = $result['LAST_INSERT_ID()'];
-                $tags[$newIndex] = $newTag;
-            }
+            // Now we need to add the tags to the database
+            if(is_array($tags)) {
+                // First we add any new tags
+                if(!empty($tags[0])) {
+                    if(is_array($tags[0])) {
+                        foreach($tags[0] as $newTag) {
+                            $sql = "INSERT INTO tags(name) VALUES (:newTag)";
+                            $stmt = $admin_pdo->prepare($sql);
+                            $stmt->bindValue('newTag',$newTag);
+                            $stmt->execute();
+                            $sql = "SELECT LAST_INSERT_ID()";
+                            $stmt = $admin_pdo->prepare($sql);
+                            $stmt->execute();
+                            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                            $newIndex = $result['LAST_INSERT_ID()'];
+                            $tags[$newIndex] = $newTag;
+                        }
+                    }
+                }
 
-            // Now we need to add the tagmaps to the database
-            foreach($tags as $key => $tag) {
-                if($key!==0 && $tag !== null) {
-                    $sql = "INSERT INTO ".$_GET['type']."s_tagmap(".$_GET['type']."_id,tag_id) VALUES (:post_id,:tag_id)";
-                    $stmt = $admin_pdo->prepare($sql);
-                    $stmt->bindValue('post_id',$nextID);
-                    $stmt->bindValue('tag_id',$key);
-                    $stmt->execute();
+                // Now we need to add the tagmaps to the database
+                foreach($tags as $key => $tag) {
+                    if($key!==0 && $tag !== null) {
+                        $sql = "INSERT INTO ".$_GET['type']."s_tagmap(".$_GET['type']."_id,tag_id) VALUES (:post_id,:tag_id)";
+                        $stmt = $admin_pdo->prepare($sql);
+                        $stmt->bindValue('post_id',$nextID);
+                        $stmt->bindValue('tag_id',$key);
+                        $stmt->execute();
+                    }
                 }
             }
         }
@@ -166,8 +173,10 @@ include_once 'topnav.php';
 ?>
 
 <?php if($successfulPost): ?>
-<p>You have successful posted a <?= $_GET['type'] ?> with ID <?= $nextID ?></p>
-<p>View it <a href="<?= $website_root."/".$_GET['type'] ?>_view.php?id=<?= $nextID ?>">here</a>.</p>
+<div class="successful_post_wrapper">
+    <p>You have successful posted a <?= $_GET['type'] ?> with ID <?= $nextID ?></p>
+    <p>View it <a href="<?= $website_root."/".$_GET['type'] ?>_view.php?id=<?= $nextID ?>">here</a>.</p>
+</div>
 <?php else: ?>
 
     <?php
