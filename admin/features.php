@@ -7,7 +7,6 @@
         header("Location: index.php");
         exit;
     }
-    print_r($_SESSION);
 ?>
 
 <?php include_once 'footer.php'; ?>

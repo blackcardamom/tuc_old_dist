@@ -50,7 +50,7 @@
     <?php
         // Here we actually delete the post
      ?>
-    <h1>Post deleted</h1>
+    <h1>Post deleted (this doesn't work yet)</h1>
     <a href="<?= $_GET['type'] ?>s.php"><button class="action_button">Return</button></a>
     <?php endif; ?>
 </div>

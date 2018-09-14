@@ -7,7 +7,6 @@
         header("Location: index.php");
         exit;
     }
-    print_r($_SESSION);
     if(isset($_POST['logout'])) {
         session_destroy();
         header("Location: index.php");
