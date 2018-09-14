@@ -119,9 +119,9 @@
                 foreach($keys as $key) {
                     $stmt->bindValue(":".$key,$data[$key]);
                 }
-                // Submit new recipe
+                // Submit new post
                 $stmt->execute();
-                // Return to original page for success message and link to new recipe
+                // Return to original page for success message and link to new post
                 $successfulPost = true;
             }
 
@@ -156,6 +156,39 @@ include_once 'topnav.php';
     ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <!-- Tag live search -->
+    <script>
+    // Adapted from https://www.w3schools.com/php/php_ajax_livesearch.asp
+    function showResult(str) {
+        var divToUpdate = document.getElementById("livesearch");
+        if (str.length==0) {
+            divToUpdate.innerHTML="";
+            divToUpdate.className="empty_search_results";
+            return;
+        }
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        } else {  // code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function() {
+            if (this.readyState==4 && this.status==200) {
+              divToUpdate.innerHTML=this.responseText;
+              divToUpdate.className="full_search_results";
+            }
+        }
+        xmlhttp.open("GET","taglivesearch.php?q="+str,true);
+        xmlhttp.send();
+    }
+
+    function addTag(tag) {
+        var tags = JSON.parse(document.getElementById("tags").value);
+        if(!tags.includes(tag)) {tags.push(tag);}
+        document.getElementById("tags").value = JSON.stringify(tags);
+        document.getElementById("tags_display").innerHTML = JSON.stringify(tags);
+    }
+    </script>
     <div class="form_container">
         <h1>Create new recipe (with ID <?= $nextID ?>)</h1><br>
         <?php
@@ -171,31 +204,49 @@ include_once 'topnav.php';
         ?>
         <form action="new_post.php?type=recipe" method="post">
             <input type="hidden" name="nextID" value="<?= (string)$nextID?>">
+
             <label>Recipe Title</label><br>
             <input type="text" name="title" placeholder="Lemon Meringue Pie"<?= empty($_POST['title']) ? "" : " value = '".$_POST['title']."'"?>><br>
+
             <label>Time spent cooking</label><br>
             <input type="text" name="recipe_active_time" placeholder="2 hours 30 minutes"<?= empty($_POST['recipe_active_time']) ? "" : " value = '".$_POST['recipe_active_time']."'"?>><br>
+
             <label>Time spent waiting</label><br>
             <input type="text" name="recipe_wait_time" placeholder="3 hours + overnight"<?= empty($_POST['recipe_wait_time']) ? "" : " value = '".$_POST['recipe_wait_time']."'"?>><br>
+
             <label>Recipe servings</label><br>
             <input type="text" name="recipe_serves" placeholder="A hungry Tom"<?= empty($_POST['recipe_serves']) ? "" : " value = '".$_POST['recipe_serves']."'"?>><br>
+
             <label>Intro Markdown Editor</label><br>
             <textarea id="intro_mde"><?= empty($_POST['intro_md']) ? "" : $_POST['intro_md']?></textarea>
             <input type="hidden" name="intro_md" id="intro_md_input">
+
             <label>Ingredients Markdown Editor</label><br>
             <textarea id="ingredients_mde"><?= empty($_POST['ingredients_md']) ? "" : $_POST['ingredients_md']?></textarea>
             <input type="hidden" name="ingredients_md" id="ingredients_md_input">
+
             <label>Method Markdown Editor</label><br>
             <textarea id="method_mde"><?= empty($_POST['method_md']) ? "" : $_POST['method_md']?></textarea>
             <input type="hidden" name="method_md" id="method_md_input">
+
             <label>Path to intro image</label><br>
             <input type="text" name="intro_img" value="<?= empty($_POST["intro_img"]) ? "recipes/".$nextID."/" : $_POST["intro_img"] ?>"><br>
+
             <label>Path to card image</label><br>
             <input type="text" name="card_img" value="<?= empty($_POST["card_img"]) ? "recipes/".$nextID."/" : $_POST["card_img"] ?>"><br>
+
             <label>Path to printable pdf</label><br>
             <input type="text" name="print_pdf" value="<?= empty($_POST["print_pdf"]) ? "recipes/".$nextID."/" : $_POST["print_pdf"] ?>"><br>
+
+            <label>Tags</label>
+            <input type="hidden" name="tags" id="tags" value = "[]">
+            <div class="new_post_active_tags" id="tags_display"></div>
+            <input type="text" size="30" onkeyup="showResult(this.value)" name="tag_input" class="search_bar">
+            <div id="livesearch" class="empty_search_results"></div>
+
             <label>Username</label> &nbsp;&nbsp;
             <input type="text" class="uid" name="uid"<?= empty($_POST['uid']) ? "" : " value = '".$_POST['uid']."'"?>> &nbsp;&nbsp; <br id="mobile_linebreak"> <br id="mobile_linebreak">
+
             <label>Password</label> &nbsp;&nbsp;
             <input type="password" name="pwd"> &nbsp;&nbsp; <br id="mobile_linebreak"> <br id="mobile_linebreak">
             <input type="submit" name="submit" onclick="onNewRecipeSubmit()">
@@ -247,15 +298,20 @@ include_once 'topnav.php';
         ?>
         <form action="new_post.php?type=blogpost" method="post">
             <input type="hidden" name="nextID" value="<?= (string)$nextID?>">
+
             <label>Blog Title</label><br>
             <input type="text" name="title" placeholder="Lemon Meringue Pie"<?= empty($_POST['title']) ? "" : " value = '".$_POST['title']."'"?>><br>
+
             <label>Intro Text</label><br>
             <textarea name="intro"><?= empty($_POST['intro']) ? "" : $_POST['intro']?></textarea>
+
             <label>Content Markdown Editor</label><br>
             <textarea id="content_mde"><?= empty($_POST['content_md']) ? "" : $_POST['content_md']?></textarea>
             <input type="hidden" name="content_md" id="content_md_input">
+
             <label>Username</label> &nbsp;&nbsp;
             <input type="text" class="uid" name="uid"<?= empty($_POST['uid']) ? "" : " value = '".$_POST['uid']."'"?>> &nbsp;&nbsp; <br id="mobile_linebreak"> <br id="mobile_linebreak">
+
             <label>Password</label> &nbsp;&nbsp;
             <input type="password" name="pwd"> &nbsp;&nbsp; <br id="mobile_linebreak"> <br id="mobile_linebreak">
             <input type="submit" name="submit" onclick="onNewBlogSubmit()">
