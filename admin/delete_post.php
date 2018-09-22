@@ -8,6 +8,11 @@
         exit;
     }
 
+    if(empty($_GET['id']) || empty($_GET['type'])) {
+        header("Location: index.php?err=missing_field");
+        exit;
+    }
+
     // Make sure we have been passed an acceptable type
     $acceptableTypes = Array("recipe","blogpost");
     if(!in_array($_GET['type'],$acceptableTypes)) {
@@ -49,8 +54,12 @@
     <?php else: ?>
     <?php
         // Here we actually delete the post
+        $sql = "DELETE FROM " . $_GET['type'] ."s WHERE id=:id";
+        $stmt = $admin_pdo->prepare($sql);
+        $stmt->bindValue('id',$_GET['id']);
+        $stmt->execute();
      ?>
-    <h1>Post deleted (this doesn't work yet)</h1>
+    <h1>Post deleted</h1>
     <a href="<?= $_GET['type'] ?>s.php"><button class="action_button">Return</button></a>
     <?php endif; ?>
 </div>
