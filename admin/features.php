@@ -135,4 +135,5 @@ td.title_cell {
         <button type="submit" name="submit" class="action_button">Submit</button>
     </form>
 </div>
+<div class="new_post_button"><a href="new_feature.php">+</a></div>
 <?php include_once 'footer.php'; ?>
