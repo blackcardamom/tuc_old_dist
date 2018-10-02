@@ -443,7 +443,7 @@ include_once 'topnav.php';
 
     <script>
         var content_mde = new SimpleMDE({ element: document.getElementById("content_mde") });
-        var content_md_input = document.getElementById("content_md_input")
+        var content_md_input = document.getElementById("content_md_input");
 
         function onNewBlogSubmit() {
             content_md_input.value = content_mde.value();
