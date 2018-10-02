@@ -63,3 +63,5 @@
     <a href="<?= $_GET['type'] ?>s.php"><button class="action_button">Return</button></a>
     <?php endif; ?>
 </div>
+
+<?php include_once 'footer.php'; ?>

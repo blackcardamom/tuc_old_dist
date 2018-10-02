@@ -11,3 +11,6 @@
     include_once 'header.php';
     $selected = "features";
     include_once 'topnav.php';
+?>
+
+<?php include_once 'footer.php'; ?>

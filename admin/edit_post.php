@@ -20,3 +20,6 @@
     include_once 'header.php';
     $selected = $_GET['type']."s";
     include_once 'topnav.php';
+?>
+
+<?php include_once 'footer.php'; ?>

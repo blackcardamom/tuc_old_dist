@@ -458,3 +458,4 @@ include_once 'topnav.php';
 ?>
 
 <?php endif; endif;?>
+<?php include_once 'footer.php'; ?>
