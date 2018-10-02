@@ -437,7 +437,7 @@ include_once 'topnav.php';
 
             <label>Password</label> &nbsp;&nbsp;
             <input type="password" name="pwd"> &nbsp;&nbsp; <br id="mobile_linebreak"> <br id="mobile_linebreak">
-            <button type="submit" name="submit" onclick="onNewRecipeSubmit()" class="action_button">Submit</button>
+            <button type="submit" name="submit" onclick="onNewBlogSubmit()" class="action_button">Submit</button>
         </form>
     </div>
 
