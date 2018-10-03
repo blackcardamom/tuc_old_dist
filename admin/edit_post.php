@@ -38,6 +38,7 @@
     // Else we pass anything we received in POST back into the form and display an error message
     $successfulPost = false;
     $postErrors = Array();
+    $nextID = $_GET['id'];
 
     // Make sure we've actually pressed submit
     if(isset($_POST['submit'])){
@@ -203,7 +204,7 @@ include_once 'topnav.php';
 
 <?php if($successfulPost): ?>
 <div class="message_wrapper">
-    <p>You have successful edit a <?= $_GET['type'] ?> with ID <?= $nextID ?></p>
+    <p>You have successfully edited a <?= $_GET['type'] ?> with ID <?= $nextID ?></p>
     <p>View it <a href="<?= $website_root."/".$_GET['type'] ?>_view.php?id=<?= $nextID ?>">here</a>.</p>
 </div>
 <?php else: ?>
