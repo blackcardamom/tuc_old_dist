@@ -132,6 +132,7 @@ td.title_cell {
     </table>
     <form action="features.php" method="get">
         <input type="hidden" name="new_order" id="hidden_input">
+        <br>
         <button type="submit" name="submit" class="action_button">Submit</button>
     </form>
 </div>
