@@ -3,6 +3,8 @@
     // * Change the MySQL query to an UPDATE $query
     // * Deal with adding and deleting tags on successful submission
 
+    // We will deal with tags by storing pairs (id, title) of tags in a stack
+
     // Start the session
     session_start();
 
@@ -61,7 +63,6 @@
             $tags = json_decode($data['tags']);               // We'll need this to add tags later
             unset($data['tags']);
             $nextID = $_GET['id'];                        // We'll need this for later
-            unset($data['nextID']);
 
             // We now need to proccess the markdown on the page to create the relavent HTML and create the social links
             if($_GET['type'] === "recipe") {
@@ -114,15 +115,11 @@
             }
 
             // We are now safe to construct our query using the keys in $data
-            $sql = "INSERT into ".$_GET['type']."s (";
+            $sql = "UPDATE ".$_GET['type']."s  SET";
             foreach($keys as $key) {
-                $sql = $sql.$key.", ";
+                $sql .= $key . " = :" . $key . ", ";
             }
-            $sql = substr($sql,0,-2).") VALUES (";
-            foreach($keys as $key) {
-                $sql = $sql.":". $key .", ";
-            }
-            $sql = substr($sql,0,-2).")";
+            $sql = substr($sql,0,-2)." WHERE id = :id";
 
             // We now execute the query
             if ( !($stmt = $admin_pdo->prepare($sql)) ) {
@@ -132,43 +129,65 @@
                 foreach($keys as $key) {
                     $stmt->bindValue(":".$key,$data[$key]);
                 }
+                $stmt->bindValue("id",$nextID);
                 // Submit new post
                 $stmt->execute();
-                // Return to original page for success message and link to new post
+                // Return to original page for success message and link to editted post
                 $successfulPost = true;
             }
 
-            // Now we need to add the tags to the database
-            if(is_array($tags)) {
-                // First we add any new tags
-                if(!empty($tags[0])) {
-                    if(is_array($tags[0])) {
-                        foreach($tags[0] as $newTag) {
-                            $sql = "INSERT INTO tags(name) VALUES (:newTag)";
-                            $stmt = $admin_pdo->prepare($sql);
-                            $stmt->bindValue('newTag',$newTag);
+            // Now we need to update the tags on the database
+            if(!empty($tags)) {
+                foreach($tags as $tagPair) {
+                    if($tagPair[0] == -1) {
+                        // We need to delete the tag map with tag_id $tagPair[1]
+                        $query = "DELETE FROM ".$_GET['type']."s_tagmap WHERE ".$_GET['type']."_id = :post_id AND tag_id = :tag_id";
+                        $stmt = $admin_pdo->prepare($query);
+                        $stmt->bindValue('post_id',$_GET['id']);
+                        $stmt->bindValue('tag_id', $tagPair[1]);
+                        $stmt->execute();
+                    } elseif ($tagPair[0] == 0) {
+                        // We need to add a new tag and the tagmap
+
+                        // First lets create the new tag
+                        $query = "INSERT INTO tags(name) VALUES (:new_tag)";
+                        $stmt = $admin_pdo->prepare($query);
+                        $stmt->bindValue('new_tag',$tagPair[1]);
+                        $stmt->execute();
+
+                        // Now lets figure out what the new tag_id is
+                        $sql = "SELECT LAST_INSERT_ID()";
+                        $stmt = $admin_pdo->prepare($sql);
+                        $stmt->execute();
+                        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                        $new_id = $result['LAST_INSERT_ID()'];
+
+                        // Now let's insert the tagmap
+                        $query = "INSERT INTO ".$_GET['type']."s_tagmap (".$_GET['type']."_id, tag_id) VALUES (:post_id, :tag_id)";
+                        $stmt = $admin_pdo->prepare($query);
+                        $stmt->bindValue('post_id',$_GET['id']);
+                        $stmt->bindValue('tag_id', $new_id);
+                        $stmt->execute();
+
+                    } else {
+                        // We just need to add a new tagmap tag_id $tagPair[0] if such a map does not already exist
+                        // Lets first check if the tag exists
+                        $query = "SELECT * FROM ".$_GET['type']."s_tagmap WHERE ".$_GET['type']."_id = :post_id AND tag_id = :tag_id";
+                        $stmt = $admin_pdo->prepare($query);
+                        $stmt->bindValue('post_id',$_GET['id']);
+                        $stmt->bindValue('tag_id', $tagPair[0]);
+                        $stmt->execute();
+                        if(!$stmt->fetch()) {
+                            $query = "INSERT INTO ".$_GET['type']."s_tagmap (".$_GET['type']."_id, tag_id) VALUES (:post_id, :tag_id)";
+                            $stmt = $admin_pdo->prepare($query);
+                            $stmt->bindValue('post_id',$_GET['id']);
+                            $stmt->bindValue('tag_id', $tagPair[0]);
                             $stmt->execute();
-                            $sql = "SELECT LAST_INSERT_ID()";
-                            $stmt = $admin_pdo->prepare($sql);
-                            $stmt->execute();
-                            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                            $newIndex = $result['LAST_INSERT_ID()'];
-                            $tags[$newIndex] = $newTag;
                         }
                     }
                 }
-
-                // Now we need to add the tagmaps to the database
-                foreach($tags as $key => $tag) {
-                    if($key!==0 && $tag !== null) {
-                        $sql = "INSERT INTO ".$_GET['type']."s_tagmap(".$_GET['type']."_id,tag_id) VALUES (:post_id,:tag_id)";
-                        $stmt = $admin_pdo->prepare($sql);
-                        $stmt->bindValue('post_id',$nextID);
-                        $stmt->bindValue('tag_id',$key);
-                        $stmt->execute();
-                    }
-                }
             }
+
         }
     }
 
@@ -219,57 +238,43 @@ include_once 'topnav.php';
         xmlhttp.send();
     }
 
-    // We create an array with the first position containing an array of new tags to add
-    // Subsequent positions correpond to the IDs of existing tags
-    // We set them true if we wish to add them otherwise we leave them null
+    // We create a stack of tags stored as pairs (id, name) with id=0 if it is a new tag
     function addTag(id,tag) {
         // Retrieve the array
         var tags = JSON.parse(document.getElementById("tags").value);
         // Make sure it is an array
         if(!Array.isArray(tags)) {
-            tags = [];
+            var tags = [];
         }
-        if (id == 0) {
-            // We are adding a new tag
-            // Make sure tags[0] is an array
-            if(!Array.isArray(tags[0])) {
-                tags[0] = [];
-            }
-            if(!tags[0].includes(tag)) {
-                tags[0].push(tag);
-                document.getElementById("tags_display").innerHTML += "<li id='tag_"+tag+"'>"+tag+" <a onclick='removeTag(0,"+'"'+tag+'"'+")'><i class='fas fa-times-circle'></i></a></li>";
-            }
-        } else {
-            console.log(id+":"+tag);
-            // We are adding an existing tag
-            if(tags[id] == null) {
-                tags[id] = tag;
-                document.getElementById("tags_display").innerHTML += "<li id='tag_"+id+"'>"+tag+" <a onclick='removeTag("+id+","+'"'+tag+'"'+")'><i class='fas fa-times-circle'></i></a></li>";
+        // We need to check to make sure such a tag does not already exist
+        for(i= 0; i< tags.length; i++) {
+            if(tags[i][0] == id) {
+                return;
             }
         }
+        tags.push([id, tag]);
+        var new_pos = tags.length - 1;
+        document.getElementById("tags_display").innerHTML += "<li id='tag_"+tag+"'>"+tag+" <a onclick='removeTag("+'"'+ tag +'"'+")'><i class='fas fa-times-circle'></i></a></li>";
         document.getElementById("tags").value = JSON.stringify(tags);
     }
 
+    // Removes an element from the document
     // Taken from https://www.abeautifulsite.net/adding-and-removing-elements-on-the-fly-using-javascript
     function removeElement(elementId) {
-        // Removes an element from the document
         var element = document.getElementById(elementId);
         element.parentNode.removeChild(element);
     }
 
-    function removeTag(id,tag) {
+    function removeTag(name) {
         var tags = JSON.parse(document.getElementById("tags").value);
-        if (id == 0) {
-            // We are removing a new tag
-            var index = tags[0].indexOf(tag);
-            if (index > -1) {
-              tags[0].splice(index, 1);
+        for(i=0 ; i < tags.length; i++) {
+            if (tags[i][1] == name) {
+                // We set a reminder to ourselves to remove this tag
+                // By leaving a pair (-1, tag_id)
+                tags[i][1] = tags[i][0];
+                tags[i][0] = -1
+                removeElement("tag_"+name);
             }
-            removeElement("tag_"+tag);
-        } else {
-            // We are remvoing an existing tag
-            tags[id]= null;
-            removeElement("tag_"+id);
         }
         document.getElementById("tags").value = JSON.stringify(tags);
     }
@@ -283,6 +288,9 @@ include_once 'topnav.php';
         if(isset($_POST['submit'])) {
             // We attempted to edit the post but failed so we should fill the form with $_POST
             $formData = $_POST;
+            // The tags are stored in the form data that we received via POST in JSON format
+            $tags = json_decode($formData['tags']);
+            $tagsJSON = $formData['tags'];
         } else {
             // We have just opened the form so we should populate the form with the database content
             $query = "SELECT * FROM ".$_GET['type']."s WHERE ID = :id";
@@ -290,6 +298,17 @@ include_once 'topnav.php';
             $stmt->bindValue('id',$_GET['id']);
             $stmt->execute();
             $formData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // We need to fetch the tag information from the database
+            $tags = Array();
+            $query = "SELECT m.tag_id as tag_id, t.name FROM " . $_GET['type'] . "s_tagmap m, tags t WHERE " . $_GET['type'] . "_id = :post_id AND m.tag_id = t.id";
+            $stmt = $admin_pdo->prepare($query);
+            $stmt->bindValue('post_id',$_GET['id']);
+            $stmt->execute();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                array_push($tags, array($row['tag_id'], $row['name']) );
+            }
+            $tagsJSON = json_encode($tags);
         }
     ?>
 
@@ -344,21 +363,16 @@ include_once 'topnav.php';
             <input type="text" name="print_pdf" value="<?= empty($formData["print_pdf"]) ? "recipes/".$nextID."/" : $formData["print_pdf"] ?>"><br>
 
             <label>Tags</label>
-            <input type="hidden" name="tags" id="tags" value='<?= empty($formData['tags']) ? "[]" : $formData['tags'] ?>'>
+            <input type="hidden" name="tags" id="tags" value='<?= empty($tagsJSON) ? "[]" : $tagsJSON ?>'>
             <div class="new_post_active_tags">
                 <ul id="tags_display">
                     <?php
-                    // We need to add the li elements based on $formData['tags']
-                        if(!empty($formData['tags'])) {
-                            $tags = json_decode($formData['tags']);
-                            if(!empty($tags[0])) {
-                                foreach($tags[0] as $tag) {
-                                    echo "<li id='tag_".$tag."'>".$tag." <a onclick='removeTag(0,".'"'.$tag.'"'.")'><i class='fas fa-times-circle'></i></a></li>";
-                                }
-                            }
-                            foreach($tags as $id => $tag) {
-                                if($id !== 0 && $tag !== null) {
-                                    echo "<li id='tag_".$id."'>".$tag." <a onclick='removeTag(".$id.",".'"'.$tag.'"'.")'><i class='fas fa-times-circle'></i></a></li>";
+                        // We need to add the li elements based on $tags
+                        if(!empty($tags)) {
+                            foreach($tags as $tagPair) {
+                                // If the first entry is -1 then this is just a reminder to delete
+                                if(!$tagPair[0] !== -1) {
+                                    echo "<li id='tag_".$tagPair[1]."'>".$tagPair[1]." <a onclick='removeTag(".'"'.$tagPair[1].'"'.")'><i class='fas fa-times-circle'></i></a></li>";
                                 }
                             }
                         }
@@ -420,31 +434,26 @@ include_once 'topnav.php';
             <input type="hidden" name="content_md" id="content_md_input">
 
             <label>Tags</label>
-            <input type="hidden" name="tags" id="tags" value='<?= empty($formData['tags']) ? "[]" : $formData['tags'] ?>'>
+            <input type="hidden" name="tags" id="tags" value='<?= empty($tagsJSON) ? "[]" : $tagsJSON ?>'>
             <div class="new_post_active_tags">
                 <ul id="tags_display">
                     <?php
-                    // We need to add the li elements based on $formData['tags']
-                        if(!empty($formData['tags'])) {
-                            $tags = json_decode($formData['tags']);
-                            if(!empty($tags[0])) {
-                                foreach($tags[0] as $tag) {
-                                    echo "<li id='tag_".$tag."'>".$tag." <a onclick='removeTag(0,".'"'.$tag.'"'.")'><i class='fas fa-times-circle'></i></a></li>";
-                                 }
-                            }
-                            foreach($tags as $id => $tag) {
-                                if($id !== 0 && $tag !== null) {
-                                    echo "<li id='tag_".$id."'>".$tag." <a onclick='removeTag(".$id.",".'"'.$tag.'"'.")'><i class='fas fa-times-circle'></i></a></li>";
-                                }
+                    // We need to add the li elements based on $tags
+                    if(!empty($tags)) {
+                        foreach($tags as $tagPair) {
+                            // If the first entry is -1 then this is just a reminder to delete
+                            if(!$tagPair[0] !== -1) {
+                                echo "<li id='tag_".$tagPair[1]."'>".$tagPair[1]." <a onclick='removeTag(".'"'.$tagPair[1].'"'.")'><i class='fas fa-times-circle'></i></a></li>";
                             }
                         }
+                    }
                     ?>
                 </ul>
             </div>
             <input type="text" onkeyup="showResult(this.value)" name="tag_search_bar" class="search_bar" placeholder="Search for tags..." autocomplete="off">
             <div id="livesearch" class="empty_search_results"></div>
 
-            <label>Username</label> &nbsp;&nbsp;
+            <label>Username</label>
             <input type="text" class="uid" name="uid"<?= empty($formData['uid']) ? "" : " value = '".$formData['uid']."'"?>> &nbsp;&nbsp; <br id="mobile_linebreak"> <br id="mobile_linebreak">
 
             <label>Password</label> &nbsp;&nbsp;
