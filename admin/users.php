@@ -13,9 +13,11 @@
         exit;
     }
 ?>
-
+<div class="form_container">
+<h1 style="text-align:center"> Are you sure you want to logout?</h1>
 <form action="users.php" method="post">
-    <button name="logout" type="submit" class="action_button">Logout</button>
+    <button name="logout" type="submit" class="action_button" style="position: absolute; left: 50%; transform: translateX(-50%);">Logout</button>
 </form>
+</div>
 
 <?php include_once 'footer.php'; ?>
