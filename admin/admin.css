@@ -127,9 +127,9 @@ nav a{
     line-height: 60px;
     font-size: 1.5em;
     border-bottom: 2px solid black;
-    transition: color 0.25s, font-size 0.25s;
-    -moz-transition:color 0.25s, font-size 0.25s; /* Firefox 4 */
-    -webkit-transition:color 0.25s, font-size 0.25s; /* Safari and Chrome */
+    transition: color 0.2s, font-size 0.2s;
+    -moz-transition:color 0.2s, font-size 0.2s; /* Firefox 4 */
+    -webkit-transition:color 0.2s, font-size 0.2s; /* Safari and Chrome */
 }
 
 nav a:hover {
