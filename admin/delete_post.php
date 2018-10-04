@@ -1,6 +1,6 @@
-<?php
+<?php session_start();
     // Start the session
-    session_start();
+
 
     // Make sure we're logged in
     if(!isset($_SESSION['uid'])) {

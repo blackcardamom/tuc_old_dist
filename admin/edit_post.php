@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
     // Todo :
     // * Change the MySQL query to an UPDATE $query
     // * Deal with adding and deleting tags on successful submission
@@ -6,7 +6,7 @@
     // We will deal with tags by storing pairs (id, title) of tags in a stack
 
     // Start the session
-    session_start();
+
 
     // Make sure we're logged in
     if(!isset($_SESSION['uid'])) {

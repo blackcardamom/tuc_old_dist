@@ -1,7 +1,4 @@
-<?php
-    // Start the session
-    session_start();
-
+<?php session_start();
     // Make sure we're logged in
     if(!isset($_SESSION['uid'])) {
         header("Location: index.php");
