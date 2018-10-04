@@ -136,6 +136,7 @@
                 // Return to original page for success message and link to editted post
                 $successfulPost = true;
             }
+            echo $sql;
 
             // Now we need to update the tags on the database
             if(!empty($tags)) {
