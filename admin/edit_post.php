@@ -116,7 +116,7 @@
             }
 
             // We are now safe to construct our query using the keys in $data
-            $sql = "UPDATE ".$_GET['type']."s  SET";
+            $sql = "UPDATE ".$_GET['type']."s  SET ";
             foreach($keys as $key) {
                 $sql .= $key . " = :" . $key . ", ";
             }
