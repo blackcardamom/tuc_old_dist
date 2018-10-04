@@ -1,10 +1,11 @@
 <?php session_start();
+if (isset($_SESSION['uid'])) {
+    header("Location: recipes.php");
+    exit;
+}
+
     include_once 'admin.inc.php';
     include_once '../includes/admin_validate.inc.php';
-    if (isset($_SESSION['uid'])) {
-        header("Location: recipes.php");
-        //exit;
-    }
     $goodLogin = isset($_POST['submit']) && checkCredentials($_POST['uid'],$_POST['pwd']);
 
 ?>

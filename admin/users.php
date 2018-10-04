@@ -1,17 +1,20 @@
 <?php session_start();
+
+if(!isset($_SESSION['uid'])) {
+    header("Location: index.php");
+    exit;
+}
+if(isset($_POST['logout'])) {
+    session_destroy();
+    header("Location: index.php");
+    exit;
+}
+
     include_once 'header.php';
     $selected = "users";
     include_once 'topnav.php';
 
-    if(!isset($_SESSION['uid'])) {
-        header("Location: index.php");
-        exit;
-    }
-    if(isset($_POST['logout'])) {
-        session_destroy();
-        header("Location: index.php");
-        exit;
-    }
+
 ?>
 <div class="form_container">
 <h1 style="text-align:center"> Are you sure you want to logout?</h1>
