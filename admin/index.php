@@ -17,7 +17,7 @@ if (isset($_SESSION['uid'])) {
     ?>
     <div class="login_wrapper">
         <div class="login_logo">
-            <img src="../assets/logos/the_ugly_croissant_long_EDIT.jpeg" alt="The Ugly Croissant logo">
+            <img src="https://www.theuglycroissant.com/assets/logos/the_ugly_croissant_long_EDIT.jpeg" alt="The Ugly Croissant logo">
         </div>
         <div class="login_form">
             <form action="index.php" method="post">
